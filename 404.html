@@ -1,0 +1,38 @@
+<style type="text/css">
+ul {
+  font-size: 0;
+  left: 50%;
+  list-style-type: none;
+  padding: 0;
+  position: absolute;
+  top: 50%;
+}
+</style>
+<meta charset="utf-8">
+<link href="data:image/gif;base64,R0lGODlhCAAIAIAAMQAAAP///ywAAAAACAAIAAACDoSPgacLGqKRML0VmzMFADs="
+      rel="shortcut icon"
+      type="image/x-icon">
+<title>bibi</title>
+<body>
+<script type="text/javascript">
+var li, ul, x = 21, y = x * x, z = [
+  2084863,  1065699,  1531883,  1527701,  1525969,  1071071,  2085343,
+  7423,     87542,    2035173,  1364020,  332450,   324798,   1536,
+  2086271,  1069121,  1530973,  1528157,  1531741,  1071937,  2081663, 
+];
+
+self.name = parseInt(document.body.clientHeight / (x * 2));
+document.body.appendChild(ul = document.createElement("ul"));
+
+while(y--) {
+  ul.appendChild(li = document.createElement("li"));
+  li.style.backgroundColor = z[parseInt(y / x)] & 1 << parseInt(y % x) ? "black" : "";
+  li.style.float = "left";
+  li.style.height = li.style.width = self.name + "px";
+}
+
+with(ul) {
+  style.height = style.width = self.name * x + "px";
+  style.marginLeft = style.marginTop = "-" + self.name * x / 2 + "px";
+}
+</script>

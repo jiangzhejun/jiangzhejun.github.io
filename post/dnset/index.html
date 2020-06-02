@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="Hugo 0.72.0" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="">
+  <meta property="og:url" content="https://jiangzhejun.github.io/post/dnset/">
+
+  <title>DNSet.bat - Junet Workshop</title>
+  <meta property="og:title" content="DNSet.bat - Junet Workshop">
+  <meta property="og:type" content="article">
+  <meta name="description" content="">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Arvo:400,700">
+  <link rel="stylesheet" href="/css/highlight.css">
+  <link rel="stylesheet" href="/css/journal.css">
+  <link href="/index.xml" rel="alternate" type="application/rss+xml" title="Junet Workshop">
+
+</head>
+
+<body>
+  <div class="container">
+
+    <nav class="site-nav">
+      <a href="https://jiangzhejun.github.io/">Index</a>
+    </nav>
+
+
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">DNSet.bat</h1>
+      <time class="post-date" datetime="2020-02-17 15:28:57 CST">17 Feb 2020</time>
+    </header>
+
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">@echo off&amp;title %~n0 - bi20200217133734
+
+call:lookup <span style="color:#e6db74">&#34;Ethernet adapter&#34;</span>
+<span style="color:#66d9ef">if</span> <span style="color:#e6db74">&#34;%nic%&#34;</span><span style="color:#f92672">==</span><span style="color:#e6db74">&#34;&#34;</span> <span style="color:#f92672">(</span>call:lookup <span style="color:#e6db74">&#34;本地连接&#34;</span><span style="color:#f92672">)</span>
+<span style="color:#66d9ef">if</span> <span style="color:#e6db74">&#34;%nic%&#34;</span><span style="color:#f92672">==</span><span style="color:#e6db74">&#34;&#34;</span> <span style="color:#f92672">(</span>call:lookup <span style="color:#e6db74">&#34;以太网适配器&#34;</span><span style="color:#f92672">)</span>
+
+netsh interface ip set dns <span style="color:#e6db74">&#34;%nic%&#34;</span> static 101.198.198.198 primary validate<span style="color:#f92672">=</span>no
+netsh interface ip add dns <span style="color:#e6db74">&#34;%nic%&#34;</span> 219.141.136.10 validate<span style="color:#f92672">=</span>no
+
+cls
+ipconfig /all
+pause
+exit
+
+:lookup
+<span style="color:#66d9ef">for</span> /f <span style="color:#e6db74">&#34;tokens=2*&#34;</span> %%i in <span style="color:#f92672">(</span><span style="color:#e6db74">&#39;ipconfig /all^|find %1&#39;</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">do</span> set name<span style="color:#f92672">=</span>%%i
+<span style="color:#66d9ef">for</span> /f <span style="color:#e6db74">&#34;tokens=1* delims=:&#34;</span> %%i in <span style="color:#f92672">(</span><span style="color:#e6db74">&#34;%name%&#34;</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">do</span> set nic<span style="color:#f92672">=</span>%%i
+</code></pre></div>
+
+  </article>
+
+
+      <footer class="site-footer">
+        <span itemscope itemtype="http://schema.org/Person">
+          <link itemprop="url" href="https://jiangzhejun.github.io/">
+          <span itemprop="name"></span>
+
+          <br>
+
+          
+
+          
+
+          
+        </span>
+
+        
+      </footer>
+    </div>
+
+  <script src="/js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  </body>
+</html>
+

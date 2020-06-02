@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Junet Workshop</title>
+    <link>https://jiangzhejun.github.io/</link>
+    <description>Recent content on Junet Workshop</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Thu, 30 Apr 2020 16:40:55 +0800</lastBuildDate>
+    
+	<atom:link href="https://jiangzhejun.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>姥姥去世</title>
+      <link>https://jiangzhejun.github.io/post/grandma_died/</link>
+      <pubDate>Thu, 30 Apr 2020 16:40:55 +0800</pubDate>
+      
+      <guid>https://jiangzhejun.github.io/post/grandma_died/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>DNSet.bat</title>
+      <link>https://jiangzhejun.github.io/post/dnset/</link>
+      <pubDate>Mon, 17 Feb 2020 15:28:57 +0800</pubDate>
+      
+      <guid>https://jiangzhejun.github.io/post/dnset/</guid>
+      <description>@echo off&amp;amp;title %~n0 - bi20200217133734 call:lookup &amp;#34;Ethernet adapter&amp;#34; if &amp;#34;%nic%&amp;#34;==&amp;#34;&amp;#34; (call:lookup &amp;#34;本地连接&amp;#34;) if &amp;#34;%nic%&amp;#34;==&amp;#34;&amp;#34; (call:lookup &amp;#34;以太网适配器&amp;#34;) netsh interface ip set dns &amp;#34;%nic%&amp;#34; static 101.198.198.198 primary validate=no netsh interface ip add dns &amp;#34;%nic%&amp;#34; 219.141.136.10 validate=no cls ipconfig /all pause exit :lookup for /f &amp;#34;tokens=2*&amp;#34; %%i in (&amp;#39;ipconfig /all^|find %1&amp;#39;) do set name=%%i for /f &amp;#34;tokens=1* delims=:&amp;#34; %%i in (&amp;#34;%name%&amp;#34;) do set nic=%%i </description>
+    </item>
+    
+    <item>
+      <title>j4https.java</title>
+      <link>https://jiangzhejun.github.io/post/j4https/</link>
+      <pubDate>Sat, 15 Feb 2020 17:07:43 +0800</pubDate>
+      
+      <guid>https://jiangzhejun.github.io/post/j4https/</guid>
+      <description>import java.io.*; import java.net.*; import java.util.*; public class j4https { private static char PORT = 8888; private static String PAGE = &amp;#34;index.html&amp;#34;; private static String PATH = System.getProperty(&amp;#34;user.dir&amp;#34;); private static final String VERSION_INFO = &amp;#34;j4https 1.0.3.3 - bi20200215175285&amp;#34;; private static final String[][] TYPE = { {&amp;#34;image/gif&amp;#34;, &amp;#34;.gif&amp;#34;}, {&amp;#34;image/jpeg&amp;#34;, &amp;#34;.jpeg&amp;#34;}, {&amp;#34;image/jpeg&amp;#34;, &amp;#34;.jpg&amp;#34;}, {&amp;#34;image/png&amp;#34;, &amp;#34;.png&amp;#34;}, {&amp;#34;text/css&amp;#34;, &amp;#34;.css&amp;#34;}, {&amp;#34;text/html&amp;#34;, &amp;#34;.htm&amp;#34;}, {&amp;#34;text/html&amp;#34;, &amp;#34;.html&amp;#34;}, {&amp;#34;text/javascript&amp;#34;, &amp;#34;.js&amp;#34;}, {&amp;#34;text/xml&amp;#34;, &amp;#34;.xml&amp;#34;}, {&amp;#34;text/xsl&amp;#34;, &amp;#34;.xsl&amp;#34;} }; public static void main(String[] args) { try { for(int i = 0; i &amp;lt; args.</description>
+    </item>
+    
+    <item>
+      <title>春游昆明、杭州、苏州、上海</title>
+      <link>https://jiangzhejun.github.io/post/travels-2020-kunming-hangzhou-suzhou-shanghai/</link>
+      <pubDate>Sun, 02 Feb 2020 15:57:02 +0800</pubDate>
+      
+      <guid>https://jiangzhejun.github.io/post/travels-2020-kunming-hangzhou-suzhou-shanghai/</guid>
+      <description>上海 </description>
+    </item>
+    
+    <item>
+      <title>j4zip.java</title>
+      <link>https://jiangzhejun.github.io/post/j4zip/</link>
+      <pubDate>Tue, 27 Aug 2019 17:08:56 +0800</pubDate>
+      
+      <guid>https://jiangzhejun.github.io/post/j4zip/</guid>
+      <description>import java.io.*; import java.text.SimpleDateFormat; import java.util.*; import java.util.zip.*; public class j4zip { private static final String VERSION_INFO = &amp;#34;j4zip 1.0.1.1 - bi20190827152651&amp;#34;; public static void main(String[] args) throws Exception { if(args.length &amp;gt; 0) { for(String s : args) { zipack(new File(s)); } } System.out.println(VERSION_INFO); System.exit(0); } private static void zipack(File src) throws Exception { System.out.println(src.getName() + &amp;#34; (&amp;#34;); SimpleDateFormat sdf = new SimpleDateFormat(&amp;#34;yyyyMMddHHmmss&amp;#34;); FileOutputStream fos = new FileOutputStream(src.getName() + &amp;#34; &amp;#34; + sdf.</description>
+    </item>
+    
+  </channel>
+</rss>
