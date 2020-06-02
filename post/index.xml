@@ -56,5 +56,15 @@
       <description>import java.io.*; import java.text.SimpleDateFormat; import java.util.*; import java.util.zip.*; public class j4zip { private static final String VERSION_INFO = &amp;#34;j4zip 1.0.1.1 - bi20190827152651&amp;#34;; public static void main(String[] args) throws Exception { if(args.length &amp;gt; 0) { for(String s : args) { zipack(new File(s)); } } System.out.println(VERSION_INFO); System.exit(0); } private static void zipack(File src) throws Exception { System.out.println(src.getName() + &amp;#34; (&amp;#34;); SimpleDateFormat sdf = new SimpleDateFormat(&amp;#34;yyyyMMddHHmmss&amp;#34;); FileOutputStream fos = new FileOutputStream(src.getName() + &amp;#34; &amp;#34; + sdf.</description>
     </item>
     
+    <item>
+      <title>Tomcat9 &amp; JDK11 安装配置手记</title>
+      <link>https://jiangzhejun.github.io/post/install_tomcat9_jdk11/</link>
+      <pubDate>Mon, 29 Oct 2018 17:40:37 +0800</pubDate>
+      
+      <guid>https://jiangzhejun.github.io/post/install_tomcat9_jdk11/</guid>
+      <description>JDK 官网下载openjdk-11.0.1_windows-x64_bin.zip并解压缩至D盘
+Tomcat  官网下载apache-tomcat-9.0.12-windows-x64.zip并解压缩至D盘 修改service批处理文件  进入安装目录bin文件夹 记事本打开service.bat文件 插入“set JAVA_HOME=D:\jdk-11.0.1\”和“set JRE_HOME=%JAVA_HOME%”两行   修改server配置  进入安装目录conf文件夹 记事本打开server.xml文件 找到“&amp;lt;Connector port=“8080” protocol=“HTTP/1.1” … /&amp;gt;”，修改端口为80 滚动条拉到底，找到默认主机“&amp;lt;Host name=“localhost” …&amp;gt;”，插入“&amp;lt;Context path=&amp;rdquo;&amp;rdquo; debug=“0” docBase=“D:/website” … /&amp;gt;”，自定义根目录   必要的类库  进入网站根目录 将编译好的class文件拷贝至classes文件夹，没有就新建一个 将编译好的jar文件拷贝至lib文件夹，没有就新建一个   安装Tomcat9服务  打开CMD 切换至安装目录bin文件夹 运行“service install Tomcat9”  运行“services.msc”打开系统服务  启动服务    浏览器输入“http://localhost”访问</description>
+    </item>
+    
   </channel>
 </rss>
