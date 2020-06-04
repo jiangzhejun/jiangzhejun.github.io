@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="Hugo 0.72.0" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="">
+  <meta property="og:url" content="https://jiangzhejun.github.io/post/java_zipack/">
+
+  <title>Java递归函数实现ZIP压缩功能 - Junet Workshop</title>
+  <meta property="og:title" content="Java递归函数实现ZIP压缩功能 - Junet Workshop">
+  <meta property="og:type" content="article">
+  <meta name="description" content="">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Arvo:400,700">
+  <link rel="stylesheet" href="/css/highlight.css">
+  <link rel="stylesheet" href="/css/journal.css">
+  <link href="/index.xml" rel="alternate" type="application/rss+xml" title="Junet Workshop">
+
+</head>
+
+<body>
+  <div class="container">
+
+    <nav class="site-nav">
+      <a href="https://jiangzhejun.github.io/">Index</a>
+    </nav>
+
+
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">Java递归函数实现ZIP压缩功能</h1>
+      <time class="post-date" datetime="2019-03-26 17:08:56 CST">26 Mar 2019</time>
+    </header>
+
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">import java.io.<span style="color:#f92672">*</span>;
+import java.text.SimpleDateFormat;
+import java.util.<span style="color:#f92672">*</span>;
+import java.util.zip.<span style="color:#f92672">*</span>;
+
+public class j4zip {
+  private <span style="color:#66d9ef">static</span> final String VERSION_INFO <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;j4zip 1.0.1.1 - bi20190827152651&#34;</span>;
+
+  public <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String[] args) throws Exception {
+    <span style="color:#66d9ef">if</span>(args.length <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {
+      <span style="color:#66d9ef">for</span>(String s : args) {
+        zipack(new File(s));
+      }
+    }
+
+    System.out.println(VERSION_INFO);
+    System.exit(<span style="color:#ae81ff">0</span>);
+  }
+
+  private <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">zipack</span>(File src) throws Exception {
+    System.out.println(src.getName() <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; (&#34;</span>);
+    SimpleDateFormat sdf <span style="color:#f92672">=</span> new SimpleDateFormat(<span style="color:#e6db74">&#34;yyyyMMddHHmmss&#34;</span>);
+    FileOutputStream fos <span style="color:#f92672">=</span> new FileOutputStream(src.getName() <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; &#34;</span> <span style="color:#f92672">+</span> sdf.format(new Date()) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;b2.zip&#34;</span>);
+    CheckedOutputStream cos <span style="color:#f92672">=</span> new CheckedOutputStream(fos, new CRC32());
+
+    ZipOutputStream zos <span style="color:#f92672">=</span> new ZipOutputStream(cos);
+    zos.setComment(VERSION_INFO);
+    zos.setLevel(Deflater.BEST_COMPRESSION);
+    zos.setMethod(ZipOutputStream.DEFLATED);
+    zipack(src, src.isDirectory() <span style="color:#f92672">?</span> <span style="color:#e6db74">&#34;&#34;</span> <span style="color:#f92672">:</span> src.getName(), zos);
+    zos.close();
+
+    cos.close();
+    fos.close();
+    System.out.println(<span style="color:#e6db74">&#34;)</span><span style="color:#ae81ff">\r\n</span><span style="color:#e6db74">&#34;</span>);
+  }
+
+  private <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">zipack</span>(File src, String path, ZipOutputStream zos) throws Exception {
+    <span style="color:#66d9ef">if</span>(src.isDirectory()) {
+      path <span style="color:#f92672">+=</span> path.equals(<span style="color:#e6db74">&#34;&#34;</span>) <span style="color:#f92672">?</span> <span style="color:#e6db74">&#34;&#34;</span> <span style="color:#f92672">:</span> File.separator;
+
+      <span style="color:#66d9ef">for</span>(File f : src.listFiles()) {
+        zipack(f, path <span style="color:#f92672">+</span> f.getName(), zos);
+      }
+    }
+
+    <span style="color:#66d9ef">if</span>(src.isFile()) {
+      zos.putNextEntry(new ZipEntry(path));
+      System.out.println(path);
+
+      Long l <span style="color:#f92672">=</span> src.length();
+      byte[] b <span style="color:#f92672">=</span> new byte[l.intValue()];
+      FileInputStream fis <span style="color:#f92672">=</span> new FileInputStream(src);
+      fis.read(b);
+      fis.close();
+
+      zos.write(b);
+      zos.flush();
+      zos.closeEntry();
+    }
+  }
+}
+</code></pre></div>
+
+  </article>
+
+
+      <footer class="site-footer">
+        <span itemscope itemtype="http://schema.org/Person">
+          <link itemprop="url" href="https://jiangzhejun.github.io/">
+          <span itemprop="name"></span>
+
+          <br>
+
+          
+
+          
+
+          
+        </span>
+
+        
+      </footer>
+    </div>
+
+  <script src="/js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  </body>
+</html>
+

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="Hugo 0.72.0" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="">
+  <meta property="og:url" content="https://jiangzhejun.github.io/post/win_install-tomcat9-jdk11/">
+
+  <title>Tomcat9 &amp; JDK11 安装配置手记 - Junet Workshop</title>
+  <meta property="og:title" content="Tomcat9 &amp; JDK11 安装配置手记 - Junet Workshop">
+  <meta property="og:type" content="article">
+  <meta name="description" content="">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Arvo:400,700">
+  <link rel="stylesheet" href="/css/highlight.css">
+  <link rel="stylesheet" href="/css/journal.css">
+  <link href="/index.xml" rel="alternate" type="application/rss+xml" title="Junet Workshop">
+
+</head>
+
+<body>
+  <div class="container">
+
+    <nav class="site-nav">
+      <a href="https://jiangzhejun.github.io/">Index</a>
+    </nav>
+
+
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">Tomcat9 &amp; JDK11 安装配置手记</h1>
+      <time class="post-date" datetime="2018-10-29 17:40:37 CST">29 Oct 2018</time>
+    </header>
+
+    <h2 id="jdk">JDK</h2>
+<p>官网下载openjdk-11.0.1_windows-x64_bin.zip并解压缩至D盘</p>
+<h2 id="tomcat">Tomcat</h2>
+<ul>
+<li>官网下载apache-tomcat-9.0.12-windows-x64.zip并解压缩至D盘</li>
+<li>修改service批处理文件
+<ul>
+<li>进入安装目录bin文件夹</li>
+<li>记事本打开service.bat文件</li>
+<li>插入“set JAVA_HOME=D:\jdk-11.0.1\”和“set JRE_HOME=%JAVA_HOME%”两行</li>
+</ul>
+</li>
+<li>修改server配置
+<ul>
+<li>进入安装目录conf文件夹</li>
+<li>记事本打开server.xml文件</li>
+<li>找到“&lt;Connector port=“8080” protocol=“HTTP/1.1” … /&gt;”，修改端口为80</li>
+<li>滚动条拉到底，找到默认主机“&lt;Host name=“localhost” …&gt;”，插入“&lt;Context path=&rdquo;&rdquo; debug=“0” docBase=“D:/website” … /&gt;”，自定义根目录</li>
+</ul>
+</li>
+<li>必要的类库
+<ul>
+<li>进入网站根目录</li>
+<li>将编译好的class文件拷贝至classes文件夹，没有就新建一个</li>
+<li>将编译好的jar文件拷贝至lib文件夹，没有就新建一个</li>
+</ul>
+</li>
+<li>安装Tomcat9服务
+<ul>
+<li>打开CMD</li>
+<li>切换至安装目录bin文件夹</li>
+<li>运行“service install Tomcat9” <img src="/img/20181029161818275.png" alt="安装服务"></li>
+<li>运行“services.msc”打开系统服务 <img src="/img/20181029161838826.png" alt="打开服务"></li>
+<li>启动服务</li>
+</ul>
+</li>
+</ul>
+<p>浏览器输入“http://localhost”访问</p>
+
+
+  </article>
+
+
+      <footer class="site-footer">
+        <span itemscope itemtype="http://schema.org/Person">
+          <link itemprop="url" href="https://jiangzhejun.github.io/">
+          <span itemprop="name"></span>
+
+          <br>
+
+          
+
+          
+
+          
+        </span>
+
+        
+      </footer>
+    </div>
+
+  <script src="/js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  </body>
+</html>
+

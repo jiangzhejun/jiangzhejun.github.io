@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="Hugo 0.72.0" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="">
+  <meta property="og:url" content="https://jiangzhejun.github.io/post/html_richtext-editor/">
+
+  <title>简易的超文本编辑器 - Junet Workshop</title>
+  <meta property="og:title" content="简易的超文本编辑器 - Junet Workshop">
+  <meta property="og:type" content="article">
+  <meta name="description" content="">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Arvo:400,700">
+  <link rel="stylesheet" href="/css/highlight.css">
+  <link rel="stylesheet" href="/css/journal.css">
+  <link href="/index.xml" rel="alternate" type="application/rss+xml" title="Junet Workshop">
+
+</head>
+
+<body>
+  <div class="container">
+
+    <nav class="site-nav">
+      <a href="https://jiangzhejun.github.io/">Index</a>
+    </nav>
+
+
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">简易的超文本编辑器</h1>
+      <time class="post-date" datetime="2010-03-25 10:00:29 CST">25 Mar 2010</time>
+    </header>
+
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">style</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/css&#34;</span>&gt;
+#shuxie {
+    <span style="color:#66d9ef">border</span>: <span style="color:#ae81ff">1</span><span style="color:#66d9ef">px</span>
+    <span style="color:#66d9ef">dashed</span> <span style="color:#ae81ff">#888</span>;
+    <span style="color:#66d9ef">height</span>: <span style="color:#ae81ff">400</span><span style="color:#66d9ef">px</span>;
+    <span style="color:#66d9ef">width</span>: <span style="color:#ae81ff">800</span><span style="color:#66d9ef">px</span>;
+}
+&lt;/<span style="color:#f92672">style</span>&gt;
+
+&lt;<span style="color:#f92672">table</span> <span style="color:#a6e22e">width</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;800&#34;</span>&gt;
+    &lt;<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">onclick</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;shezhi(&#39;Bold&#39;)&#34;</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;button&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;粗&#34;</span>/&gt;
+    &lt;/<span style="color:#f92672">td</span>&gt;
+    &lt;<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">onclick</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;shezhi(&#39;UnderLine&#39;)&#34;</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;button&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;划&#34;</span>/&gt;
+    &lt;/<span style="color:#f92672">td</span>&gt;
+    &lt;<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">onclick</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;shezhi(&#39;Italic&#39;)&#34;</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;button&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;斜&#34;</span>/&gt;
+    &lt;/<span style="color:#f92672">td</span>&gt;
+    &lt;<span style="color:#f92672">td</span>&gt;|&lt;/<span style="color:#f92672">td</span>&gt;
+    &lt;<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">onclick</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;shezhi(&#39;JustifyLeft&#39;)&#34;</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;button&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;左&#34;</span>/&gt;
+    &lt;/<span style="color:#f92672">td</span>&gt;
+    &lt;<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">onclick</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;shezhi(&#39;JustifyCenter&#39;)&#34;</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;button&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;中&#34;</span>/&gt;
+    &lt;/<span style="color:#f92672">td</span>&gt;
+    &lt;<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">onclick</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;shezhi(&#39;JustifyRight&#39;)&#34;</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;button&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;右&#34;</span>/&gt;
+    &lt;/<span style="color:#f92672">td</span>&gt;
+    &lt;<span style="color:#f92672">td</span>&gt;|&lt;/<span style="color:#f92672">td</span>&gt;
+    &lt;<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">onclick</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;shezhi(&#39;CreateLink&#39;,prompt(&#39;链接的URL？&#39;))&#34;</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;button&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;链&#34;</span>/&gt;
+    &lt;/<span style="color:#f92672">td</span>&gt;
+    &lt;<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">onclick</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;shezhi(&#39;Unlink&#39;)&#34;</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;button&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;销&#34;</span>/&gt;
+    &lt;/<span style="color:#f92672">td</span>&gt;
+    &lt;<span style="color:#f92672">td</span>&gt;|&lt;/<span style="color:#f92672">td</span>&gt;
+    &lt;<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">onclick</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;shezhi(&#39;InsertImage&#39;,prompt(&#39;图片的URL？&#39;))&#34;</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;button&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;图&#34;</span>/&gt;
+    &lt;/<span style="color:#f92672">td</span>&gt;
+    &lt;<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">onclick</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;zhantie(prompt(&#39;文本的内容？&#39;))&#34;</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;button&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;文&#34;</span>/&gt;
+    &lt;/<span style="color:#f92672">td</span>&gt;
+    &lt;<span style="color:#f92672">td</span> <span style="color:#a6e22e">width</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;99%&#34;</span>&gt;
+        &lt;<span style="color:#f92672">br</span>/&gt;
+    &lt;/<span style="color:#f92672">td</span>&gt;
+    &lt;<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">select</span> <span style="color:#a6e22e">onchange</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;shezhi(&#39;FontName&#39;,this.value)&#34;</span>&gt;
+            &lt;<span style="color:#f92672">option</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;宋体&#34;</span>&gt;宋体&lt;/<span style="color:#f92672">option</span>&gt;
+            &lt;<span style="color:#f92672">option</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;黑体&#34;</span>&gt;黑体&lt;/<span style="color:#f92672">option</span>&gt;
+            &lt;<span style="color:#f92672">option</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;楷体_gb2312&#34;</span>&gt;楷体&lt;/<span style="color:#f92672">option</span>&gt;
+            &lt;<span style="color:#f92672">option</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;仿宋_gb2312&#34;</span>&gt;仿宋&lt;/<span style="color:#f92672">option</span>&gt;
+        &lt;/<span style="color:#f92672">select</span>&gt;
+    &lt;/<span style="color:#f92672">td</span>&gt;
+    &lt;<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">select</span> <span style="color:#a6e22e">onchange</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;shezhi(&#39;FontSize&#39;,this.value)&#34;</span>&gt;
+            &lt;<span style="color:#f92672">option</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;1&#34;</span>&gt;1&lt;/<span style="color:#f92672">option</span>&gt;
+            &lt;<span style="color:#f92672">option</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;2&#34;</span>&gt;2&lt;/<span style="color:#f92672">option</span>&gt;
+            &lt;<span style="color:#f92672">option</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;3&#34;</span>&gt;3&lt;/<span style="color:#f92672">option</span>&gt;
+            &lt;<span style="color:#f92672">option</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;4&#34;</span>&gt;4&lt;/<span style="color:#f92672">option</span>&gt;
+            &lt;<span style="color:#f92672">option</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;5&#34;</span>&gt;5&lt;/<span style="color:#f92672">option</span>&gt;
+            &lt;<span style="color:#f92672">option</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;6&#34;</span>&gt;6&lt;/<span style="color:#f92672">option</span>&gt;
+            &lt;<span style="color:#f92672">option</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;7&#34;</span>&gt;7&lt;/<span style="color:#f92672">option</span>&gt;
+        &lt;/<span style="color:#f92672">select</span>&gt;
+    &lt;/<span style="color:#f92672">td</span>&gt;
+    &lt;<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">select</span> <span style="color:#a6e22e">onchange</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;shezhi(&#39;ForeColor&#39;,this.value)&#34;</span>&gt;
+            &lt;<span style="color:#f92672">option</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;#000000&#34;</span>&gt;黑&lt;/<span style="color:#f92672">option</span>&gt;
+            &lt;<span style="color:#f92672">option</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;#ff0000&#34;</span>&gt;红&lt;/<span style="color:#f92672">option</span>&gt;
+            &lt;<span style="color:#f92672">option</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;#aaaa00&#34;</span>&gt;黄&lt;/<span style="color:#f92672">option</span>&gt;
+            &lt;<span style="color:#f92672">option</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;#00aa00&#34;</span>&gt;绿&lt;/<span style="color:#f92672">option</span>&gt;
+            &lt;<span style="color:#f92672">option</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;#00aaaa&#34;</span>&gt;青&lt;/<span style="color:#f92672">option</span>&gt;
+            &lt;<span style="color:#f92672">option</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;#0000aa&#34;</span>&gt;蓝&lt;/<span style="color:#f92672">option</span>&gt;
+            &lt;<span style="color:#f92672">option</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;#aa00aa&#34;</span>&gt;紫&lt;/<span style="color:#f92672">option</span>&gt;
+            &lt;<span style="color:#f92672">option</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;#888888&#34;</span>&gt;灰&lt;/<span style="color:#f92672">option</span>&gt;
+        &lt;/<span style="color:#f92672">select</span>&gt;
+    &lt;/<span style="color:#f92672">td</span>&gt;
+&lt;/<span style="color:#f92672">table</span>&gt;
+
+&lt;<span style="color:#f92672">iframe</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;shuxie&#34;</span>&gt;&lt;/<span style="color:#f92672">iframe</span>&gt;
+
+&lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/javascript&#34;</span>&gt;
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">chaowenben</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#34;shuxie&#34;</span>).<span style="color:#a6e22e">contentWindow</span>;
+<span style="color:#a6e22e">chaowenben</span>.document.<span style="color:#a6e22e">designMode</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;on&#34;</span>;
+<span style="color:#a6e22e">chaowenben</span>.document.<span style="color:#a6e22e">contentEditable</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
+<span style="color:#a6e22e">chaowenben</span>.document.<span style="color:#a6e22e">open</span>();
+<span style="color:#a6e22e">chaowenben</span>.document.<span style="color:#a6e22e">write</span>(<span style="color:#e6db74">&#34;&#34;</span>);
+<span style="color:#a6e22e">chaowenben</span>.document.<span style="color:#a6e22e">close</span>();
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">shezhi</span>(<span style="color:#a6e22e">zhiling</span>, <span style="color:#a6e22e">lujing</span>) {
+    <span style="color:#a6e22e">chaowenben</span>.<span style="color:#a6e22e">focus</span>();
+    <span style="color:#a6e22e">chaowenben</span>.document.<span style="color:#a6e22e">execCommand</span>(<span style="color:#a6e22e">zhiling</span>, <span style="color:#66d9ef">false</span>, <span style="color:#a6e22e">lujing</span>);
+}
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">zhantie</span>(<span style="color:#a6e22e">chuan</span>) {
+    <span style="color:#66d9ef">if</span>(window.<span style="color:#a6e22e">event</span>) {
+        <span style="color:#a6e22e">chaowenben</span>.document.<span style="color:#a6e22e">selection</span>.<span style="color:#a6e22e">createRange</span>().<span style="color:#a6e22e">pasteHTML</span>(<span style="color:#a6e22e">chuan</span>);
+    }
+    <span style="color:#66d9ef">else</span> {
+        <span style="color:#a6e22e">shezhi</span>(<span style="color:#e6db74">&#34;insertHTML&#34;</span>, <span style="color:#a6e22e">chuan</span>);
+    }
+}
+&lt;/<span style="color:#f92672">script</span>&gt;
+</code></pre></div>
+
+  </article>
+
+
+      <footer class="site-footer">
+        <span itemscope itemtype="http://schema.org/Person">
+          <link itemprop="url" href="https://jiangzhejun.github.io/">
+          <span itemprop="name"></span>
+
+          <br>
+
+          
+
+          
+
+          
+        </span>
+
+        
+      </footer>
+    </div>
+
+  <script src="/js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  </body>
+</html>
+

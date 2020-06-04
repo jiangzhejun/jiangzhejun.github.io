@@ -22,28 +22,28 @@
     
     <item>
       <title>扫描指定文件夹并实现磁盘配额</title>
-      <link>https://jiangzhejun.github.io/post/dirule_java/</link>
+      <link>https://jiangzhejun.github.io/post/java_dirule/</link>
       <pubDate>Tue, 03 Mar 2020 14:39:10 +0800</pubDate>
       
-      <guid>https://jiangzhejun.github.io/post/dirule_java/</guid>
+      <guid>https://jiangzhejun.github.io/post/java_dirule/</guid>
       <description>import java.io.*; import java.text.*; import java.util.*; import javax.xml.parsers.*; import javax.xml.transform.*; import javax.xml.transform.dom.*; import javax.xml.transform.stream.*; import org.w3c.dom.*; public class DIRule { private double length, quota; public static void main(String[] args) throws Exception { new DIRule(&amp;#34;config.xml&amp;#34;); System.out.println(&amp;#34;DIRule 1.0.1.12 beta - bi20200302205501&amp;#34;); en.sign(-2000); System.exit(0); } public DIRule(String conf) { SimpleDateFormat sdf = new SimpleDateFormat(&amp;#34;yyyyMMddHHmmssSSS&amp;#34;); String s = &amp;#34;bi&amp;#34; + sdf.format(new Date()); try { DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance(); DocumentBuilder db = dbf.newDocumentBuilder(); Document d = db.</description>
     </item>
     
     <item>
       <title>DNSet.bat</title>
-      <link>https://jiangzhejun.github.io/post/dnset/</link>
+      <link>https://jiangzhejun.github.io/post/bat_dnset/</link>
       <pubDate>Mon, 17 Feb 2020 15:28:57 +0800</pubDate>
       
-      <guid>https://jiangzhejun.github.io/post/dnset/</guid>
+      <guid>https://jiangzhejun.github.io/post/bat_dnset/</guid>
       <description>@echo off&amp;amp;title %~n0 - bi20200217133734 call:lookup &amp;#34;Ethernet adapter&amp;#34; if &amp;#34;%nic%&amp;#34;==&amp;#34;&amp;#34; (call:lookup &amp;#34;本地连接&amp;#34;) if &amp;#34;%nic%&amp;#34;==&amp;#34;&amp;#34; (call:lookup &amp;#34;以太网适配器&amp;#34;) netsh interface ip set dns &amp;#34;%nic%&amp;#34; static 101.198.198.198 primary validate=no netsh interface ip add dns &amp;#34;%nic%&amp;#34; 219.141.136.10 validate=no cls ipconfig /all pause exit :lookup for /f &amp;#34;tokens=2*&amp;#34; %%i in (&amp;#39;ipconfig /all^|find %1&amp;#39;) do set name=%%i for /f &amp;#34;tokens=1* delims=:&amp;#34; %%i in (&amp;#34;%name%&amp;#34;) do set nic=%%i </description>
     </item>
     
     <item>
       <title>昆明、杭州、苏州、上海</title>
-      <link>https://jiangzhejun.github.io/post/travels-2020-kunming-hangzhou-suzhou-shanghai/</link>
+      <link>https://jiangzhejun.github.io/post/travels_2020_kunming-hangzhou-suzhou-shanghai/</link>
       <pubDate>Sun, 02 Feb 2020 15:57:02 +0800</pubDate>
       
-      <guid>https://jiangzhejun.github.io/post/travels-2020-kunming-hangzhou-suzhou-shanghai/</guid>
+      <guid>https://jiangzhejun.github.io/post/travels_2020_kunming-hangzhou-suzhou-shanghai/</guid>
       <description>昆明 1月25日 圆通寺
 1月25日 昆明动物园
 1月25日 翠湖公园
@@ -59,10 +59,10 @@
     
     <item>
       <title>围场、乌兰布统、避暑山庄</title>
-      <link>https://jiangzhejun.github.io/post/travels_2019_weichang_wulanbutong_bishushanzhuang/</link>
+      <link>https://jiangzhejun.github.io/post/travels_2019_weichang-wulanbutong-bishushanzhuang/</link>
       <pubDate>Sat, 10 Aug 2019 15:43:12 +0800</pubDate>
       
-      <guid>https://jiangzhejun.github.io/post/travels_2019_weichang_wulanbutong_bishushanzhuang/</guid>
+      <guid>https://jiangzhejun.github.io/post/travels_2019_weichang-wulanbutong-bishushanzhuang/</guid>
       <description>8月7日 御道口牧场
 8月8日 乌兰布统草原
 8月9日 普陀宗乘之庙
@@ -71,46 +71,46 @@
     
     <item>
       <title>C语言实现的FTP函数静态链接库</title>
-      <link>https://jiangzhejun.github.io/post/j2ftp_c/</link>
+      <link>https://jiangzhejun.github.io/post/c_ftp_lib/</link>
       <pubDate>Tue, 23 Jul 2019 10:23:38 +0800</pubDate>
       
-      <guid>https://jiangzhejun.github.io/post/j2ftp_c/</guid>
+      <guid>https://jiangzhejun.github.io/post/c_ftp_lib/</guid>
       <description>#include &amp;#34;j2ftp.h&amp;#34; int cd(SOCKET skt, char *path) { char c[BUFFER_SIZE]; sprintf(c, &amp;#34;CWD %s\r\n&amp;#34;, path); if(sendB(skt, c) == FTP_FILE_ACTION_COMPLETE) { return 0; } else { return -1; } } SOCKET cs(char *host, int port) { struct hostent *server = gethostbyname(host); if(!server) { return -1; } char ip[20]; int i = 0; unsigned char c[4]; while(server-&amp;gt;h_addr_list[i] != NULL) { memcpy(&amp;amp;c, server-&amp;gt;h_addr_list[i], 4); sprintf(ip,&amp;#34;%d.%d.%d.%d&amp;#34;, c[0], c[1], c[2], c[3]); i++; } SOCKET s = socket(AF_INET, SOCK_STREAM, 0); if(s == SOCKET_ERROR) { printf(&amp;#34;Create socket error!</description>
     </item>
     
     <item>
       <title>古北水镇、司马台长城</title>
-      <link>https://jiangzhejun.github.io/post/travels_2019_gubeishuizhen_simatai/</link>
+      <link>https://jiangzhejun.github.io/post/travels_2019_gubeishuizhen-simatai/</link>
       <pubDate>Sat, 11 May 2019 16:57:40 +0800</pubDate>
       
-      <guid>https://jiangzhejun.github.io/post/travels_2019_gubeishuizhen_simatai/</guid>
+      <guid>https://jiangzhejun.github.io/post/travels_2019_gubeishuizhen-simatai/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Java实现简易Web服务器</title>
-      <link>https://jiangzhejun.github.io/post/j4https/</link>
+      <link>https://jiangzhejun.github.io/post/java_web-server/</link>
       <pubDate>Mon, 29 Apr 2019 17:07:43 +0800</pubDate>
       
-      <guid>https://jiangzhejun.github.io/post/j4https/</guid>
+      <guid>https://jiangzhejun.github.io/post/java_web-server/</guid>
       <description>import java.io.*; import java.net.*; import java.util.*; public class j4https { private static char PORT = 8888; private static String PAGE = &amp;#34;index.html&amp;#34;; private static String PATH = System.getProperty(&amp;#34;user.dir&amp;#34;); private static final String VERSION_INFO = &amp;#34;j4https 1.0.3.3 - bi20200215175285&amp;#34;; private static final String[][] TYPE = { {&amp;#34;image/gif&amp;#34;, &amp;#34;.gif&amp;#34;}, {&amp;#34;image/jpeg&amp;#34;, &amp;#34;.jpeg&amp;#34;}, {&amp;#34;image/jpeg&amp;#34;, &amp;#34;.jpg&amp;#34;}, {&amp;#34;image/png&amp;#34;, &amp;#34;.png&amp;#34;}, {&amp;#34;text/css&amp;#34;, &amp;#34;.css&amp;#34;}, {&amp;#34;text/html&amp;#34;, &amp;#34;.htm&amp;#34;}, {&amp;#34;text/html&amp;#34;, &amp;#34;.html&amp;#34;}, {&amp;#34;text/javascript&amp;#34;, &amp;#34;.js&amp;#34;}, {&amp;#34;text/xml&amp;#34;, &amp;#34;.xml&amp;#34;}, {&amp;#34;text/xsl&amp;#34;, &amp;#34;.xsl&amp;#34;} }; public static void main(String[] args) { try { for(int i = 0; i &amp;lt; args.</description>
     </item>
     
     <item>
       <title>Java递归函数实现ZIP压缩功能</title>
-      <link>https://jiangzhejun.github.io/post/j4zip/</link>
+      <link>https://jiangzhejun.github.io/post/java_zipack/</link>
       <pubDate>Tue, 26 Mar 2019 17:08:56 +0800</pubDate>
       
-      <guid>https://jiangzhejun.github.io/post/j4zip/</guid>
+      <guid>https://jiangzhejun.github.io/post/java_zipack/</guid>
       <description>import java.io.*; import java.text.SimpleDateFormat; import java.util.*; import java.util.zip.*; public class j4zip { private static final String VERSION_INFO = &amp;#34;j4zip 1.0.1.1 - bi20190827152651&amp;#34;; public static void main(String[] args) throws Exception { if(args.length &amp;gt; 0) { for(String s : args) { zipack(new File(s)); } } System.out.println(VERSION_INFO); System.exit(0); } private static void zipack(File src) throws Exception { System.out.println(src.getName() + &amp;#34; (&amp;#34;); SimpleDateFormat sdf = new SimpleDateFormat(&amp;#34;yyyyMMddHHmmss&amp;#34;); FileOutputStream fos = new FileOutputStream(src.getName() + &amp;#34; &amp;#34; + sdf.</description>
     </item>
     
     <item>
       <title>TXT2HTML：纯文本转换为简单网页的批处理</title>
-      <link>https://jiangzhejun.github.io/post/txt2html/</link>
+      <link>https://jiangzhejun.github.io/post/bat_txt2html/</link>
       <pubDate>Sun, 03 Mar 2019 08:07:00 +0800</pubDate>
       
-      <guid>https://jiangzhejun.github.io/post/txt2html/</guid>
+      <guid>https://jiangzhejun.github.io/post/bat_txt2html/</guid>
       <description>@setlocal enabledelayedexpansion&amp;amp;title %~n0 - bi20190303080747 @for %%n in (%*) do call :convert %%n exit :convert @if not exist &amp;#34;%1&amp;#34; goto :eof||cd /d %~dp1 @echo ^&amp;lt;meta charset=&amp;#34;gbk&amp;#34;^&amp;gt;&amp;gt;%~n1.html @echo ^&amp;lt;h1^&amp;gt;%~n1^&amp;lt;/h1^&amp;gt;&amp;gt;&amp;gt;%~n1.html @for /f %%r in (%~f1) do echo ^&amp;lt;p^&amp;gt;%%r^&amp;lt;p^&amp;gt;&amp;gt;&amp;gt;%~n1.html @pause 准备做个CHM帮助文件，需要将纯文本转网页文件。网上找的小工具虽然方便，但是冗余代码太多；用高级语言编个程序好像也不值当，批处理用不了几行代码就搞定了。
 使用方法有三：
   命令行操作，在CMD中输入批处理命令，把文本文件路径作为参数录入，回车执行即可。
@@ -121,76 +121,103 @@
     
     <item>
       <title>秒关 - 批处理设定倒计时关机</title>
-      <link>https://jiangzhejun.github.io/post/shutdown_seconds/</link>
+      <link>https://jiangzhejun.github.io/post/bat_second-off/</link>
       <pubDate>Thu, 28 Feb 2019 08:01:42 +0800</pubDate>
       
-      <guid>https://jiangzhejun.github.io/post/shutdown_seconds/</guid>
+      <guid>https://jiangzhejun.github.io/post/bat_second-off/</guid>
       <description>@echo off&amp;amp;title SecondsOff - bi20190225080142 set s=%1 :main echo %s%|findstr &amp;#34;^[1-9][0-9]*$^0$^\-[1-9][0-9]*$&amp;#34;||goto NonNumeric if %s% lss 0 (shutdown -a) else (shutdown -s -t %s%) goto %errorlevel% :NonNumeric cls&amp;amp;set /p s=Please enter a numerical value: goto main :1190 cls&amp;amp;echo Existing shutdown task! pause&amp;gt;nul exit /b :1116 cls&amp;amp;echo No shutdown task! pause&amp;gt;nul exit /b :0 cls&amp;amp;echo Set up successfully! pause&amp;gt;nul </description>
     </item>
     
     <item>
       <title>显示或隐藏指定文件夹的 JScript 脚本</title>
-      <link>https://jiangzhejun.github.io/post/folder_hidden/</link>
+      <link>https://jiangzhejun.github.io/post/js_folder-hidden/</link>
       <pubDate>Wed, 07 Nov 2018 13:23:41 +0800</pubDate>
       
-      <guid>https://jiangzhejun.github.io/post/folder_hidden/</guid>
+      <guid>https://jiangzhejun.github.io/post/js_folder-hidden/</guid>
       <description>var CONST_HIDDEN = 2, fso = new ActiveXObject(&amp;#34;Scripting.FileSystemObject&amp;#34;), folder = fso.GetFolder(&amp;#34;myFolder&amp;#34;); if(folder.attributes &amp;amp; CONST_HIDDEN) { folder.attributes &amp;amp;= ~CONST_HIDDEN; } else { folder.attributes |= CONST_HIDDEN; } </description>
     </item>
     
     <item>
-      <title>Java兼容各种主流日期格式转换标准日期格式的函数套装</title>
-      <link>https://jiangzhejun.github.io/post/java_date_formater/</link>
-      <pubDate>Thu, 01 Nov 2018 07:57:03 +0800</pubDate>
-      
-      <guid>https://jiangzhejun.github.io/post/java_date_formater/</guid>
-      <description>public static Date getDate(String sFormat, String sDate) { SimpleDateFormat sdf = new SimpleDateFormat(sFormat); Date d = null; try { sdf.setLenient(false); d = sdf.parse(sDate); } catch (Exception e) { e.printStackTrace(); } return d; } public static String getDate(String sDate) { String[] sa = { &amp;#34;yyyy-MM-dd&amp;#34;, &amp;#34;yyyyMMdd&amp;#34;, &amp;#34;yyyy.MM.dd&amp;#34;, &amp;#34;yyyy/MM/dd&amp;#34;, &amp;#34;yyyy年MM月dd日&amp;#34; }; for(String s : sa) { Date d = getDate(s, sDate); if(d == null) { continue; } else { return new SimpleDateFormat(sa[0]).format(d); } } return &amp;#34;&amp;#34;; } </description>
-    </item>
-    
-    <item>
       <title>Tomcat9 &amp; JDK11 安装配置手记</title>
-      <link>https://jiangzhejun.github.io/post/install_tomcat9_jdk11/</link>
+      <link>https://jiangzhejun.github.io/post/win_install-tomcat9-jdk11/</link>
       <pubDate>Mon, 29 Oct 2018 17:40:37 +0800</pubDate>
       
-      <guid>https://jiangzhejun.github.io/post/install_tomcat9_jdk11/</guid>
+      <guid>https://jiangzhejun.github.io/post/win_install-tomcat9-jdk11/</guid>
       <description>JDK 官网下载openjdk-11.0.1_windows-x64_bin.zip并解压缩至D盘
 Tomcat  官网下载apache-tomcat-9.0.12-windows-x64.zip并解压缩至D盘 修改service批处理文件  进入安装目录bin文件夹 记事本打开service.bat文件 插入“set JAVA_HOME=D:\jdk-11.0.1\”和“set JRE_HOME=%JAVA_HOME%”两行   修改server配置  进入安装目录conf文件夹 记事本打开server.xml文件 找到“&amp;lt;Connector port=“8080” protocol=“HTTP/1.1” … /&amp;gt;”，修改端口为80 滚动条拉到底，找到默认主机“&amp;lt;Host name=“localhost” …&amp;gt;”，插入“&amp;lt;Context path=&amp;rdquo;&amp;rdquo; debug=“0” docBase=“D:/website” … /&amp;gt;”，自定义根目录   必要的类库  进入网站根目录 将编译好的class文件拷贝至classes文件夹，没有就新建一个 将编译好的jar文件拷贝至lib文件夹，没有就新建一个   安装Tomcat9服务  打开CMD 切换至安装目录bin文件夹 运行“service install Tomcat9”  运行“services.msc”打开系统服务  启动服务    浏览器输入“http://localhost”访问</description>
     </item>
     
     <item>
       <title>最简单的MFC窗体创建示例</title>
-      <link>https://jiangzhejun.github.io/post/mfc_window_create/</link>
+      <link>https://jiangzhejun.github.io/post/cpp_mfc-window-create/</link>
       <pubDate>Sun, 30 Sep 2018 11:30:33 +0800</pubDate>
       
-      <guid>https://jiangzhejun.github.io/post/mfc_window_create/</guid>
+      <guid>https://jiangzhejun.github.io/post/cpp_mfc-window-create/</guid>
       <description>#include &amp;lt;afxwin.h&amp;gt; class hwWnd : public CFrameWnd { public: hwWnd(LPCTSTR sTitle) { Create(NULL, sTitle); } }; class hwApp : public CWinApp { public: virtual BOOL InitInstance(); }; BOOL hwApp::InitInstance() { m_pMainWnd = new hwWnd(_T(&amp;#34;HelloWorld!&amp;#34;)); m_pMainWnd-&amp;gt;ShowWindow(m_nCmdShow); return TRUE; } hwApp junet_201809301033; </description>
     </item>
     
     <item>
       <title>巧用组策略解决软件“无法验证发行者”问题</title>
-      <link>https://jiangzhejun.github.io/post/unable_to_verify_publisher/</link>
+      <link>https://jiangzhejun.github.io/post/win_unable-to-verify-publisher/</link>
       <pubDate>Fri, 21 Feb 2014 09:41:32 +0800</pubDate>
       
-      <guid>https://jiangzhejun.github.io/post/unable_to_verify_publisher/</guid>
+      <guid>https://jiangzhejun.github.io/post/win_unable-to-verify-publisher/</guid>
       <description>在运行局域网中另一台电脑上的程序时，总会弹出“无法验证发行者，确定要运行此软件吗” 或者 “Security warning: The publisher could not be verified. Are you sure…?”之类的对话框，很烦人。解决方法是：
  开始菜单“运行”gpedit.msc, 打开“组策略”； 用户配置-&amp;gt;管理模板-&amp;gt;Windows 组件-&amp;gt;附件管理器； 启用“中等危险文件类型的包含列表”； 在“指定中等危险扩展名”中填入：“.exe”； 确定。  </description>
     </item>
     
     <item>
-      <title>HTML/CSS/Javascript实现标题栏可拖拽的半透明对话框</title>
-      <link>https://jiangzhejun.github.io/post/title_bar_drag_and_drop/</link>
+      <title>网页填写日期</title>
+      <link>https://jiangzhejun.github.io/post/html_page-filling-date/</link>
+      <pubDate>Fri, 04 Jun 2010 09:26:28 +0800</pubDate>
+      
+      <guid>https://jiangzhejun.github.io/post/html_page-filling-date/</guid>
+      <description>&amp;lt;style type=&amp;#34;text/css&amp;#34;&amp;gt; div#nyrneishang { color: gray; font-size: 24px; font-weight: bold; text-align: center; } div#nyrneishang span { cursor: pointer; } div#nyrwaike { background-color: silver; border: solid 1px gray; padding: 5px; position: absolute; visibility: hidden; width: 200px; z-index: 999; } div#nyrneixia table { color: gray; font-size: 16px; width: 100%; } div#nyrneixia table td { cursor: pointer; padding: 5px; text-align: center; } div#nyrneixia table td.xingqi { background-color: gray; color: silver; } &amp;lt;/style&amp;gt; &amp;lt;html&amp;gt; &amp;lt;head&amp;gt; &amp;lt;title&amp;gt;填写日期&amp;lt;/title&amp;gt; &amp;lt;/head&amp;gt; &amp;lt;body&amp;gt; &amp;lt;div id=&amp;#34;nyrwaike&amp;#34;&amp;gt; &amp;lt;div id=&amp;#34;nyrneishang&amp;#34;&amp;gt;&amp;lt;/div&amp;gt; &amp;lt;div id=&amp;#34;nyrneixia&amp;#34;&amp;gt;&amp;lt;/div&amp;gt; &amp;lt;/div&amp;gt; &amp;lt;input onclick=&amp;#34;nyrweizhi(this)&amp;#34;/&amp;gt; &amp;lt;/body&amp;gt; &amp;lt;/html&amp;gt; &amp;lt;script type=&amp;#34;text/javascript&amp;#34;&amp;gt; var nyrmubiao, gbx = gby = 0; var nyrneishang = document.</description>
+    </item>
+    
+    <item>
+      <title>标题栏可拖拽的半透明对话框</title>
+      <link>https://jiangzhejun.github.io/post/html_titlebar-drag-and-drop/</link>
       <pubDate>Fri, 02 Apr 2010 09:57:19 +0800</pubDate>
       
-      <guid>https://jiangzhejun.github.io/post/title_bar_drag_and_drop/</guid>
+      <guid>https://jiangzhejun.github.io/post/html_titlebar-drag-and-drop/</guid>
       <description>&amp;lt;style type=&amp;#34;text/css&amp;#34;&amp;gt; body { text-align:center; } .dhkshang { background-color: #888; color: #ccc; cursor: default; padding: 5px; text-align: right; } .dhkxia { color: #888; font-size: 180px; padding-bottom: 50px; text-align: center; } #duihuakuang { -moz-opacity: 0.8; -khtml-opacity: 0.8; background-color: #ccc; border-collapse: collapse; border: 1px solid #888; filter: alpha(opacity=80); opacity: 0.8; position: absolute; top: -999; visibility: hidden; width: 500px; z-index: 999; } #jubing { text-align: left; width: 499px; } .me { color: black; cursor: pointer; font-size: 99px; height: 640px; margin: auto; text-align: center; width: 640px; } .</description>
     </item>
     
     <item>
-      <title>HTML/CSS/Javascript实现简易的超文本编辑器</title>
-      <link>https://jiangzhejun.github.io/post/rich_text_editor/</link>
+      <title>二级菜单下拉式导航栏</title>
+      <link>https://jiangzhejun.github.io/post/html_menu2navibar/</link>
+      <pubDate>Tue, 30 Mar 2010 09:08:44 +0800</pubDate>
+      
+      <guid>https://jiangzhejun.github.io/post/html_menu2navibar/</guid>
+      <description>&amp;lt;style type=&amp;#34;text/css&amp;#34;&amp;gt; li.cd1 { float: left; text-align: center; } li.cd1 a { display: inline-block; padding: 15px; text-decoration: none; } li.cd1:hover, li.cd1:hover span.cd2 { background-color: #ccc; display: block; } span.cd2 { box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2); display: none; position: absolute; } span.cd2 a { clear: left; display: block; float: left; padding: 15px; text-align: left; text-decoration: none; } span.cd2 a:hover { color: #ccc; background-color: #888; } ul.caidan { background-color: #333; color: white; font-size: 18px; list-style-type: none; margin: auto; overflow: hidden; width: 800px; } &amp;lt;/style&amp;gt; &amp;lt;ul class=&amp;#34;caidan&amp;#34;&amp;gt; &amp;lt;li class=&amp;#34;cd1&amp;#34;&amp;gt; &amp;lt;a&amp;gt;a&amp;lt;/a&amp;gt; &amp;lt;span class=&amp;#34;cd2&amp;#34;&amp;gt; &amp;lt;a&amp;gt;b&amp;lt;/a&amp;gt; &amp;lt;a&amp;gt;c&amp;lt;/a&amp;gt; &amp;lt;a&amp;gt;d&amp;lt;/a&amp;gt; &amp;lt;/span&amp;gt; &amp;lt;/li&amp;gt; &amp;lt;li class=&amp;#34;cd1&amp;#34;&amp;gt; &amp;lt;a&amp;gt;e&amp;lt;/a&amp;gt; &amp;lt;span class=&amp;#34;cd2&amp;#34;&amp;gt; &amp;lt;a&amp;gt;f&amp;lt;/a&amp;gt; &amp;lt;a&amp;gt;g&amp;lt;/a&amp;gt; &amp;lt;a&amp;gt;h&amp;lt;/a&amp;gt; &amp;lt;/span&amp;gt; &amp;lt;/li&amp;gt; &amp;lt;li class=&amp;#34;cd1&amp;#34;&amp;gt; &amp;lt;a&amp;gt;i&amp;lt;/a&amp;gt; &amp;lt;span class=&amp;#34;cd2&amp;#34;&amp;gt; &amp;lt;a&amp;gt;j&amp;lt;/a&amp;gt; &amp;lt;a&amp;gt;k&amp;lt;/a&amp;gt; &amp;lt;a&amp;gt;l&amp;lt;/a&amp;gt; &amp;lt;a&amp;gt;m&amp;lt;/a&amp;gt; &amp;lt;a&amp;gt;n&amp;lt;/a&amp;gt; &amp;lt;/span&amp;gt; &amp;lt;/li&amp;gt; &amp;lt;li class=&amp;#34;cd1&amp;#34;&amp;gt; &amp;lt;a&amp;gt;o&amp;lt;/a&amp;gt; &amp;lt;span class=&amp;#34;cd2&amp;#34;&amp;gt; &amp;lt;a&amp;gt;p&amp;lt;/a&amp;gt; &amp;lt;a&amp;gt;q&amp;lt;/a&amp;gt; &amp;lt;a&amp;gt;r&amp;lt;/a&amp;gt; &amp;lt;a&amp;gt;s&amp;lt;/a&amp;gt; &amp;lt;a&amp;gt;t&amp;lt;/a&amp;gt; &amp;lt;/span&amp;gt; &amp;lt;/li&amp;gt; &amp;lt;li class=&amp;#34;cd1&amp;#34;&amp;gt; &amp;lt;a&amp;gt;u&amp;lt;/a&amp;gt; &amp;lt;span class=&amp;#34;cd2&amp;#34;&amp;gt; &amp;lt;a&amp;gt;v&amp;lt;/a&amp;gt; &amp;lt;a&amp;gt;w&amp;lt;/a&amp;gt; &amp;lt;a&amp;gt;x&amp;lt;/a&amp;gt; &amp;lt;a&amp;gt;y&amp;lt;/a&amp;gt; &amp;lt;a&amp;gt;z&amp;lt;/a&amp;gt; &amp;lt;/span&amp;gt; &amp;lt;/li&amp;gt; &amp;lt;/ul&amp;gt; </description>
+    </item>
+    
+    <item>
+      <title>简易的超文本编辑器</title>
+      <link>https://jiangzhejun.github.io/post/html_richtext-editor/</link>
       <pubDate>Thu, 25 Mar 2010 10:00:29 +0800</pubDate>
       
-      <guid>https://jiangzhejun.github.io/post/rich_text_editor/</guid>
+      <guid>https://jiangzhejun.github.io/post/html_richtext-editor/</guid>
       <description>&amp;lt;style type=&amp;#34;text/css&amp;#34;&amp;gt; #shuxie { border: 1px dashed #888; height: 400px; width: 800px; } &amp;lt;/style&amp;gt; &amp;lt;table width=&amp;#34;800&amp;#34;&amp;gt; &amp;lt;td&amp;gt; &amp;lt;input onclick=&amp;#34;shezhi(&amp;#39;Bold&amp;#39;)&amp;#34; type=&amp;#34;button&amp;#34; value=&amp;#34;粗&amp;#34;/&amp;gt; &amp;lt;/td&amp;gt; &amp;lt;td&amp;gt; &amp;lt;input onclick=&amp;#34;shezhi(&amp;#39;UnderLine&amp;#39;)&amp;#34; type=&amp;#34;button&amp;#34; value=&amp;#34;划&amp;#34;/&amp;gt; &amp;lt;/td&amp;gt; &amp;lt;td&amp;gt; &amp;lt;input onclick=&amp;#34;shezhi(&amp;#39;Italic&amp;#39;)&amp;#34; type=&amp;#34;button&amp;#34; value=&amp;#34;斜&amp;#34;/&amp;gt; &amp;lt;/td&amp;gt; &amp;lt;td&amp;gt;|&amp;lt;/td&amp;gt; &amp;lt;td&amp;gt; &amp;lt;input onclick=&amp;#34;shezhi(&amp;#39;JustifyLeft&amp;#39;)&amp;#34; type=&amp;#34;button&amp;#34; value=&amp;#34;左&amp;#34;/&amp;gt; &amp;lt;/td&amp;gt; &amp;lt;td&amp;gt; &amp;lt;input onclick=&amp;#34;shezhi(&amp;#39;JustifyCenter&amp;#39;)&amp;#34; type=&amp;#34;button&amp;#34; value=&amp;#34;中&amp;#34;/&amp;gt; &amp;lt;/td&amp;gt; &amp;lt;td&amp;gt; &amp;lt;input onclick=&amp;#34;shezhi(&amp;#39;JustifyRight&amp;#39;)&amp;#34; type=&amp;#34;button&amp;#34; value=&amp;#34;右&amp;#34;/&amp;gt; &amp;lt;/td&amp;gt; &amp;lt;td&amp;gt;|&amp;lt;/td&amp;gt; &amp;lt;td&amp;gt; &amp;lt;input onclick=&amp;#34;shezhi(&amp;#39;CreateLink&amp;#39;,prompt(&amp;#39;链接的URL？&amp;#39;))&amp;#34; type=&amp;#34;button&amp;#34; value=&amp;#34;链&amp;#34;/&amp;gt; &amp;lt;/td&amp;gt; &amp;lt;td&amp;gt; &amp;lt;input onclick=&amp;#34;shezhi(&amp;#39;Unlink&amp;#39;)&amp;#34; type=&amp;#34;button&amp;#34; value=&amp;#34;销&amp;#34;/&amp;gt; &amp;lt;/td&amp;gt; &amp;lt;td&amp;gt;|&amp;lt;/td&amp;gt; &amp;lt;td&amp;gt; &amp;lt;input onclick=&amp;#34;shezhi(&amp;#39;InsertImage&amp;#39;,prompt(&amp;#39;图片的URL？&amp;#39;))&amp;#34; type=&amp;#34;button&amp;#34; value=&amp;#34;图&amp;#34;/&amp;gt; &amp;lt;/td&amp;gt; &amp;lt;td&amp;gt; &amp;lt;input onclick=&amp;#34;zhantie(prompt(&amp;#39;文本的内容？&amp;#39;))&amp;#34; type=&amp;#34;button&amp;#34; value=&amp;#34;文&amp;#34;/&amp;gt; &amp;lt;/td&amp;gt; &amp;lt;td width=&amp;#34;99%&amp;#34;&amp;gt; &amp;lt;br/&amp;gt; &amp;lt;/td&amp;gt; &amp;lt;td&amp;gt; &amp;lt;select onchange=&amp;#34;shezhi(&amp;#39;FontName&amp;#39;,this.</description>
+    </item>
+    
+    <item>
+      <title>网页溅出窗口</title>
+      <link>https://jiangzhejun.github.io/post/html_splooing-cover/</link>
+      <pubDate>Sat, 27 Feb 2010 09:22:56 +0800</pubDate>
+      
+      <guid>https://jiangzhejun.github.io/post/html_splooing-cover/</guid>
+      <description>&amp;lt;style type=&amp;#34;text/css&amp;#34;&amp;gt; #jianchu { background-color: silver; border: 2px solid gray; color: gray; cursor: default; font-size: 200px; position: absolute; text-align: center; visibility: hidden; width: 800px; z-index: 999; } &amp;lt;/style&amp;gt; &amp;lt;div id=&amp;#34;jianchu&amp;#34;&amp;gt; *^_^* &amp;lt;/div&amp;gt; &amp;lt;script type=&amp;#34;text/javascript&amp;#34;&amp;gt; with(jianchu) { style.left = (document.body.clientWidth - offsetWidth) / 2 + &amp;#34;px&amp;#34;; style.top = (document.body.clientHeight - offsetHeight) / 2 + document.body.scrollTop + &amp;#34;px&amp;#34;; style.visibility = &amp;#34;visible&amp;#34;; } setTimeout(&amp;#34;jianchu.style.visibility=&amp;#39;hidden&amp;#39;&amp;#34;, 3000); &amp;lt;/script&amp;gt; </description>
+    </item>
+    
+    <item>
+      <title>秀啊 1.0</title>
+      <link>https://jiangzhejun.github.io/post/cs_showare/</link>
+      <pubDate>Fri, 04 Jun 2004 09:30:00 +0800</pubDate>
+      
+      <guid>https://jiangzhejun.github.io/post/cs_showare/</guid>
+      <description>using System; using System.ComponentModel; using System.Drawing; using System.Drawing.Printing; using System.IO; using System.Reflection; using System.Windows.Forms; [assembly: AssemblyCompany(&amp;#34;bibi&amp;#34;)] [assembly: AssemblyCopyright(&amp;#34;bi20181105155750&amp;#34;)] [assembly: AssemblyProduct(&amp;#34;秀啊&amp;#34;)] [assembly: AssemblyTrademark(&amp;#34;jobar&amp;#34;)] [assembly: AssemblyVersion(&amp;#34;1.0.4.7&amp;#34;)] class showare: Form { public showare() { Controls.AddRange(new Control[] {xiua.mianban, new caidan()}); ClientSize = new Size(300, 420 + Controls[1].Height); FormBorderStyle = FormBorderStyle.FixedSingle; xiua.mianban.yangshi(1); Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath); MaximizeBox = MinimizeBox = false; StartPosition = FormStartPosition.CenterScreen; Text = ProductName + &amp;#34; 1.0&amp;#34;; } [STAThread] public static void Main(String[] zifuchuan) { xiua.</description>
     </item>
     
   </channel>
