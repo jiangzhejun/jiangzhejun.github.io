@@ -1,42 +1,28 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-
+<html>
 <head>
-  <meta charset="utf-8">
-  <meta name="generator" content="Hugo 0.72.0" />
-
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="author" content="">
-  <meta property="og:url" content="https://jiangzhejun.github.io/post/c_ftp_lib/">
-
-  <title>C语言实现的FTP函数静态链接库 - Junet Workshop</title>
-  <meta property="og:title" content="C语言实现的FTP函数静态链接库 - Junet Workshop">
-  <meta property="og:type" content="article">
-  <meta name="description" content="">
-
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Arvo:400,700">
-  <link rel="stylesheet" href="/css/highlight.css">
-  <link rel="stylesheet" href="/css/journal.css">
-  <link href="/index.xml" rel="alternate" type="application/rss+xml" title="Junet Workshop">
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C语言实现的FTP函数静态链接库 - Junet Workshop</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
 </head>
-
 <body>
-  <div class="container">
-
-    <nav class="site-nav">
-      <a href="https://jiangzhejun.github.io/">Index</a>
-    </nav>
-
-
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">C语言实现的FTP函数静态链接库</h1>
-      <time class="post-date" datetime="2019-07-23 10:23:38 CST">23 Jul 2019</time>
-    </header>
-
-    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;j2ftp.h&#34;</span><span style="color:#75715e">
+<header>
+  <div>
+    <h1 class="subject"><a href="https://jiangzhejun.github.io/">Junet Workshop</a></h1>
+  </div>
+  <nav></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>C语言实现的FTP函数静态链接库</h1>
+  </div>
+<div class="meta">
+  <div>2019-07-23 10:23</div>
+  </div>
+<div class="content">
+  <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;j2ftp.h&#34;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span>
 <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">cd</span>(SOCKET skt, <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>path) {
   <span style="color:#66d9ef">char</span> c[BUFFER_SIZE];
@@ -393,32 +379,9 @@ SOCKET <span style="color:#a6e22e">pasv</span>(SOCKET skt) {
 
   <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }
-</code></pre></div>
+</code></pre></div></div>
 
   </article>
-
-
-      <footer class="site-footer">
-        <span itemscope itemtype="http://schema.org/Person">
-          <link itemprop="url" href="https://jiangzhejun.github.io/">
-          <span itemprop="name"></span>
-
-          <br>
-
-          
-
-          
-
-          
-        </span>
-
-        
-      </footer>
-    </div>
-
-  <script src="/js/highlight.pack.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
-
-  </body>
+</main>
+</body>
 </html>
-

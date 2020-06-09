@@ -1,149 +1,112 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-
+<html>
 <head>
-  <meta charset="utf-8">
-  <meta name="generator" content="Hugo 0.72.0" />
-
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="author" content="">
-  <meta property="og:url" content="https://jiangzhejun.github.io/post/java_dirule/">
-
-  <title>扫描指定文件夹并实现磁盘配额 - Junet Workshop</title>
-  <meta property="og:title" content="扫描指定文件夹并实现磁盘配额 - Junet Workshop">
-  <meta property="og:type" content="article">
-  <meta name="description" content="">
-
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Arvo:400,700">
-  <link rel="stylesheet" href="/css/highlight.css">
-  <link rel="stylesheet" href="/css/journal.css">
-  <link href="/index.xml" rel="alternate" type="application/rss+xml" title="Junet Workshop">
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>扫描指定文件夹并实现磁盘配额 - Junet Workshop</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
 </head>
-
 <body>
-  <div class="container">
+<header>
+  <div>
+    <h1 class="subject"><a href="https://jiangzhejun.github.io/">Junet Workshop</a></h1>
+  </div>
+  <nav></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>扫描指定文件夹并实现磁盘配额</h1>
+  </div>
+<div class="meta">
+  <div>2020-03-03 14:39</div>
+  </div>
+<div class="content">
+  <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">import</span> java.io.*<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> java.text.*<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> java.util.*<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> javax.xml.parsers.*<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> javax.xml.transform.*<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> javax.xml.transform.dom.*<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> javax.xml.transform.stream.*<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> org.w3c.dom.*<span style="color:#f92672">;</span>
 
-    <nav class="site-nav">
-      <a href="https://jiangzhejun.github.io/">Index</a>
-    </nav>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DIRule</span> <span style="color:#f92672">{</span>
+  <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">double</span> length<span style="color:#f92672">,</span> quota<span style="color:#f92672">;</span>
 
+  <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> Exception <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">new</span> DIRule<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;config.xml&#34;</span><span style="color:#f92672">);</span>
+    System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;DIRule 1.0.1.12 beta - bi20200302205501&#34;</span><span style="color:#f92672">);</span>
+		en<span style="color:#f92672">.</span><span style="color:#a6e22e">sign</span><span style="color:#f92672">(-</span>2000<span style="color:#f92672">);</span>
+		System<span style="color:#f92672">.</span><span style="color:#a6e22e">exit</span><span style="color:#f92672">(</span>0<span style="color:#f92672">);</span>
+  <span style="color:#f92672">}</span>
 
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">扫描指定文件夹并实现磁盘配额</h1>
-      <time class="post-date" datetime="2020-03-03 14:39:10 CST">03 Mar 2020</time>
-    </header>
+  <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">DIRule</span><span style="color:#f92672">(</span>String conf<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    SimpleDateFormat sdf <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> SimpleDateFormat<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;yyyyMMddHHmmssSSS&#34;</span><span style="color:#f92672">);</span>
+    String s <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;bi&#34;</span> <span style="color:#f92672">+</span> sdf<span style="color:#f92672">.</span><span style="color:#a6e22e">format</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> Date<span style="color:#f92672">());</span>
+    <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+      DocumentBuilderFactory dbf <span style="color:#f92672">=</span> DocumentBuilderFactory<span style="color:#f92672">.</span><span style="color:#a6e22e">newInstance</span><span style="color:#f92672">();</span>
+      DocumentBuilder db <span style="color:#f92672">=</span> dbf<span style="color:#f92672">.</span><span style="color:#a6e22e">newDocumentBuilder</span><span style="color:#f92672">();</span>
+      Document d <span style="color:#f92672">=</span> db<span style="color:#f92672">.</span><span style="color:#a6e22e">parse</span><span style="color:#f92672">(</span>conf<span style="color:#f92672">);</span>
+      d<span style="color:#f92672">.</span><span style="color:#a6e22e">normalize</span><span style="color:#f92672">();</span>
+      d<span style="color:#f92672">.</span><span style="color:#a6e22e">getDocumentElement</span><span style="color:#f92672">().</span><span style="color:#a6e22e">getAttributes</span><span style="color:#f92672">().</span><span style="color:#a6e22e">getNamedItem</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;timestamp&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">setNodeValue</span><span style="color:#f92672">(</span>s<span style="color:#f92672">);</span>
 
-    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">import java.io.<span style="color:#f92672">*</span>;
-import java.text.<span style="color:#f92672">*</span>;
-import java.util.<span style="color:#f92672">*</span>;
-import javax.xml.parsers.<span style="color:#f92672">*</span>;
-import javax.xml.transform.<span style="color:#f92672">*</span>;
-import javax.xml.transform.dom.<span style="color:#f92672">*</span>;
-import javax.xml.transform.stream.<span style="color:#f92672">*</span>;
-import org.w3c.dom.<span style="color:#f92672">*</span>;
+      NodeList nl <span style="color:#f92672">=</span> d<span style="color:#f92672">.</span><span style="color:#a6e22e">getDocumentElement</span><span style="color:#f92672">().</span><span style="color:#a6e22e">getElementsByTagName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;directory&#34;</span><span style="color:#f92672">);</span>
+      <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;</span> nl<span style="color:#f92672">.</span><span style="color:#a6e22e">getLength</span><span style="color:#f92672">();</span> i<span style="color:#f92672">++)</span> <span style="color:#f92672">{</span>
+        NamedNodeMap nnm <span style="color:#f92672">=</span> nl<span style="color:#f92672">.</span><span style="color:#a6e22e">item</span><span style="color:#f92672">(</span>i<span style="color:#f92672">).</span><span style="color:#a6e22e">getAttributes</span><span style="color:#f92672">();</span>
+        Element e <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>Element<span style="color:#f92672">)(</span>nl<span style="color:#f92672">.</span><span style="color:#a6e22e">item</span><span style="color:#f92672">(</span>i<span style="color:#f92672">).</span><span style="color:#a6e22e">getChildNodes</span><span style="color:#f92672">());</span>
+        quota <span style="color:#f92672">=</span> Double<span style="color:#f92672">.</span><span style="color:#a6e22e">valueOf</span><span style="color:#f92672">(</span>e<span style="color:#f92672">.</span><span style="color:#a6e22e">getElementsByTagName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;quota&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">item</span><span style="color:#f92672">(</span>0<span style="color:#f92672">).</span><span style="color:#a6e22e">getTextContent</span><span style="color:#f92672">());</span>
+        e<span style="color:#f92672">.</span><span style="color:#a6e22e">getElementsByTagName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;readonly&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">item</span><span style="color:#f92672">(</span>0<span style="color:#f92672">).</span><span style="color:#a6e22e">setTextContent</span><span style="color:#f92672">(</span>
+          readonly<span style="color:#f92672">(</span>
+            nnm<span style="color:#f92672">.</span><span style="color:#a6e22e">getNamedItem</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;path&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">getNodeValue</span><span style="color:#f92672">()</span> <span style="color:#f92672">+</span>
+            e<span style="color:#f92672">.</span><span style="color:#a6e22e">getElementsByTagName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;name&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">item</span><span style="color:#f92672">(</span>0<span style="color:#f92672">).</span><span style="color:#a6e22e">getTextContent</span><span style="color:#f92672">()</span>
+          <span style="color:#f92672">)</span>
+        <span style="color:#f92672">);</span>
+        e<span style="color:#f92672">.</span><span style="color:#a6e22e">getElementsByTagName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;length&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">item</span><span style="color:#f92672">(</span>0<span style="color:#f92672">).</span><span style="color:#a6e22e">setTextContent</span><span style="color:#f92672">(</span>String<span style="color:#f92672">.</span><span style="color:#a6e22e">format</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;%.2f&#34;</span><span style="color:#f92672">,</span> length<span style="color:#f92672">));</span>
+      <span style="color:#f92672">}</span>
 
-public class DIRule {
-  private <span style="color:#66d9ef">double</span> length, quota;
+      TransformerFactory tf <span style="color:#f92672">=</span> TransformerFactory<span style="color:#f92672">.</span><span style="color:#a6e22e">newInstance</span><span style="color:#f92672">();</span>
+      Transformer t <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span><span style="color:#a6e22e">newTransformer</span><span style="color:#f92672">();</span>
+      t<span style="color:#f92672">.</span><span style="color:#a6e22e">setOutputProperty</span><span style="color:#f92672">(</span>OutputKeys<span style="color:#f92672">.</span><span style="color:#a6e22e">ENCODING</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;utf-8&#34;</span><span style="color:#f92672">);</span>
+      t<span style="color:#f92672">.</span><span style="color:#a6e22e">transform</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> DOMSource<span style="color:#f92672">(</span>d<span style="color:#f92672">),</span> <span style="color:#66d9ef">new</span> StreamResult<span style="color:#f92672">(</span>conf<span style="color:#f92672">));</span>
+    <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span><span style="color:#f92672">(</span>Exception e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+      e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+  <span style="color:#f92672">}</span>
 
-  public <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String[] args) throws Exception {
-    new DIRule(<span style="color:#e6db74">&#34;config.xml&#34;</span>);
-    System.out.println(<span style="color:#e6db74">&#34;DIRule 1.0.1.12 beta - bi20200302205501&#34;</span>);
-		en.sign(<span style="color:#f92672">-</span><span style="color:#ae81ff">2000</span>);
-		System.exit(<span style="color:#ae81ff">0</span>);
-  }
+  <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">double</span> <span style="color:#a6e22e">getLength</span><span style="color:#f92672">(</span>File dir<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> Exception <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">double</span> d <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
 
-  public <span style="color:#a6e22e">DIRule</span>(String conf) {
-    SimpleDateFormat sdf <span style="color:#f92672">=</span> new SimpleDateFormat(<span style="color:#e6db74">&#34;yyyyMMddHHmmssSSS&#34;</span>);
-    String s <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;bi&#34;</span> <span style="color:#f92672">+</span> sdf.format(new Date());
-    try {
-      DocumentBuilderFactory dbf <span style="color:#f92672">=</span> DocumentBuilderFactory.newInstance();
-      DocumentBuilder db <span style="color:#f92672">=</span> dbf.newDocumentBuilder();
-      Document d <span style="color:#f92672">=</span> db.parse(conf);
-      d.normalize();
-      d.getDocumentElement().getAttributes().getNamedItem(<span style="color:#e6db74">&#34;timestamp&#34;</span>).setNodeValue(s);
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>dir<span style="color:#f92672">.</span><span style="color:#a6e22e">exists</span><span style="color:#f92672">())</span> <span style="color:#f92672">{</span>
+      <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span>File f <span style="color:#f92672">:</span> dir<span style="color:#f92672">.</span><span style="color:#a6e22e">listFiles</span><span style="color:#f92672">())</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>f<span style="color:#f92672">.</span><span style="color:#a6e22e">isDirectory</span><span style="color:#f92672">())</span> <span style="color:#f92672">{</span>
+          d <span style="color:#f92672">+=</span> getLength<span style="color:#f92672">(</span>f<span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+          d <span style="color:#f92672">+=</span> f<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span>
+      <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
 
-      NodeList nl <span style="color:#f92672">=</span> d.getDocumentElement().getElementsByTagName(<span style="color:#e6db74">&#34;directory&#34;</span>);
-      <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> nl.getLength(); i<span style="color:#f92672">++</span>) {
-        NamedNodeMap nnm <span style="color:#f92672">=</span> nl.item(i).getAttributes();
-        Element e <span style="color:#f92672">=</span> (Element)(nl.item(i).getChildNodes());
-        quota <span style="color:#f92672">=</span> Double.valueOf(e.getElementsByTagName(<span style="color:#e6db74">&#34;quota&#34;</span>).item(<span style="color:#ae81ff">0</span>).getTextContent());
-        e.getElementsByTagName(<span style="color:#e6db74">&#34;readonly&#34;</span>).item(<span style="color:#ae81ff">0</span>).setTextContent(
-          readonly(
-            nnm.getNamedItem(<span style="color:#e6db74">&#34;path&#34;</span>).getNodeValue() <span style="color:#f92672">+</span>
-            e.getElementsByTagName(<span style="color:#e6db74">&#34;name&#34;</span>).item(<span style="color:#ae81ff">0</span>).getTextContent()
-          )
-        );
-        e.getElementsByTagName(<span style="color:#e6db74">&#34;length&#34;</span>).item(<span style="color:#ae81ff">0</span>).setTextContent(String.format(<span style="color:#e6db74">&#34;%.2f&#34;</span>, length));
-      }
+    <span style="color:#66d9ef">return</span> d<span style="color:#f92672">;</span>
+  <span style="color:#f92672">}</span>
 
-      TransformerFactory tf <span style="color:#f92672">=</span> TransformerFactory.newInstance();
-      Transformer t <span style="color:#f92672">=</span> tf.newTransformer();
-      t.setOutputProperty(OutputKeys.ENCODING, <span style="color:#e6db74">&#34;utf-8&#34;</span>);
-      t.transform(new DOMSource(d), new StreamResult(conf));
-    } catch(Exception e) {
-      e.printStackTrace();
-    }
-  }
-
-  private <span style="color:#66d9ef">double</span> <span style="color:#a6e22e">getLength</span>(File dir) throws Exception {
-    <span style="color:#66d9ef">double</span> d <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-
-    <span style="color:#66d9ef">if</span>(dir.exists()) {
-      <span style="color:#66d9ef">for</span>(File f : dir.listFiles()) {
-        <span style="color:#66d9ef">if</span>(f.isDirectory()) {
-          d <span style="color:#f92672">+=</span> getLength(f);
-        } <span style="color:#66d9ef">else</span> {
-          d <span style="color:#f92672">+=</span> f.length();
-        }
-      }
-    }
-
-    <span style="color:#66d9ef">return</span> d;
-  }
-
-  private String <span style="color:#a6e22e">readonly</span>(String pan) throws Exception {
-    String s <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;icacls </span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">+</span> pan <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74"> /grant:r everyone:(OI)(CI)&#34;</span>;
-    <span style="color:#66d9ef">if</span>((length <span style="color:#f92672">=</span> getLength(new File(pan))) <span style="color:#f92672">&gt;</span> quota <span style="color:#f92672">*</span> Math.pow(<span style="color:#ae81ff">1024</span>, <span style="color:#ae81ff">3</span>)) {
-      Runtime.getRuntime().exec(s <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;rd&#34;</span>);
-      s <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Yes&#34;</span>;
-    } <span style="color:#66d9ef">else</span> {
-      Runtime.getRuntime().exec(s <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;f&#34;</span>);
-      s <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;No&#34;</span>;
-    }
+  <span style="color:#66d9ef">private</span> String <span style="color:#a6e22e">readonly</span><span style="color:#f92672">(</span>String pan<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> Exception <span style="color:#f92672">{</span>
+    String s <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;icacls \&#34;&#34;</span> <span style="color:#f92672">+</span> pan <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;\&#34; /grant:r everyone:(OI)(CI)&#34;</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">((</span>length <span style="color:#f92672">=</span> getLength<span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> File<span style="color:#f92672">(</span>pan<span style="color:#f92672">)))</span> <span style="color:#f92672">&gt;</span> quota <span style="color:#f92672">*</span> Math<span style="color:#f92672">.</span><span style="color:#a6e22e">pow</span><span style="color:#f92672">(</span>1024<span style="color:#f92672">,</span> 3<span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+      Runtime<span style="color:#f92672">.</span><span style="color:#a6e22e">getRuntime</span><span style="color:#f92672">().</span><span style="color:#a6e22e">exec</span><span style="color:#f92672">(</span>s <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;rd&#34;</span><span style="color:#f92672">);</span>
+      s <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Yes&#34;</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+      Runtime<span style="color:#f92672">.</span><span style="color:#a6e22e">getRuntime</span><span style="color:#f92672">().</span><span style="color:#a6e22e">exec</span><span style="color:#f92672">(</span>s <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;f&#34;</span><span style="color:#f92672">);</span>
+      s <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;No&#34;</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
     
-    length <span style="color:#f92672">/=</span> Math.pow(<span style="color:#ae81ff">1024</span>, <span style="color:#ae81ff">3</span>);
-    <span style="color:#66d9ef">return</span> s;
-  }
-}
-</code></pre></div>
+    length <span style="color:#f92672">/=</span> Math<span style="color:#f92672">.</span><span style="color:#a6e22e">pow</span><span style="color:#f92672">(</span>1024<span style="color:#f92672">,</span> 3<span style="color:#f92672">);</span>
+    <span style="color:#66d9ef">return</span> s<span style="color:#f92672">;</span>
+  <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div></div>
 
   </article>
-
-
-      <footer class="site-footer">
-        <span itemscope itemtype="http://schema.org/Person">
-          <link itemprop="url" href="https://jiangzhejun.github.io/">
-          <span itemprop="name"></span>
-
-          <br>
-
-          
-
-          
-
-          
-        </span>
-
-        
-      </footer>
-    </div>
-
-  <script src="/js/highlight.pack.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
-
-  </body>
+</main>
+</body>
 </html>
-

@@ -1,42 +1,28 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-
+<html>
 <head>
-  <meta charset="utf-8">
-  <meta name="generator" content="Hugo 0.72.0" />
-
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="author" content="">
-  <meta property="og:url" content="https://jiangzhejun.github.io/post/win_install-tomcat9-jdk11/">
-
-  <title>Tomcat9 &amp; JDK11 安装配置手记 - Junet Workshop</title>
-  <meta property="og:title" content="Tomcat9 &amp; JDK11 安装配置手记 - Junet Workshop">
-  <meta property="og:type" content="article">
-  <meta name="description" content="">
-
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Arvo:400,700">
-  <link rel="stylesheet" href="/css/highlight.css">
-  <link rel="stylesheet" href="/css/journal.css">
-  <link href="/index.xml" rel="alternate" type="application/rss+xml" title="Junet Workshop">
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tomcat9 &amp; JDK11 安装配置手记 - Junet Workshop</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
 </head>
-
 <body>
-  <div class="container">
-
-    <nav class="site-nav">
-      <a href="https://jiangzhejun.github.io/">Index</a>
-    </nav>
-
-
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">Tomcat9 &amp; JDK11 安装配置手记</h1>
-      <time class="post-date" datetime="2018-10-29 17:40:37 CST">29 Oct 2018</time>
-    </header>
-
-    <h2 id="jdk">JDK</h2>
+<header>
+  <div>
+    <h1 class="subject"><a href="https://jiangzhejun.github.io/">Junet Workshop</a></h1>
+  </div>
+  <nav></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>Tomcat9 &amp; JDK11 安装配置手记</h1>
+  </div>
+<div class="meta">
+  <div>2018-10-29 17:40</div>
+  </div>
+<div class="content">
+  <h2 id="jdk">JDK</h2>
 <p>官网下载openjdk-11.0.1_windows-x64_bin.zip并解压缩至D盘</p>
 <h2 id="tomcat">Tomcat</h2>
 <ul>
@@ -67,39 +53,16 @@
 <ul>
 <li>打开CMD</li>
 <li>切换至安装目录bin文件夹</li>
-<li>运行“service install Tomcat9”   <img src="/img/20181029161818275.png" alt="安装服务"></li>
-<li>运行“services.msc”打开系统服务   <img src="/img/20181029161838826.png" alt="打开服务"></li>
+<li>运行“service install Tomcat9”   <img src="/img/win_install-tomcat9-jdk11/20181029161818275.png" alt="安装服务"></li>
+<li>运行“services.msc”打开系统服务   <img src="/img/win_install-tomcat9-jdk11/20181029161838826.png" alt="打开服务"></li>
 <li>启动服务</li>
 </ul>
 </li>
 </ul>
 <p>浏览器输入“http://localhost”访问</p>
-
+</div>
 
   </article>
-
-
-      <footer class="site-footer">
-        <span itemscope itemtype="http://schema.org/Person">
-          <link itemprop="url" href="https://jiangzhejun.github.io/">
-          <span itemprop="name"></span>
-
-          <br>
-
-          
-
-          
-
-          
-        </span>
-
-        
-      </footer>
-    </div>
-
-  <script src="/js/highlight.pack.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
-
-  </body>
+</main>
+</body>
 </html>
-

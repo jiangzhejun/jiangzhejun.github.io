@@ -1,76 +1,39 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-
+<html>
 <head>
-  <meta charset="utf-8">
-  <meta name="generator" content="Hugo 0.72.0" />
-
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="author" content="">
-  <meta property="og:url" content="https://jiangzhejun.github.io/post/js_folder-hidden/">
-
-  <title>显示或隐藏指定文件夹的 JScript 脚本 - Junet Workshop</title>
-  <meta property="og:title" content="显示或隐藏指定文件夹的 JScript 脚本 - Junet Workshop">
-  <meta property="og:type" content="article">
-  <meta name="description" content="">
-
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Arvo:400,700">
-  <link rel="stylesheet" href="/css/highlight.css">
-  <link rel="stylesheet" href="/css/journal.css">
-  <link href="/index.xml" rel="alternate" type="application/rss+xml" title="Junet Workshop">
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>显示或隐藏指定文件夹的 JScript 脚本 - Junet Workshop</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
 </head>
-
 <body>
-  <div class="container">
-
-    <nav class="site-nav">
-      <a href="https://jiangzhejun.github.io/">Index</a>
-    </nav>
-
-
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">显示或隐藏指定文件夹的 JScript 脚本</h1>
-      <time class="post-date" datetime="2018-11-07 13:23:41 CST">07 Nov 2018</time>
-    </header>
-
-    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">var CONST_HIDDEN <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>,
-fso <span style="color:#f92672">=</span> new ActiveXObject(<span style="color:#e6db74">&#34;Scripting.FileSystemObject&#34;</span>),
-folder <span style="color:#f92672">=</span> fso.GetFolder(<span style="color:#e6db74">&#34;myFolder&#34;</span>);
+<header>
+  <div>
+    <h1 class="subject"><a href="https://jiangzhejun.github.io/">Junet Workshop</a></h1>
+  </div>
+  <nav></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>显示或隐藏指定文件夹的 JScript 脚本</h1>
+  </div>
+<div class="meta">
+  <div>2018-11-07 13:23</div>
+  </div>
+<div class="content">
+  <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">CONST_HIDDEN</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>,
+<span style="color:#a6e22e">fso</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">ActiveXObject</span>(<span style="color:#e6db74">&#34;Scripting.FileSystemObject&#34;</span>),
+<span style="color:#a6e22e">folder</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">fso</span>.<span style="color:#a6e22e">GetFolder</span>(<span style="color:#e6db74">&#34;myFolder&#34;</span>);
  
-<span style="color:#66d9ef">if</span>(folder.attributes <span style="color:#f92672">&amp;</span> CONST_HIDDEN) {
-    folder.attributes <span style="color:#f92672">&amp;=</span> <span style="color:#f92672">~</span>CONST_HIDDEN;
+<span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">folder</span>.<span style="color:#a6e22e">attributes</span> <span style="color:#f92672">&amp;</span> <span style="color:#a6e22e">CONST_HIDDEN</span>) {
+    <span style="color:#a6e22e">folder</span>.<span style="color:#a6e22e">attributes</span> <span style="color:#f92672">&amp;=</span> <span style="color:#f92672">~</span><span style="color:#a6e22e">CONST_HIDDEN</span>;
 } <span style="color:#66d9ef">else</span> {
-    folder.attributes <span style="color:#f92672">|=</span> CONST_HIDDEN;
+    <span style="color:#a6e22e">folder</span>.<span style="color:#a6e22e">attributes</span> <span style="color:#f92672">|=</span> <span style="color:#a6e22e">CONST_HIDDEN</span>;
 }
-</code></pre></div>
+</code></pre></div></div>
 
   </article>
-
-
-      <footer class="site-footer">
-        <span itemscope itemtype="http://schema.org/Person">
-          <link itemprop="url" href="https://jiangzhejun.github.io/">
-          <span itemprop="name"></span>
-
-          <br>
-
-          
-
-          
-
-          
-        </span>
-
-        
-      </footer>
-    </div>
-
-  <script src="/js/highlight.pack.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
-
-  </body>
+</main>
+</body>
 </html>
-
