@@ -59,6 +59,15 @@
     </item>
     
     <item>
+      <title>北京植物园</title>
+      <link>https://jiangzhejun.github.io/post/travels_20191102_beijingzhiwuyuan/</link>
+      <pubDate>Sat, 02 Nov 2019 08:58:59 +0800</pubDate>
+      
+      <guid>https://jiangzhejun.github.io/post/travels_20191102_beijingzhiwuyuan/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>围场、乌兰布统、避暑山庄</title>
       <link>https://jiangzhejun.github.io/post/travels_2019_weichang-wulanbutong-bishushanzhuang/</link>
       <pubDate>Sat, 10 Aug 2019 15:43:12 +0800</pubDate>
@@ -77,6 +86,15 @@
       
       <guid>https://jiangzhejun.github.io/post/c_ftp_lib/</guid>
       <description>#include &amp;#34;j2ftp.h&amp;#34; int cd(SOCKET skt, char *path) { char c[BUFFER_SIZE]; sprintf(c, &amp;#34;CWD %s\r\n&amp;#34;, path); if(sendB(skt, c) == FTP_FILE_ACTION_COMPLETE) { return 0; } else { return -1; } } SOCKET cs(char *host, int port) { struct hostent *server = gethostbyname(host); if(!server) { return -1; } char ip[20]; int i = 0; unsigned char c[4]; while(server-&amp;gt;h_addr_list[i] != NULL) { memcpy(&amp;amp;c, server-&amp;gt;h_addr_list[i], 4); sprintf(ip,&amp;#34;%d.%d.%d.%d&amp;#34;, c[0], c[1], c[2], c[3]); i++; } SOCKET s = socket(AF_INET, SOCK_STREAM, 0); if(s == SOCKET_ERROR) { printf(&amp;#34;Create socket error!</description>
+    </item>
+    
+    <item>
+      <title>山西忻州·五台山礼佛</title>
+      <link>https://jiangzhejun.github.io/post/travels_201906_wutaishan/</link>
+      <pubDate>Fri, 07 Jun 2019 11:07:39 +0800</pubDate>
+      
+      <guid>https://jiangzhejun.github.io/post/travels_201906_wutaishan/</guid>
+      <description></description>
     </item>
     
     <item>
