@@ -6,8 +6,17 @@
     <description>Recent content on biNet Workshop</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <copyright>bi20200609083641</copyright>
-    <lastBuildDate>Tue, 03 Mar 2020 14:39:10 +0800</lastBuildDate><atom:link href="https://jiangzhejun.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>bi20200609080923</copyright>
+    <lastBuildDate>Wed, 23 Sep 2020 16:35:57 +0800</lastBuildDate><atom:link href="https://jiangzhejun.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>setip.bat</title>
+      <link>https://jiangzhejun.github.io/post/bat_setip_202009231635b2/</link>
+      <pubDate>Wed, 23 Sep 2020 16:35:57 +0800</pubDate>
+      
+      <guid>https://jiangzhejun.github.io/post/bat_setip_202009231635b2/</guid>
+      <description>@echo off&amp;amp;title %~n0 - bi202009221735 setlocal enabledelayedexpansion set ipall=ipconfig /all call:lookup 本地连接 以太网 :main for /f &amp;#34;delims=. tokens=1,2,3&amp;#34; %%a in (&amp;#34;%~n0&amp;#34;) do ( if &amp;#34;%nic%&amp;#34;==&amp;#34;&amp;#34; nic=%%a netsh interface ip set addr &amp;#34;%nic%&amp;#34; static 192.168.%%b.%%c 255.255.255.0 192.168.%%b.1 netsh interface ip set dns &amp;#34;%nic%&amp;#34; static 211.167.230.100 primary validate=no netsh interface ip add dns &amp;#34;%nic%&amp;#34; 211.167.230.200 validate=no ) cls %ipall% pause exit :lookup for %%l in (%*) do ( for /f &amp;#34;tokens=2*&amp;#34; %%m in (&amp;#39;%ipall%^|find /i &amp;#34;%%l&amp;#34;&amp;#39;) do set name=%%m for /f &amp;#34;tokens=1* delims=:&amp;#34; %%n in (&amp;#34;!</description>
+    </item>
+    
     <item>
       <title>扫描指定文件夹并实现磁盘配额</title>
       <link>https://jiangzhejun.github.io/post/java_dirule/</link>
@@ -15,15 +24,6 @@
       
       <guid>https://jiangzhejun.github.io/post/java_dirule/</guid>
       <description>import java.io.*; import java.text.*; import java.util.*; import javax.xml.parsers.*; import javax.xml.transform.*; import javax.xml.transform.dom.*; import javax.xml.transform.stream.*; import org.w3c.dom.*; public class DIRule { private double length, quota; public static void main(String[] args) throws Exception { new DIRule(&amp;#34;config.xml&amp;#34;); System.out.println(&amp;#34;DIRule 1.0.1.12 beta - bi20200302205501&amp;#34;); en.sign(-2000); System.exit(0); } public DIRule(String conf) { SimpleDateFormat sdf = new SimpleDateFormat(&amp;#34;yyyyMMddHHmmssSSS&amp;#34;); String s = &amp;#34;bi&amp;#34; + sdf.format(new Date()); try { DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance(); DocumentBuilder db = dbf.newDocumentBuilder(); Document d = db.</description>
-    </item>
-    
-    <item>
-      <title>DNSet.bat</title>
-      <link>https://jiangzhejun.github.io/post/bat_dnset/</link>
-      <pubDate>Mon, 17 Feb 2020 15:28:57 +0800</pubDate>
-      
-      <guid>https://jiangzhejun.github.io/post/bat_dnset/</guid>
-      <description>@echo off&amp;amp;title %~n0 - bi20200217133734 call:lookup &amp;#34;Ethernet adapter&amp;#34; if &amp;#34;%nic%&amp;#34;==&amp;#34;&amp;#34; (call:lookup &amp;#34;本地连接&amp;#34;) if &amp;#34;%nic%&amp;#34;==&amp;#34;&amp;#34; (call:lookup &amp;#34;以太网适配器&amp;#34;) netsh interface ip set dns &amp;#34;%nic%&amp;#34; static 101.198.198.198 primary validate=no netsh interface ip add dns &amp;#34;%nic%&amp;#34; 219.141.136.10 validate=no cls ipconfig /all pause exit :lookup for /f &amp;#34;tokens=2*&amp;#34; %%i in (&amp;#39;ipconfig /all^|find %1&amp;#39;) do set name=%%i for /f &amp;#34;tokens=1* delims=:&amp;#34; %%i in (&amp;#34;%name%&amp;#34;) do set nic=%%i </description>
     </item>
     
     <item>
