@@ -1,0 +1,64 @@
+* {
+  font: 16px/1.2 NotoMono, "Noto Sans CJK Regular", "Courier New", Courier, monospace, "Microsoft Yahei", SimSun;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #f59;
+  text-decoration: underline;
+}
+
+b {
+  font-weight: bold;
+}
+
+div.block {
+  border-left: 5px solid gray;
+  padding: 0.5em;
+}
+
+h1 {
+  font-size: 3em;
+}
+
+h2 {
+  font-size: 2.7em;
+}
+
+h3 {
+  font-size: 2.4em;
+}
+
+h4 {
+  font-size: 2.1em;
+}
+
+h5 {
+  font-size: 1.8em;
+}
+
+h6 {
+  font-size: 1.5em;
+}
+
+i {
+  font-style: italic;
+}
+
+pre.code {
+  background-color: silver;
+  border: 2px dashed gray;
+  padding: 1em;
+}
+
+span.code_line {
+  background-color: silver;
+  color: fuchsia;
+  display: inline-block;
+  margin: auto 0.2em;
+  padding: 0.2em 0.5em;
+}
