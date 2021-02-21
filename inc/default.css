@@ -4,6 +4,7 @@
 
 a {
   color: black;
+  font-size: inherit;
   text-decoration: none;
 }
 
@@ -13,11 +14,13 @@ a:hover {
 }
 
 b {
+  font-size: inherit;
   font-weight: bold;
 }
 
 div.block {
   border-left: 5px solid gray;
+  font-size: inherit;
   padding: 0.5em;
 }
 
@@ -26,26 +29,27 @@ h1 {
 }
 
 h2 {
-  font-size: 2.7em;
+  font-size: 2em;
 }
 
 h3 {
-  font-size: 2.4em;
-}
-
-h4 {
-  font-size: 2.1em;
-}
-
-h5 {
   font-size: 1.8em;
 }
 
+h4 {
+  font-size: 1.6em;
+}
+
+h5 {
+  font-size: 1.4em;
+}
+
 h6 {
-  font-size: 1.5em;
+  font-size: 1.2em;
 }
 
 i {
+  font-size: inherit;
   font-style: italic;
 }
 
@@ -59,6 +63,12 @@ span.code_line {
   background-color: silver;
   color: fuchsia;
   display: inline-block;
+  font-size: inherit;
   margin: auto 0.2em;
   padding: 0.2em 0.5em;
+}
+
+u {
+  font-size: inherit;
+  text-decoration: underline;
 }
