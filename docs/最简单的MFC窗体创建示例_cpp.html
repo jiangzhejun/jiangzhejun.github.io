@@ -12,20 +12,20 @@
 
 <span class='wbk_difine_keyword'>class</span> hwWnd : <span class='wbk_access_control'>public</span> CFrameWnd {
 <span class='wbk_access_control'>public</span>:
-	hwWnd(LPCTSTR sTitle) {
-		Create(NULL, sTitle);
-	}
+  hwWnd(LPCTSTR sTitle) {
+    Create(NULL, sTitle);
+  }
 };
 
 <span class='wbk_difine_keyword'>class</span> hwApp : <span class='wbk_access_control'>public</span> CWinApp {
 <span class='wbk_access_control'>public</span>:
-	<span class='wbk_modify_keyword'>virtual</span> BOOL InitInstance();
+  <span class='wbk_modify_keyword'>virtual</span> BOOL InitInstance();
 };
 
 BOOL hwApp::InitInstance() {
-	m_pMainWnd = <span class='wbk_operator'>new</span> hwWnd(_T("Hello World!"));
-	m_pMainWnd-&gt;ShowWindow(m_nCmdShow);
-	<span class='wbk_process_control'>return</span> TRUE;
+  m_pMainWnd = <span class='wbk_operator'>new</span> hwWnd(_T("Hello World!"));
+  m_pMainWnd-&gt;ShowWindow(m_nCmdShow);
+  <span class='wbk_process_control'>return</span> TRUE;
 }
 
 hwApp bi201809301033;</pre>
