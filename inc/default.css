@@ -84,3 +84,7 @@ span.code_line {
   margin: auto 0.2em;
   padding: 0.2em 0.5em;
 }
+
+u {
+  font-size: inherit;
+}
