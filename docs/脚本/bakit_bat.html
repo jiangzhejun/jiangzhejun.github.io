@@ -22,7 +22,8 @@
 )
 
 forfiles /p %home% /m %src%_*.7z -d -30 /c "<span class='wbk_external_command'>cmd</span> /c <span class='wbk_internal_command'>del</span> /f @<span class='wbk_internal_command'>path</span>"
-7z a "%dest%" %params% %<span class='wbk_internal_command'>cd</span>%&#92;*</pre>
+7z a "%dest%" %params% %<span class='wbk_internal_command'>cd</span>%&#92;*
+<span class='wbk_internal_command'>exit</span> /b 0</pre>
 </body>
 
 </html>
