@@ -80,12 +80,10 @@ pre.code {
 span.code_line {
   background-color: silver;
   color: fuchsia;
-  display: inline-block;
   margin: auto 0.2em;
   padding: 0.2em 0.5em;
 }
 
 u {
   font-size: inherit;
-  
 }
