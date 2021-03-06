@@ -1,0 +1,14 @@
+<html>
+
+<head>
+  <link rel='stylesheet' href='../../../inc/code.css'>
+  <link rel='stylesheet' href='../../../inc/default.css'>
+  <meta charset="utf-8">
+  <title>Thinkpad L421安装XP遇蓝屏问题的解决</title>
+</head>
+
+<body>
+  <h1>Thinkpad L421安装XP遇蓝屏问题的解决</h1><i>2015年4月1日</i><br><br>单位新购置一台Thinkpad笔记本，预装Win7系统(第一次启动时从隐藏分区安装)，因工作需要改为XP系统。<br><br>之前的操作没什么问题，虽然对于DOS找不到硬盘有点奇怪，但是通过PE系统还是很容易地进行了分区和Ghost操作，但是重启后已进入XP就显示蓝屏。<br><br><img alt='Thinkpad L421安装XP遇蓝屏' src='../../../pics/20150401 Thinkpad L421安装XP遇蓝屏问题的解决/28b430a2-ddf8-4a20-933b-47d9edeca09b.jpg'><br><br>一开始以为是分区表的问题，但是通过工具恢复分区表和主引导记录，依然如故。<br><br>后来搜了一下“stop:0X0000007B”这个错误，总算弄明白原来是 BIOS 默认开启 AHCI 模式，在该模式下安装 Windows XP 操作系统后，重新启动时则会因为没有预先加载 SATA AHCI Controller 驱动程序出现蓝屏(XP 系统不自带 AHCI 驱动)。所以只需要将SATA Mode改为IDE模式即可：重启电脑，按 F2 进入 BIOS，设定 SATA Mode 为 IDE Mode 或 compatibility，之后就能正常进入系统。
+</body>
+
+</html>
