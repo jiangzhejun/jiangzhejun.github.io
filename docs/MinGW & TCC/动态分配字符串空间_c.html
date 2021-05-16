@@ -1,0 +1,60 @@
+<html>
+
+<head>
+  <link rel='stylesheet' href='../../inc/code.css'>
+  <link rel='stylesheet' href='../../inc/default.css'>
+  <meta charset="utf-8">
+  <title>动态分配字符串空间.c</title>
+</head>
+
+<body>
+  <pre class='code'>#<span class='wbk_package_keyword'>include</span> &lt;stdio.h&gt;
+#<span class='wbk_package_keyword'>include</span> &lt;stdlib.h&gt;
+
+<span class='wbk_types'>int</span> length(<span class='wbk_modify_keyword'>const</span> <span class='wbk_types'>char</span> *str) {
+  <span class='wbk_modify_keyword'>const</span> <span class='wbk_types'>char</span> *c = str;
+  <span class='wbk_process_control'>while</span>(*str) {
+    str++;
+  }
+
+  <span class='wbk_process_control'>return</span> str - c;
+}
+
+<span class='wbk_types'>char</span> *copy(<span class='wbk_types'>char</span> *dest, <span class='wbk_modify_keyword'>const</span> <span class='wbk_types'>char</span> *src) {
+  <span class='wbk_types'>char</span> *c = dest;
+  <span class='wbk_process_control'>while</span>(*dest++ = *src++);
+  *dest = '&#92;0';
+
+  <span class='wbk_process_control'>return</span> c;
+}
+
+<span class='wbk_types'>char</span> *join(<span class='wbk_types'>char</span> *dest, <span class='wbk_modify_keyword'>const</span> <span class='wbk_types'>char</span> *src) {
+  <span class='wbk_types'>char</span> *c = dest;
+  dest += length(dest);
+
+  <span class='wbk_process_control'>while</span>(*src) {
+    *dest++ = *src++;
+  }
+
+  *dest = '&#92;0';
+  <span class='wbk_process_control'>return</span> c;
+}
+
+<span class='wbk_types'>char</span> *getString(<span class='wbk_types'>char</span> **dest, <span class='wbk_modify_keyword'>const</span> <span class='wbk_types'>char</span> *src) {
+  <span class='wbk_types'>char</span> *c = *dest;
+  *dest = (<span class='wbk_types'>char</span> *)malloc(<span class='wbk_operator'>sizeof</span>(<span class='wbk_types'>char</span>) * (length(*dest) + length(src) + 1));
+  copy(*dest, c);
+  join(*dest, src);
+  <span class='wbk_process_control'>return</span> c;
+}
+
+<span class='wbk_types'>void</span> main() {
+  <span class='wbk_types'>char</span> *c = "12345@678.", *d = "9&#92;0";
+  printf("%s&#92;n", c);
+  getString(&c, d);
+  printf("%s&#92;n", c);
+  free(c);
+}</pre>
+</body>
+
+</html>

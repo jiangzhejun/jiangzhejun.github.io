@@ -1,0 +1,23 @@
+<html>
+
+<head>
+  <link rel='stylesheet' href='../../../inc/code.css'>
+  <link rel='stylesheet' href='../../../inc/default.css'>
+  <meta charset="utf-8">
+  <title>批量新建数字文件夹.bat</title>
+</head>
+
+<body>
+  <pre class='code'>@<span class='wbk_internal_command'>echo</span> off & <span class='wbk_internal_command'>title</span> %~f0 - bi201902252022
+
+<span class='wbk_internal_command'>set</span> /p <span class='wbk_internal_command'>start</span>=请输入起始数：
+<span class='wbk_internal_command'>set</span> /p count=请输入新建文件夹数量：
+<span class='wbk_internal_command'>set</span> /a end=%<span class='wbk_internal_command'>start</span>%+%count%
+
+<span class='wbk_internal_command'>md</span> %<span class='wbk_internal_command'>start</span>%-%end%
+<span class='wbk_internal_command'>for</span> /l %%i in (%<span class='wbk_internal_command'>start</span>%, 1, %end%) do <span class='wbk_internal_command'>md</span> %<span class='wbk_internal_command'>start</span>%-%end%&#92;%%i
+
+<span class='wbk_internal_command'>pause</span>&gt;nul</pre>
+</body>
+
+</html>

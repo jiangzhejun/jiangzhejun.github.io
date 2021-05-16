@@ -1,0 +1,88 @@
+<html>
+
+<head>
+  <link rel='stylesheet' href='../../inc/code.css'>
+  <link rel='stylesheet' href='../../inc/default.css'>
+  <meta charset="utf-8">
+  <title>zipack.java</title>
+</head>
+
+<body>
+  <pre class='code'><span class='wbk_package_keyword'>package</span> bww.bill;
+
+<span class='wbk_package_keyword'>import</span> java.io.*;
+<span class='wbk_package_keyword'>import</span> java.util.zip.*;
+
+<span class='wbk_access_control'>public</span> <span class='wbk_difine_keyword'>class</span> zipack {
+  <span class='wbk_access_control'>protected</span> <span class='wbk_modify_keyword'>static</span> <span class='wbk_modify_keyword'>final</span> <span class='wbk_types'>String</span> VERSION_INFO = "zipack 2.1.2.8 - bi202010071623";
+  <span class='wbk_access_control'>private</span> <span class='wbk_modify_keyword'>static</span> CheckedOutputStream COS = <span class='wbk_constant'>null</span>;
+  <span class='wbk_access_control'>private</span> <span class='wbk_modify_keyword'>static</span> FileOutputStream FOS = <span class='wbk_constant'>null</span>;
+  <span class='wbk_access_control'>protected</span> <span class='wbk_modify_keyword'>static</span> ZipOutputStream ZOS = <span class='wbk_constant'>null</span>;
+
+  <span class='wbk_access_control'>public</span> zipack(<span class='wbk_types'>String</span>[] archives) {
+    <span class='wbk_process_control'>if</span> (archives != <span class='wbk_constant'>null</span> && archives.length &gt; 0) {
+      <span class='wbk_error_handle'>try</span> {
+        open(archives[0].replaceAll("&#92;&#92;.[^&#92;&#92;.]+&#36;", "") + ".zip");
+
+        ZOS.setComment(VERSION_INFO);
+        ZOS.setLevel(Deflater.BEST_COMPRESSION);
+        ZOS.setMethod(ZipOutputStream.DEFLATED);
+
+        <span class='wbk_process_control'>for</span> (<span class='wbk_types'>String</span> s : archives) {
+          dig(<span class='wbk_difine_keyword'>new</span> File(s), s.replaceAll("^.*[/&#92;&#92;&#92;&#92;]([^/&#92;&#92;&#92;&#92;]+)&#36;", "&#36;1"));
+        }
+
+        close();
+      } <span class='wbk_error_handle'>catch</span> (Exception e) {
+        e.printStackTrace();
+      }
+    }
+  }
+
+  <span class='wbk_access_control'>protected</span> <span class='wbk_modify_keyword'>static</span> <span class='wbk_modify_keyword'>final</span> <span class='wbk_types'>void</span> close() <span class='wbk_error_handle'>throws</span> Exception {
+    ZOS.close();
+    COS.close();
+    FOS.close();
+  }
+
+  <span class='wbk_access_control'>protected</span> <span class='wbk_modify_keyword'>final</span> <span class='wbk_types'>void</span> dig(File archive, <span class='wbk_types'>String</span> path) <span class='wbk_error_handle'>throws</span> Exception {
+    <span class='wbk_process_control'>if</span> (archive.isFile()) {
+      save(<span class='wbk_difine_keyword'>new</span> FileInputStream(archive), path);
+    } <span class='wbk_process_control'>else</span> <span class='wbk_process_control'>if</span> (archive.isDirectory()) {
+      <span class='wbk_process_control'>for</span> (File f : archive.listFiles()) {
+        dig(f, path + "/" + f.getName());
+      }
+    }
+  }
+
+  <span class='wbk_access_control'>protected</span> <span class='wbk_modify_keyword'>static</span> <span class='wbk_modify_keyword'>final</span> <span class='wbk_types'>void</span> open(<span class='wbk_types'>String</span> name) <span class='wbk_error_handle'>throws</span> Exception {
+    FOS = <span class='wbk_difine_keyword'>new</span> FileOutputStream(name);
+    COS = <span class='wbk_difine_keyword'>new</span> CheckedOutputStream(FOS, <span class='wbk_difine_keyword'>new</span> CRC32());
+    ZOS = <span class='wbk_difine_keyword'>new</span> ZipOutputStream(COS);
+  }
+
+  <span class='wbk_access_control'>protected</span> <span class='wbk_modify_keyword'>final</span> <span class='wbk_types'>void</span> put(InputStream <span class='wbk_function_command'>is</span>, <span class='wbk_types'>String</span> name) <span class='wbk_error_handle'>throws</span> Exception {
+    <span class='wbk_types'>byte</span>[] b = <span class='wbk_difine_keyword'>new</span> <span class='wbk_types'>byte</span>[<span class='wbk_function_command'>is</span>.available()];
+    <span class='wbk_function_command'>is</span>.read(b);
+    <span class='wbk_function_command'>is</span>.close();
+
+    ZOS.putNextEntry(<span class='wbk_difine_keyword'>new</span> ZipEntry(name));
+    ZOS.write(b);
+    ZOS.flush();
+    ZOS.closeEntry();
+    System.out.println("+ " + name);
+  }
+
+  <span class='wbk_access_control'>protected</span> <span class='wbk_types'>void</span> save(InputStream <span class='wbk_function_command'>is</span>, <span class='wbk_types'>String</span> name) <span class='wbk_error_handle'>throws</span> Exception {
+    put(<span class='wbk_function_command'>is</span>, name);
+  }
+
+  <span class='wbk_access_control'>public</span> <span class='wbk_modify_keyword'>static</span> <span class='wbk_types'>void</span> main(<span class='wbk_types'>String</span>[] args) {
+    <span class='wbk_difine_keyword'>new</span> zipack(args);
+    System.out.println(VERSION_INFO);
+    System.exit(0);
+  }
+}</pre>
+</body>
+
+</html>

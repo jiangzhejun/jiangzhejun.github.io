@@ -1,0 +1,47 @@
+<html>
+
+<head>
+  <link rel='stylesheet' href='../../inc/code.css'>
+  <link rel='stylesheet' href='../../inc/default.css'>
+  <meta charset="utf-8">
+  <title>buid.go</title>
+</head>
+
+<body>
+  <pre class='code'><span class='wbk_package_keyword'>package</span> buid
+
+<span class='wbk_package_keyword'>import</span> (
+  "fmt"
+  "math/rand"
+  "time"
+)
+
+<span class='wbk_difine_keyword'>func</span> New() string {
+  <span class='wbk_difine_keyword'>const</span> c = "89ab"
+  s := ""
+  r := rand.New(rand.NewSource(time.Now().UnixNano()))
+
+  <span class='wbk_process_control'>for</span> i := 0; i &lt; 16; i++ {
+    j := r.Intn(0x7fff) % 0xff
+
+    <span class='wbk_process_control'>switch</span> i {
+    <span class='wbk_process_control'>case</span> 6:
+      s += fmt.Sprintf("4%x", j % 15)
+      <span class='wbk_process_control'>break</span>
+    <span class='wbk_process_control'>case</span> 8:
+      s += fmt.Sprintf("%s%x", string(c[r.Intn(4) % 4]), j % 15)
+      <span class='wbk_process_control'>break</span>
+    <span class='wbk_process_control'>default</span>:
+      s += fmt.Sprintf("%02x", j)
+    }
+
+    <span class='wbk_process_control'>if</span> i &lt; 10 && i % 2 &gt; 0 && i &gt; 1 {
+      s += "-"
+    }
+  }
+
+  <span class='wbk_process_control'>return</span> s
+}</pre>
+</body>
+
+</html>

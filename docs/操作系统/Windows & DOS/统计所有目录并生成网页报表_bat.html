@@ -1,0 +1,52 @@
+<html>
+
+<head>
+  <link rel='stylesheet' href='../../../inc/code.css'>
+  <link rel='stylesheet' href='../../../inc/default.css'>
+  <meta charset="utf-8">
+  <title>统计所有目录并生成网页报表.bat</title>
+</head>
+
+<body>
+  <pre class='code'>@<span class='wbk_internal_command'>echo</span> off & <span class='wbk_internal_command'>title</span> %~n0 - bi20190412161435
+
+<span class='wbk_internal_command'>pushd</span> %~dp0 & <span class='wbk_internal_command'>for</span> %%o in (.) do <span class='wbk_internal_command'>set</span> <span class='wbk_internal_command'>title</span>=%%~no
+<span class='wbk_internal_command'>set</span> dest=index.html
+ 
+<span class='wbk_internal_command'>echo</span> ^&lt;meta charset="gbk"^&gt;&gt;%dest%
+<span class='wbk_internal_command'>echo</span> ^&lt;h1^&gt;%<span class='wbk_internal_command'>title</span>%^&lt;/h1^&gt;&gt;&gt;%dest%
+<span class='wbk_internal_command'>echo</span> ^&lt;table border="1" width="800"^&gt;&gt;&gt;%dest%
+<span class='wbk_internal_command'>echo</span> ^&lt;tr bgcolor="silver"^&gt;&gt;&gt;%dest%
+<span class='wbk_internal_command'>echo</span> ^&lt;td^&gt;目录名^&lt;/td^&gt;&gt;&gt;%dest%
+<span class='wbk_internal_command'>echo</span> ^&lt;td^&gt;文件数^&lt;/td^&gt;&gt;&gt;%dest%
+<span class='wbk_internal_command'>echo</span> ^&lt;td^&gt;字节数^&lt;/td^&gt;&gt;&gt;%dest%
+<span class='wbk_internal_command'>echo</span> ^&lt;/tr^&gt;&gt;&gt;%dest%
+ 
+<span class='wbk_internal_command'>for</span> /f "delims=" %%l in ('<span class='wbk_internal_command'>dir</span> /ad /b') do (
+  <span class='wbk_internal_command'>setlocal</span> enabledelayedexpansion
+  <span class='wbk_internal_command'>call</span>:col "%%l"
+  <span class='wbk_internal_command'>call</span>:row "%%l" !files! "!bytes!"
+  <span class='wbk_internal_command'>endlocal</span>
+)
+ 
+<span class='wbk_internal_command'>echo</span> ^&lt;/table^&gt;&gt;&gt;%dest%
+<span class='wbk_internal_command'>echo</span> ^&lt;br^&gt;&gt;&gt;%dest%
+<span class='wbk_internal_command'>echo</span> ^&lt;i^&gt;%<span class='wbk_internal_command'>date</span>% %<span class='wbk_internal_command'>time</span>%^&lt;/i^&gt;&gt;&gt;%dest%
+<span class='wbk_internal_command'>exit</span> /b 0
+
+:row
+<span class='wbk_internal_command'>echo</span> ^&lt;tr^&gt;&gt;&gt;%dest%
+<span class='wbk_internal_command'>echo</span> ^&lt;td^&gt;%~1^&lt;/td^&gt;&gt;&gt;%dest%
+<span class='wbk_internal_command'>echo</span> ^&lt;td^&gt;%~2^&lt;/td^&gt;&gt;&gt;%dest%
+<span class='wbk_internal_command'>echo</span> ^&lt;td^&gt;%~3^&lt;/td^&gt;&gt;&gt;%dest%
+<span class='wbk_internal_command'>echo</span> ^&lt;/tr^&gt;&gt;&gt;%dest%
+<span class='wbk_internal_command'>goto</span>:eof
+
+:col
+<span class='wbk_internal_command'>for</span> /f "delims=个文件字节 tokens=1,2" %%m in ('<span class='wbk_internal_command'>dir</span> "%~1" /s ^|<span class='wbk_internal_command'>findstr</span> 个文件') do (
+  <span class='wbk_internal_command'>set</span> files=%%m
+  <span class='wbk_internal_command'>set</span> bytes=%%n
+)</pre>
+</body>
+
+</html>

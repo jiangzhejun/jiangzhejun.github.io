@@ -1,0 +1,14 @@
+<html>
+
+<head>
+  <link rel='stylesheet' href='../../inc/code.css'>
+  <link rel='stylesheet' href='../../inc/default.css'>
+  <meta charset="utf-8">
+  <title>VC6SDK程序自定义图标</title>
+</head>
+
+<body>
+  <h1>VC6SDK程序自定义图标</h1><i>2015年11月3日</i><br><br><ol><li>在项目中建一个resource.h文件写入一句#define IDR_MAINFRAME 128；</li><li>在项目中建一个resource.rc写入一句IDI_ICO ICON DISCARDABLE "project.ico"；</li><li>在主文件中，加入一句#include "resource.h"再添加resource.rc文件；</li><li>最后编译一下，程序图标就变成指定的project .ico了。</li></ol>
+</body>
+
+</html>

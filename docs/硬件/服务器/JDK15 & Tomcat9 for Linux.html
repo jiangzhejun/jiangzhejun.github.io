@@ -1,0 +1,20 @@
+<html>
+
+<head>
+  <link rel='stylesheet' href='../../../inc/code.css'>
+  <link rel='stylesheet' href='../../../inc/default.css'>
+  <meta charset="utf-8">
+  <title>JDK15 & Tomcat9 for CentOS 7.8</title>
+</head>
+
+<body>
+  <h1>JDK15 & Tomcat9 for CentOS 7.8</h1><h2>JDK</h2><b>安装</b><br><ul><li>官网下载 openjdk-15.0.1_linux-x64_bin.tar.gz 到 /bww/res</li><li><span class='code_line'>tar -zxvf openjdk-15.0.1_linux-x64_bin.tar.gz</span> 解压缩</li><li><span class='code_line'>mv jdk-15.0.1 /bww/apps/jdk-15.0.1</span> 移至安装目录</li></ul><br><b>设置环境变量</b><br><ul><li><span class='code_line'>vi /etc/profile</span> 打开配置文件</li><li>键入 <span class='code_line'>i</span> 切换输入模式</li><li>光标移至最后一行输入：</li><br><pre class='code'>
+<span class='wbk_internal_command'>export</span> JAVA_HOME=/bww/apps/jdk-15.0.1
+<span class='wbk_internal_command'>export</span> CLASSPATH=.:&#36;JAVA_HOME/lib/dt.jar:&#36;JAVA_HOME/lib/tools.jar
+<span class='wbk_internal_command'>export</span> PATH=&#36;JAVA_HOME/bin:&#36;PATH
+</pre><br><li>按 ESC 退出输入模式</li><li>键入 <span class='code_line'>:wq</span> 存盘退出</li><li><span class='code_line'>reboot</span> 重启系统</li><li><span class='code_line'>java -version</span> 查看是否安装成功</li></ul><h2>Tomcat</h2><b>安装</b><br><ul><li>官网下载 apache-tomcat-9.0.39.tar.gz 到 /bww/res</li><li><span class='code_line'>tar -zxvf apache-tomcat-9.0.39.tar.gz</span> 解压缩</li><li><span class='code_line'>mv apache-tomcat-9.0.39 /bww/apps/apache-tomcat-9.0.39</span> 移至安装目录</li><li><span class='code_line'>vi /bww/apps/apache-tomcat-9.0.39/conf/server.xml</span> 修改默认端口</li><br><pre class='code'>
+&lt;<span class='wbk_ml_tag'>Connector</span> <span class='wbk_ml_attribute'>port</span>="80" <span class='wbk_ml_attribute'>protocol</span>="HTTP/1.1" … />
+</pre><br><li><span class='code_line'>/bww/apps/apache-tomcat-9.0.39/bin/startup.sh</span> 启动服务</li></ul><br><b>设置防火墙</b><br><ul><li><span class='code_line'>systemctl start firewalld</span> 启动防火墙</li><li><span class='code_line'>systemctl status firewalld</span> 查看防火墙状态</li><li><span class='code_line'>firewall-cmd --zone=public --add-port=80/tcp --permanent</span>开启端口</li><li><span class='code_line'>firewall-cmd --reload</span> 重启防火墙</li><li><span class='code_line'>firewall-cmd --query-port=80/tcp</span> 查看端口是否开启</li></ul>
+</body>
+
+</html>

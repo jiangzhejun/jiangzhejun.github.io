@@ -1,0 +1,14 @@
+<html>
+
+<head>
+  <link rel='stylesheet' href='../../../inc/code.css'>
+  <link rel='stylesheet' href='../../../inc/default.css'>
+  <meta charset="utf-8">
+  <title>巧用组策略解决软件“无法验证发行者</title>
+</head>
+
+<body>
+  <h1>巧用组策略解决软件“无法验证发行者</h1><i>2014年2月21日</i><br><br>在运行局域网中另一台电脑上的程序时，总会弹出“无法验证发行者，确定要运行此软件吗” 或者 “Security warning: The publisher could not be verified. Are you sure…?”之类的对话框，很烦人。解决方法是：<br><br><ol><li>开始菜单“运行”gpedit.msc, 打开“组策略”；</li><li>用户配置->管理模板->Windows 组件->附件管理器；</li><li>启用“中等危险文件类型的包含列表”；</li><li>在“指定中等危险扩展名”中填入：“.exe”；</li><li>确定。</li></ol><br><img alt='组策略' src='../../../pics/20140221 巧用组策略解决软件“无法验证发行者/psb75129jflasj759j512jh51h1h5.png'><br><br><img alt='中等危险文件类型的包含列表' src='../../../pics/20140221 巧用组策略解决软件“无法验证发行者/psb52145j5kl1j51j15h9512j1hnaso.png'>
+</body>
+
+</html>

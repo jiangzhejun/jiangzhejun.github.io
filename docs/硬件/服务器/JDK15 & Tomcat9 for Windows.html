@@ -1,0 +1,14 @@
+<html>
+
+<head>
+  <link rel='stylesheet' href='../../../inc/code.css'>
+  <link rel='stylesheet' href='../../../inc/default.css'>
+  <meta charset="utf-8">
+  <title>JDK15 & Tomcat9 for Windows 10</title>
+</head>
+
+<body>
+  <h1>JDK15 & Tomcat9 for Windows 10</h1><h2>JDK</h2>官网下载openjdk-15.0.2_windows-x64_bin.zip并解压缩至D盘<h2>Tomcat</h2>官网下载apache-tomcat-9.0.39-windows-x64.zip并解压缩至D盘<br><br><b>修改service批处理文件</b><br><ul><li>进入安装目录bin文件夹</li><ul><li>记事本打开service.bat文件</li><li>设置环境变量</li></ul></ul><span class='code_line'>set JAVA_HOME=D:&#92;jdk-15.0.2&#92;</span><br><span class='code_line'>set JRE_HOME=%JAVA_HOME%</span><br><br><b>修改server配置</b><br><ul><li>进入安装目录conf文件夹</li><li>记事本打开server.xml文件</li><li>找到“<Connector port=“8080” protocol=“HTTP/1.1” … />”，修改端口为80</li><li>滚动条拉到底，找到默认主机“<Host name=“localhost” …>”，插入“<Context path="" debug=“0” docBase=“D:/website” … />”，自定义根目录</li></ul><br><b>必要的类库</b><br><ul><li>进入网站根目录</li><li>将编译好的class文件拷贝至classes文件夹，没有就新建一个</li><li>将编译好的jar文件拷贝至lib文件夹，没有就新建一个</li></ul><br><b>安装Tomcat9服务</b><br><ul><li>打开CMD</li><li>切换至安装目录bin文件夹</li><li>运行“service install Tomcat9”</li><li>运行“services.msc”打开系统服务</li><li>启动服务</li></ul><br>浏览器输入 http://localhost 访问
+</body>
+
+</html>

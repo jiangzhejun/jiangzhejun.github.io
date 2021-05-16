@@ -1,0 +1,132 @@
+<html>
+
+<head>
+  <link rel='stylesheet' href='../../inc/code.css'>
+  <link rel='stylesheet' href='../../inc/default.css'>
+  <meta charset="utf-8">
+  <title>个税计算器 v2.html</title>
+</head>
+
+<body>
+  <pre class='code'>&lt;<span class='wbk_ml_tag'>style</span> <span class='wbk_ml_attribute'>type</span>="text/css"&gt;
+h1 {
+  text-align: center;
+}
+
+p {
+  text-align: center;
+}
+
+table {
+  border: 2px solid silver;
+  font-size: 16px;
+}
+
+td {
+  border: 1px dashed silver;
+  height: 30px;
+  padding: 5px 9px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+td.shen {
+  background-color: #B8CCE4;
+  border: 1px solid #B8CCE4;
+}
+
+td.qian {
+  background-color: #DCE6F1;
+  border: 1px solid #DCE6F1;
+}
+
+td input.text {
+  text-align: center;
+  width: 180px;
+}
+&lt;/<span class='wbk_ml_tag'>style</span>&gt;
+
+&lt;<span class='wbk_ml_tag'>html</span>&gt;
+  &lt;<span class='wbk_ml_tag'>head</span>&gt;
+    &lt;<span class='wbk_ml_tag'>meta</span> <span class='wbk_ml_attribute'>name</span>="author" <span class='wbk_ml_attribute'>charset</span>="utf-8" <span class='wbk_ml_attribute'>content</span>="mayer@2018.9.10"&gt;
+    &lt;<span class='wbk_ml_tag'>title</span>&gt;个税计算器 v2.0&lt;/<span class='wbk_ml_tag'>title</span>&gt;
+  &lt;/<span class='wbk_ml_tag'>head</span>&gt;
+  &lt;<span class='wbk_ml_tag'>body</span>&gt;
+    &lt;<span class='wbk_ml_tag'>h1</span>&gt;工薪税费计算器&lt;/<span class='wbk_ml_tag'>h1</span>&gt;
+    &lt;<span class='wbk_ml_tag'>table</span> <span class='wbk_ml_attribute'>align</span>="center" <span class='wbk_ml_attribute'>cellpadding</span>="0"&gt;
+      &lt;<span class='wbk_ml_tag'>tr</span>&gt;
+        &lt;<span class='wbk_ml_tag'>td</span> <span class='wbk_ml_attribute'>class</span>="shen"&gt;税前收入&lt;/<span class='wbk_ml_tag'>td</span>&gt;
+        &lt;<span class='wbk_ml_tag'>td</span>&gt;&lt;<span class='wbk_ml_tag'>input</span> <span class='wbk_ml_attribute'>class</span>="text" <span class='wbk_ml_attribute'>id</span>="shuiqianshouru" <span class='wbk_ml_event'>onchange</span>="jisuan()" <span class='wbk_ml_attribute'>type</span>="text" <span class='wbk_ml_attribute'>value</span>="6113"/&gt;&lt;/<span class='wbk_ml_tag'>td</span>&gt;
+        &lt;<span class='wbk_ml_tag'>td</span> <span class='wbk_ml_attribute'>class</span>="shen"&gt;工资基数&lt;/<span class='wbk_ml_tag'>td</span>&gt;
+        &lt;<span class='wbk_ml_tag'>td</span>&gt;&lt;<span class='wbk_ml_tag'>input</span> <span class='wbk_ml_attribute'>class</span>="text" <span class='wbk_ml_attribute'>id</span>="gongzijishu" <span class='wbk_ml_event'>onchange</span>="jisuan()" <span class='wbk_ml_attribute'>type</span>="text" <span class='wbk_ml_attribute'>value</span>="5000"/&gt;&lt;/<span class='wbk_ml_tag'>td</span>&gt;
+      &lt;/<span class='wbk_ml_tag'>tr</span>&gt;
+      &lt;<span class='wbk_ml_tag'>tr</span>&gt;
+        &lt;<span class='wbk_ml_tag'>td</span> <span class='wbk_ml_attribute'>class</span>="qian"&gt;医疗保险&lt;/<span class='wbk_ml_tag'>td</span>&gt;
+        &lt;<span class='wbk_ml_tag'>td</span> <span class='wbk_ml_attribute'>id</span>="yiliaobaoxian"&gt;0.00&lt;/<span class='wbk_ml_tag'>td</span>&gt;
+        &lt;<span class='wbk_ml_tag'>td</span> <span class='wbk_ml_attribute'>class</span>="qian"&gt;住房公积金&lt;/<span class='wbk_ml_tag'>td</span>&gt;
+        &lt;<span class='wbk_ml_tag'>td</span> <span class='wbk_ml_attribute'>id</span>="zhufanggongjijin"&gt;0.00&lt;/<span class='wbk_ml_tag'>td</span>&gt;
+      &lt;/<span class='wbk_ml_tag'>tr</span>&gt;
+      &lt;<span class='wbk_ml_tag'>tr</span>&gt;
+        &lt;<span class='wbk_ml_tag'>td</span> <span class='wbk_ml_attribute'>class</span>="shen"&gt;养老保险&lt;/<span class='wbk_ml_tag'>td</span>&gt;
+        &lt;<span class='wbk_ml_tag'>td</span> <span class='wbk_ml_attribute'>id</span>="yanglaobaoxian"&gt;0.00&lt;/<span class='wbk_ml_tag'>td</span>&gt;
+        &lt;<span class='wbk_ml_tag'>td</span> <span class='wbk_ml_attribute'>class</span>="shen"&gt;失业保险&lt;/<span class='wbk_ml_tag'>td</span>&gt;
+        &lt;<span class='wbk_ml_tag'>td</span> <span class='wbk_ml_attribute'>id</span>="shiyebaoxian"&gt;0.00&lt;/<span class='wbk_ml_tag'>td</span>&gt;
+      &lt;/<span class='wbk_ml_tag'>tr</span>&gt;
+      &lt;<span class='wbk_ml_tag'>tr</span>&gt;
+        &lt;<span class='wbk_ml_tag'>td</span> <span class='wbk_ml_attribute'>class</span>="qian"&gt;税后应得&lt;/<span class='wbk_ml_tag'>td</span>&gt;
+        &lt;<span class='wbk_ml_tag'>td</span> <span class='wbk_ml_attribute'>id</span>="shuihouyingde"&gt;0.00&lt;/<span class='wbk_ml_tag'>td</span>&gt;
+        &lt;<span class='wbk_ml_tag'>td</span> <span class='wbk_ml_attribute'>class</span>="qian"&gt;个人所得税&lt;/<span class='wbk_ml_tag'>td</span>&gt;
+        &lt;<span class='wbk_ml_tag'>td</span> <span class='wbk_ml_attribute'>id</span>="gerensuodeshui"&gt;0.00&lt;/<span class='wbk_ml_tag'>td</span>&gt;
+      &lt;/<span class='wbk_ml_tag'>tr</span>&gt;
+    &lt;/<span class='wbk_ml_tag'>table</span>&gt;
+    &lt;<span class='wbk_ml_tag'>p</span>&gt;&lt;/<span class='wbk_ml_tag'>p</span>&gt;
+  &lt;/<span class='wbk_ml_tag'>body</span>&gt;
+&lt;/<span class='wbk_ml_tag'>html</span>&gt;
+
+&lt;<span class='wbk_ml_tag'>script</span> <span class='wbk_ml_attribute'>type</span>="text/javascript"&gt;
+var geshuimianzhenge = 5000, jisuan = window.onload = function() {
+  yssr = jsYingshuishouru();
+
+  switch(true) {
+    case yssr > 0 && yssr <= 3000:
+      grsds = yssr * 0.03;
+    break;
+    case yssr > 3000 && yssr <= 12000:
+      grsds = yssr * 0.1 - 210;
+    break;
+    case yssr > 12000 && yssr <= 25000:
+      grsds = yssr * 0.2 - 1410;
+    break;
+    case yssr > 25000 && yssr <= 35000:
+      grsds = yssr * 0.25 - 2660;
+    break;
+    case yssr > 35000 && yssr <= 55000:
+      grsds = yssr * 0.3 - 4410;
+    break;
+    case yssr > 55000 && yssr <= 80000:
+      grsds = yssr * 0.35 - 7160;
+    break;
+    case yssr > 80000:
+      grsds = yssr * 0.45 - 15160;
+    break;
+    default:
+      grsds = 0;
+    break;
+  }
+
+  gerensuodeshui.innerText = grsds.toFixed(2);
+  shuihouyingde.innerText = (yssr + geshuimianzhenge - grsds).toFixed(2);
+}
+
+function jsYingshuishouru() {
+  sxyj = Number(zhufanggongjijin.innerText = (gongzijishu.value * 0.12).toFixed(2));
+  sxyj += Number(yiliaobaoxian.innerText = (gongzijishu.value * 0.02 + 3).toFixed(2));
+  sxyj += Number(yanglaobaoxian.innerText = (gongzijishu.value * 0.08).toFixed(2));
+  sxyj += Number(shiyebaoxian.innerText = (gongzijishu.value * 0.002).toFixed(2));
+
+  return shuiqianshouru.value - geshuimianzhenge - sxyj;
+}
+&lt;/<span class='wbk_ml_tag'>script</span>&gt;</pre>
+</body>
+
+</html>

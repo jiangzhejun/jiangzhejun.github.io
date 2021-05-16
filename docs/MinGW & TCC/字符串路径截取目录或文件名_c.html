@@ -1,0 +1,62 @@
+<html>
+
+<head>
+  <link rel='stylesheet' href='../../inc/code.css'>
+  <link rel='stylesheet' href='../../inc/default.css'>
+  <meta charset="utf-8">
+  <title>字符串路径截取目录或文件名.c</title>
+</head>
+
+<body>
+  <pre class='code'>#<span class='wbk_package_keyword'>include</span> &lt;stdio.h&gt;
+#<span class='wbk_package_keyword'>include</span> &lt;stdlib.h&gt;
+
+<span class='wbk_types'>int</span> length(<span class='wbk_modify_keyword'>const</span> <span class='wbk_types'>char</span> *str) {
+  <span class='wbk_modify_keyword'>const</span> <span class='wbk_types'>char</span> *c = str;
+  <span class='wbk_process_control'>while</span>(*str) {
+    str++;
+  }
+
+  <span class='wbk_process_control'>return</span> str - c;
+}
+
+<span class='wbk_types'>char</span> *cutwo(<span class='wbk_types'>char</span> *path) {
+  path += length(path) - 1;
+
+  <span class='wbk_process_control'>while</span>(*path) {
+    <span class='wbk_process_control'>if</span>(*path == '&#92;&#92;' || *path == '/') {
+      *path = '&#92;0';
+      <span class='wbk_process_control'>break</span>;
+    } <span class='wbk_process_control'>else</span> {
+      path--;
+    }
+  }
+
+  <span class='wbk_process_control'>return</span> ++path;
+}
+
+<span class='wbk_types'>char</span> *cuthree(<span class='wbk_types'>char</span> *path, <span class='wbk_types'>char</span> **ext) {
+  <span class='wbk_types'>char</span> *c = cutwo(path);
+  path += length(path) + length(c) - 1;
+
+  <span class='wbk_process_control'>while</span>(*path) {
+    <span class='wbk_process_control'>if</span>(*path == '.') {
+      *path = '&#92;0';
+      <span class='wbk_process_control'>break</span>;
+    } <span class='wbk_process_control'>else</span> {
+      path--;
+    }
+  }
+
+  *ext = (<span class='wbk_types'>char</span> *)malloc(<span class='wbk_operator'>sizeof</span>(++path));
+  *ext = ++path;
+  <span class='wbk_process_control'>return</span> c;
+}
+
+<span class='wbk_types'>void</span> main() {
+  <span class='wbk_types'>char</span> c[512] = "12345/678.9&#92;0", *ext = NULL, *name = cuthree(c, &ext);
+  printf("Path: %s&#92;nName: %s&#92;nExt: %s", c, name, ext);
+}</pre>
+</body>
+
+</html>

@@ -1,0 +1,64 @@
+<html>
+
+<head>
+  <link rel='stylesheet' href='../../../inc/code.css'>
+  <link rel='stylesheet' href='../../../inc/default.css'>
+  <meta charset="utf-8">
+  <title>CreateDesktopShortcut.vbs</title>
+</head>
+
+<body>
+  <pre class='code'><span class='wbk_process_control'>On</span> <span class='wbk_error_handle'>Error</span> <span class='wbk_difine_keyword'>Resume</span> <span class='wbk_process_control'>Next</span>
+<span class='wbk_difine_keyword'>Rem</span> CreateDesktopShortcut - bi2020101316121021223029
+
+<span class='wbk_process_control'>Function</span> extract(rgx, src)
+  <span class='wbk_difine_keyword'>Dim</span> Regex, Match, Matches, Value
+  <span class='wbk_function_command'>Set</span> Regex = <span class='wbk_difine_keyword'>New</span> RegExp
+      Regex.Pattern = rgx
+      Regex.IgnoreCase = <span class='wbk_constant'>True</span>
+      Regex.Global = <span class='wbk_constant'>False</span>
+    <span class='wbk_function_command'>Set</span> Matches = Regex.Execute(src)
+      <span class='wbk_process_control'>For</span> <span class='wbk_process_control'>Each</span> Match in Matches
+        Value = Match.Value
+      <span class='wbk_process_control'>Next</span>
+      extract = Value
+    <span class='wbk_function_command'>Set</span> Matches = <span class='wbk_constant'>Nothing</span>
+  <span class='wbk_function_command'>Set</span> Regex = <span class='wbk_constant'>Nothing</span>
+<span class='wbk_process_control'>End</span> <span class='wbk_process_control'>Function</span>
+
+<span class='wbk_process_control'>Function</span> signature()
+  <span class='wbk_function_command'>Randomize</span>
+  <span class='wbk_difine_keyword'>Dim</span> Words(8)
+  Words(0) = "bi"
+  Words(1) = <span class='wbk_function_command'>Year</span>(<span class='wbk_function_command'>Now</span>)
+  Words(2) = <span class='wbk_function_command'>Right</span>("0" & <span class='wbk_function_command'>Month</span>(<span class='wbk_function_command'>Now</span>), 2)
+  Words(3) = <span class='wbk_function_command'>Right</span>("0" & <span class='wbk_function_command'>Day</span>(<span class='wbk_function_command'>Now</span>), 2)
+  Words(4) = <span class='wbk_function_command'>Right</span>("0" & <span class='wbk_function_command'>Hour</span>(<span class='wbk_function_command'>Now</span>), 2)
+  Words(5) = <span class='wbk_function_command'>Right</span>("0" & <span class='wbk_function_command'>Minute</span>(<span class='wbk_function_command'>Now</span>), 2)
+  Words(6) = <span class='wbk_function_command'>Right</span>("0" & <span class='wbk_function_command'>Second</span>(<span class='wbk_function_command'>Now</span>), 2)
+  Words(7) = <span class='wbk_function_command'>Int</span>(((999 - 100 + 1) * <span class='wbk_function_command'>Rnd</span>) + 100)
+  signature = <span class='wbk_function_command'>Join</span>(Words, "")
+<span class='wbk_process_control'>End</span> <span class='wbk_process_control'>Function</span>
+
+<span class='wbk_function_command'>Set</span> Args = WScript.Arguments
+  <span class='wbk_process_control'>For</span> <span class='wbk_process_control'>Each</span> Arg In Args
+    shortcut Arg
+  <span class='wbk_process_control'>Next</span>
+<span class='wbk_function_command'>Set</span> Args = <span class='wbk_constant'>Nothing</span>
+
+<span class='wbk_process_control'>Sub</span> shortcut(path)
+  <span class='wbk_function_command'>Name</span> = extract("^[^&#92;.]+", extract("[^&#92;&#92;]+&#36;", path))
+  <span class='wbk_function_command'>Set</span> co = WScript.<span class='wbk_function_command'>CreateObject</span>("WScript.<span class='wbk_function_command'>Shell</span>")
+    <span class='wbk_function_command'>Set</span> cs = co.CreateShortcut(co.SpecialFolders("Desktop") & "&#92;" & <span class='wbk_function_command'>Name</span> & ".lnk")
+      cs.Description = signature
+      cs.IconLocation = path & ", 0"
+      cs.TargetPath = path
+      cs.WindowStyle = 1
+      cs.WorkingDirectory = co.SpecialFolders("MyDocuments")
+      cs.Save
+    <span class='wbk_function_command'>Set</span> cs = <span class='wbk_constant'>Nothing</span>
+  <span class='wbk_function_command'>Set</span> co = <span class='wbk_constant'>Nothing</span>
+<span class='wbk_process_control'>End</span> <span class='wbk_process_control'>Sub</span></pre>
+</body>
+
+</html>

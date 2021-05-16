@@ -1,0 +1,17 @@
+<html>
+
+<head>
+  <link rel='stylesheet' href='../../inc/code.css'>
+  <link rel='stylesheet' href='../../inc/default.css'>
+  <meta charset="utf-8">
+  <title>Notepad++一键编译</title>
+</head>
+
+<body>
+  <h1>Notepad++一键编译</h1><i>2020年6月17日</i><h2>1. 保存脚本</h2><img alt='Execute...' src='../../pics/20200617 Notepad++一键编译/bi20200617102948.png'><br><br>预先安装好NppExec插件，功能键F6呼叫出Execute对话框，输入：<br><br><pre class='code'>
+NPP_SAVEALL
+&#36;(CURRENT_DIRECTORY)&#92;make.bat &#36;(FILE_NAME)
+</pre><br><br>按Save保存为“make”。<h2>2. 加入宏菜单</h2><img alt='Execute...' src='../../pics/20200617 Notepad++一键编译/bi20200617104133.png'><br><br>菜单栏：插件→NppExec→Advanced Option...打开对话框，左下选择需要加速的脚本，即刚才保存的“make”，设置菜单项名称为“编译”，点击“Add/Modiffy”按钮将其添加到宏菜单。<br><br><img alt='Execute...' src='../../pics/20200617 Notepad++一键编译/bi20200617104153.png'><br><br>点击OK后出现的对话框再确定。<h2>3.设置快键</h2><img alt='Execute...' src='../../pics/20200617 Notepad++一键编译/bi20200617105937.png'><br><br>宏菜单点开“快捷键管理”对话框，选中刚才命名为“编译”的插件命令，选择功能键F9，确定后关闭就好了。
+</body>
+
+</html>

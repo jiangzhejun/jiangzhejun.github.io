@@ -1,0 +1,53 @@
+<html>
+
+<head>
+  <link rel='stylesheet' href='../../inc/code.css'>
+  <link rel='stylesheet' href='../../inc/default.css'>
+  <meta charset="utf-8">
+  <title>bwwid.c</title>
+</head>
+
+<body>
+  <pre class='code'>#<span class='wbk_package_keyword'>include</span> &lt;stdio.h&gt;
+#<span class='wbk_package_keyword'>include</span> &lt;stdlib.h&gt;
+#<span class='wbk_package_keyword'>include</span> &lt;string.h&gt;
+#<span class='wbk_package_keyword'>include</span> &lt;time.h&gt;
+
+<span class='wbk_types'>char</span> *uuid() {
+  <span class='wbk_modify_keyword'>static</span> <span class='wbk_types'>char</span> u[37];
+  srand((<span class='wbk_types'>unsigned</span> <span class='wbk_types'>int</span>)time(NULL));
+  <span class='wbk_modify_keyword'>const</span> <span class='wbk_types'>char</span> *c = "89ab";
+  <span class='wbk_types'>char</span> *p = u;
+
+  <span class='wbk_process_control'>for</span> (<span class='wbk_types'>int</span> i, j = 0; j &lt; 16; ++j) {
+    i = rand() % 0xff;
+
+    <span class='wbk_process_control'>switch</span> (j) {
+    <span class='wbk_process_control'>case</span> 6:
+      sprintf(p, "4%x", i % 15);
+      <span class='wbk_process_control'>break</span>;
+    <span class='wbk_process_control'>case</span> 8:
+      sprintf(p, "%c%x", c[rand() % strlen(c)], i % 15);
+      <span class='wbk_process_control'>break</span>;
+    <span class='wbk_process_control'>default</span>:
+      sprintf(p, "%02x", i);
+    }
+
+    p += 2;
+
+    <span class='wbk_process_control'>if</span> (j &lt; 10 && j % 2 && j &gt; 1) {
+      *p++ = '-';
+    }
+  }
+
+  *p = 0;
+
+  <span class='wbk_process_control'>return</span> u;
+}
+
+<span class='wbk_types'>int</span> main() {
+  <span class='wbk_process_control'>return</span> printf(uuid());
+}</pre>
+</body>
+
+</html>
