@@ -1,0 +1,14 @@
+<html>
+
+<head>
+  <link rel='stylesheet' href='../inc/code.css'>
+  <link rel='stylesheet' href='../inc/default.css'>
+  <meta charset="utf-8">
+  <title>Github打不开的解决方法</title>
+</head>
+
+<body>
+  <h1>Github打不开的解决方法</h1><i>2021/4/9 北京</i><h2>一、DNS查询</h2>访问<a href='https://tool.chinaz.com/dns/'>https://tool.chinaz.com/dns/</a>分别搜索github.com和github.global.ssl.fastly.net两个网址，获取TTL值最小的IP地址。<h2>二、修改hosts文件</h2><div class='block'> C:&#92;Windows&#92;System32&#92;drivers&#92;etc&#92;hosts</div><br><br>用文本编辑器在文件末尾追加配置：<br><pre class='code'>#GitHub<br>XXX.XXX.XXX.XXX github.com<br>XXX.XXX.XXX.XXX github.global.ssl.fastly.net</pre>
+</body>
+
+</html>
