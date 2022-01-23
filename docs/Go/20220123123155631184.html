@@ -1,0 +1,49 @@
+<html>
+
+<head>
+<link rel="stylesheet" href="../../webook.css">
+<meta charset="utf-8">
+<title>buid.go - webook</title>
+</head>
+
+<body>
+<h1>buid.go</h1>
+<pre class="code_block" title="golang">
+<b>package</b> buid
+
+<b>import</b> (
+	"fmt"
+	"math/rand"
+	"time"
+)
+
+<b>func</b> New() string {
+	<b>const</b> c = "89ab"
+	s := ""
+	r := rand.New(rand.NewSource(time.Now().UnixNano()))
+
+	<b>for</b> i := 0; i &lt; 16; i++ {
+		j := r.Intn(0x7fff) % 0xff
+
+		<b>switch</b> i {
+		<b>case</b> 6:
+			s += fmt.Sprintf("4%x", j % 15)
+			<b>break</b>
+		<b>case</b> 8:
+			s += fmt.Sprintf("%s%x", string(c[r.Intn(4) % 4]), j % 15)
+			<b>break</b>
+		<b>default</b>:
+			s += fmt.Sprintf("%02x", j)
+		}
+
+		<b>if</b> i &lt; 10 &amp;&amp; i % 2 &gt; 0 &amp;&amp; i &gt; 1 {
+			s += "-"
+		}
+	}
+
+	<b>return</b> s
+}
+</pre>
+</body>
+
+</html>

@@ -1,0 +1,52 @@
+<html>
+
+<head>
+<link rel="stylesheet" href="../../webook.css">
+<meta charset="utf-8">
+<title>第一个go程序 - webook</title>
+</head>
+
+<body>
+<h1>第一个go程序</h1>
+<i>2021/3/15 北京</i>
+<br><br>
+<h2>一、下载并安装</h2>
+<ol>
+	<li>前往<a href="https://golang.google.cn/dl/" target="_blank">官网</a>，下载免安装压缩包go1.16.2.windows-amd64.zip，解压到安装目录。</li>
+	<li>添加环境目录 <div class="code_line">set path=D:\go\bin;%path%</div></li>
+	<li>验证安装成功</li>
+</ol>
+<br><br>
+<pre class="code_block" title="dos">
+E:&#92;bibi&#92;junet&gt;go version
+go version go1.16.2 windows/amd64
+</pre>
+<br><br>
+<h2>二、编写源代码</h2>
+<pre class="code_block" title="golang">
+<b>package</b> main
+
+<b>import</b> "fmt"
+
+<b>func</b> main() {
+	fmt.Println("Let's <b>go</b>!")
+}
+</pre>
+<br><br>
+<h2>三、测试运行</h2>
+<pre class="code_block" title="dos">
+E:&#92;bibi&#92;junet&#92;lab&gt;go run let's.go
+Let's go!
+</pre>
+<br><br>
+<h2>四、编译可执行文件</h2>
+<pre class="code_block" title="dos">
+E:&#92;bibi&#92;junet&#92;lab&gt;go build let's.go
+
+E:&#92;bibi&#92;junet&#92;lab&gt;let's
+Let's go!
+</pre>
+
+</body>
+
+</html>

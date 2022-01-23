@@ -1,0 +1,126 @@
+<html>
+
+<head>
+<link rel="stylesheet" href="../../webook.css">
+<meta charset="utf-8">
+<title>zipack.go - webook</title>
+</head>
+
+<body>
+<h1>zipack.go</h1>
+<pre class="code_block" title="golang">
+<b>package</b> zipack
+
+<b>import</b> (
+	"archive/zip"
+	"io"
+	"os"
+	"path"
+	"path/filepath"
+	"strings"
+)
+
+<b>func</b> Get(dest string, src string) error {
+	zr, err := zip.OpenReader(src)
+	<b>if</b> err != nil {
+		<b>return</b> err
+	}
+	<b>defer</b> zr.Close()
+
+	<b>for</b> _, f := <b>range</b> zr.File {
+		path := filepath.Join(dest, f.Name)
+		<b>if</b> f.FileInfo().IsDir() {
+			os.MkdirAll(path, os.ModePerm)
+		} <b>else</b> {
+			<b>if</b> err = os.MkdirAll(filepath.Dir(path), os.ModePerm); err != nil {
+				<b>return</b> err
+			}
+
+			fout, err := os.OpenFile(path, os.O_CREATE|os.O_TRUNC|os.O_WRONLY, f.Mode())
+			<b>if</b> err != nil {
+				<b>return</b> err
+			}
+			<b>defer</b> fout.Close()
+
+			fin, err := f.Open()
+			<b>if</b> err != nil {
+				<b>return</b> err
+			}
+			<b>defer</b> fin.Close()
+
+			_, err = io.Copy(fout, fin)
+			<b>if</b> err != nil {
+				<b>return</b> err
+			}
+		}
+	}
+
+	<b>return</b> nil
+}
+
+<b>func</b> Set(dest string, srcs ... string) error {
+	f, err := os.Create(dest)
+	<b>if</b> err != nil {
+		<b>return</b> err
+	}
+	<b>defer</b> f.Close()
+
+	zw := zip.NewWriter(f)
+	<b>defer</b> zw.Close()
+
+	<b>for</b> _, src := <b>range</b> srcs {
+		filepath.Walk(workDirectory(src), <b>func</b>(path string, info os.FileInfo, err error) error {
+			<b>if</b> err != nil || strings.Contains(path, ".nozip") {
+				<b>return</b> err
+			}
+
+			h, err := zip.FileInfoHeader(info)
+			<b>if</b> err != nil {
+				<b>return</b> err
+			}
+
+			h.Name = strings.TrimPrefix(path, filepath.Dir(src) + "/")
+			<b>if</b> info.IsDir() {
+				h.Name += "/"
+			} <b>else</b> {
+				h.Method = zip.Deflate
+			}
+
+			fout, err := zw.CreateHeader(h)
+			<b>if</b> err != nil {
+				<b>return</b> err
+			}
+
+			<b>if</b> ! info.IsDir() {
+				fin, err := os.Open(path)
+				<b>if</b> err != nil {
+					<b>return</b> err
+				}
+				<b>defer</b> fin.Close()
+
+				_, err = io.Copy(fout, fin)
+				<b>if</b> err != nil {
+					<b>return</b> err
+				}
+			}
+
+			<b>return</b> nil
+		})
+	}
+
+	<b>return</b> nil
+}
+
+<b>func</b> workDirectory(src string) string {
+	dir, err := filepath.Abs(filepath.Dir(src))
+	<b>if</b> err != nil {
+		<b>return</b> src
+	}
+
+	err = os.Chdir(dir)
+	<b>return</b> path.Base(filepath.ToSlash(src))
+}
+</pre>
+</body>
+
+</html>
