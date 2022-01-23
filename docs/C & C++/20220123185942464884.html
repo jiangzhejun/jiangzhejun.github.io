@@ -1,0 +1,37 @@
+<html>
+
+<head>
+<link rel="stylesheet" href="../../webook.css">
+<meta charset="utf-8">
+<title>最简单的MFC窗体创建示例.cpp - webook</title>
+</head>
+
+<body>
+<h1>最简单的MFC窗体创建示例.cpp</h1>
+<pre class="code_block" title="c++">
+#include &lt;afxwin.h&gt;
+
+<b>class</b> hwWnd : <b>public</b> CFrameWnd {
+<b>public</b>:
+  hwWnd(LPCTSTR sTitle) {
+    Create(NULL, sTitle);
+  }
+};
+
+<b>class</b> hwApp : <b>public</b> CWinApp {
+<b>public</b>:
+  <b>virtual</b> BOOL InitInstance();
+};
+
+BOOL hwApp::InitInstance() {
+  m_pMainWnd = <b>new</b> hwWnd(_T("Hello World!"));
+  m_pMainWnd-&gt;ShowWindow(m_nCmdShow);
+  <b>return</b> <b>TRUE</b>;
+}
+
+hwApp bi201809301033;
+
+</pre>
+</body>
+
+</html>
