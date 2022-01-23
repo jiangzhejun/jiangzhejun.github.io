@@ -1,0 +1,61 @@
+<html>
+
+<head>
+<link rel="stylesheet" href="../../webook.css">
+<meta charset="utf-8">
+<title>数字分页导航栏.html - webook</title>
+</head>
+
+<body>
+<h1>数字分页导航栏.html</h1>
+<pre class="code_block" title="html">
+&lt;style type="text/css"&gt;
+.current_page {
+  background-color: gray;
+ }
+ 
+ .navi {
+  display: block;
+  float: left;
+  margin: 2px;
+  padding: 5px;
+}
+ 
+.other_page {
+  background-color: silver;
+ }
+&lt;/style&gt;
+&lt;body&gt;
+&lt;script type="text/javascript"&gt;
+function navibar(page, pages, param) {
+  var a, li, ul = document.createElement("ul");
+  for (var i = 1; i &lt;= pages; i++) {
+    if (i == 2 &amp;&amp; page - 6 &gt; 1) {
+      i = page - 6;
+    } else if (i == page + 6 &amp;&amp; page + 6 &lt; pages) {
+      i = pages - 1;
+    } else {
+      li = document.createElement("li");
+      a = document.createElement("a");
+      if (i == page){
+        a.href = "#";
+        a.innerText = i;
+        li.className = "navi current_page";
+      } else {
+        a.href = "?page=" + i + param;
+        a.innerText = i == 1 || i == pages ? "|" : i;
+        li.className = "navi other_page";
+      }
+      li.appendChild(a);
+      ul.appendChild(li);
+    }
+  }
+  return ul;
+}
+
+document.body.appendChild(navibar(48, 50, "&amp;keyword="));
+&lt;/script&gt;
+</pre>
+</body>
+
+</html>

@@ -1,0 +1,134 @@
+<html>
+
+<head>
+<link rel="stylesheet" href="../../webook.css">
+<meta charset="utf-8">
+<title>个税计算器 v2.0.html - webook</title>
+</head>
+
+<body>
+<h1>个税计算器 v2.0.html</h1>
+<pre class="code_block" title="html">
+&lt;style type="text/css"&gt;
+h1 {
+  text-align: center;
+}
+
+p {
+  text-align: center;
+}
+
+table {
+  border: 2px solid silver;
+  font-size: 16px;
+}
+
+td {
+  border: 1px dashed silver;
+  height: 30px;
+  padding: 5px 9px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+td.shen {
+  background-color: #B8CCE4;
+  border: 1px solid #B8CCE4;
+}
+
+td.qian {
+  background-color: #DCE6F1;
+  border: 1px solid #DCE6F1;
+}
+
+td input.text {
+  text-align: center;
+  width: 180px;
+}
+&lt;/style&gt;
+
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta name="author" charset="utf-8" content="mayer@2018.9.10"&gt;
+    &lt;title&gt;个税计算器 v2.0&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;工薪税费计算器&lt;/h1&gt;
+    &lt;table align="center" cellpadding="0"&gt;
+      &lt;tr&gt;
+        &lt;td class="shen"&gt;税前收入&lt;/td&gt;
+        &lt;td&gt;&lt;input class="text" id="shuiqianshouru" onchange="jisuan()" type="text" value="6113"/&gt;&lt;/td&gt;
+        &lt;td class="shen"&gt;工资基数&lt;/td&gt;
+        &lt;td&gt;&lt;input class="text" id="gongzijishu" onchange="jisuan()" type="text" value="5000"/&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td class="qian"&gt;医疗保险&lt;/td&gt;
+        &lt;td id="yiliaobaoxian"&gt;0.00&lt;/td&gt;
+        &lt;td class="qian"&gt;住房公积金&lt;/td&gt;
+        &lt;td id="zhufanggongjijin"&gt;0.00&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td class="shen"&gt;养老保险&lt;/td&gt;
+        &lt;td id="yanglaobaoxian"&gt;0.00&lt;/td&gt;
+        &lt;td class="shen"&gt;失业保险&lt;/td&gt;
+        &lt;td id="shiyebaoxian"&gt;0.00&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td class="qian"&gt;税后应得&lt;/td&gt;
+        &lt;td id="shuihouyingde"&gt;0.00&lt;/td&gt;
+        &lt;td class="qian"&gt;个人所得税&lt;/td&gt;
+        &lt;td id="gerensuodeshui"&gt;0.00&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/table&gt;
+    &lt;p&gt;&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+
+&lt;script type="text/javascript"&gt;
+var geshuimianzhenge = 5000, jisuan = window.onload = function() {
+  yssr = jsYingshuishouru();
+
+  switch(true) {
+    case yssr &gt; 0 &amp;&amp; yssr &lt;= 3000:
+      grsds = yssr * 0.03;
+    break;
+    case yssr &gt; 3000 &amp;&amp; yssr &lt;= 12000:
+      grsds = yssr * 0.1 - 210;
+    break;
+    case yssr &gt; 12000 &amp;&amp; yssr &lt;= 25000:
+      grsds = yssr * 0.2 - 1410;
+    break;
+    case yssr &gt; 25000 &amp;&amp; yssr &lt;= 35000:
+      grsds = yssr * 0.25 - 2660;
+    break;
+    case yssr &gt; 35000 &amp;&amp; yssr &lt;= 55000:
+      grsds = yssr * 0.3 - 4410;
+    break;
+    case yssr &gt; 55000 &amp;&amp; yssr &lt;= 80000:
+      grsds = yssr * 0.35 - 7160;
+    break;
+    case yssr &gt; 80000:
+      grsds = yssr * 0.45 - 15160;
+    break;
+    default:
+      grsds = 0;
+    break;
+  }
+
+  gerensuodeshui.innerText = grsds.toFixed(2);
+  shuihouyingde.innerText = (yssr + geshuimianzhenge - grsds).toFixed(2);
+}
+
+function jsYingshuishouru() {
+  sxyj = Number(zhufanggongjijin.innerText = (gongzijishu.value * 0.12).toFixed(2));
+  sxyj += Number(yiliaobaoxian.innerText = (gongzijishu.value * 0.02 + 3).toFixed(2));
+  sxyj += Number(yanglaobaoxian.innerText = (gongzijishu.value * 0.08).toFixed(2));
+  sxyj += Number(shiyebaoxian.innerText = (gongzijishu.value * 0.002).toFixed(2));
+
+  return shuiqianshouru.value - geshuimianzhenge - sxyj;
+}
+&lt;/script&gt;
+</pre>
+</body>
+
+</html>
