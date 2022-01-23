@@ -1,0 +1,55 @@
+<html>
+
+<head>
+<link rel="stylesheet" href="../../webook.css">
+<meta charset="utf-8">
+<title>bwwid.c - webook</title>
+</head>
+
+<body>
+<h1>bwwid.c</h1>
+<pre class="code_block" title="c">
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;time.h&gt;
+
+<b>char</b> *uuid() {
+  <b>static</b> <b>char</b> u[37];
+  srand((<b>unsigned</b> <b>int</b>)time(NULL));
+  <b>const</b> <b>char</b> *c = "89ab";
+  <b>char</b> *p = u;
+
+  <b>for</b> (<b>int</b> i, j = 0; j &lt; 16; ++j) {
+    i = rand() % 0xff;
+
+    <b>switch</b> (j) {
+    <b>case</b> 6:
+      sprintf(p, "4%x", i % 15);
+      <b>break</b>;
+    <b>case</b> 8:
+      sprintf(p, "%c%x", c[rand() % strlen(c)], i % 15);
+      <b>break</b>;
+    <b>default</b>:
+      sprintf(p, "%02x", i);
+    }
+
+    p += 2;
+
+    <b>if</b> (j &lt; 10 &amp;&amp; j % 2 &amp;&amp; j &gt; 1) {
+      *p++ = '-';
+    }
+  }
+
+  *p = 0;
+
+  <b>return</b> u;
+}
+
+<b>int</b> main() {
+  <b>return</b> printf(uuid());
+}
+</pre>
+</body>
+
+</html>

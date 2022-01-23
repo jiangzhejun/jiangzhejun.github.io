@@ -1,0 +1,91 @@
+<html>
+
+<head>
+<link rel="stylesheet" href="../../webook.css">
+<meta charset="utf-8">
+<title>字符串前缀、后缀回调函数方式实现.c - webook</title>
+</head>
+
+<body>
+<h1>字符串前缀、后缀回调函数方式实现.c</h1>
+<pre class="code_block" title="c">
+#include &lt;stdarg.h&gt;
+#include &lt;stdio.h&gt;
+
+<b>char</b> *zero(<b>char</b> *str, size_t n) {
+  <b>char</b> *c = str;
+  <b>while</b>(n--) {
+    *str++ = 0;
+  }
+
+  <b>return</b> c;
+}
+
+<b>int</b> length(<b>const</b> <b>char</b> *str) {
+  <b>const</b> <b>char</b> *c = str;
+  <b>while</b>(*str) {
+    str++;
+  }
+
+  <b>return</b> str - c;
+}
+
+<b>char</b> *copy(<b>char</b> *dest, <b>const</b> <b>char</b> *src) {
+  <b>char</b> *c = dest;
+  <b>while</b>(*dest++ = *src++);
+  *dest = '&#92;0';
+
+  <b>return</b> c;
+}
+
+<b>char</b> *atLast(<b>char</b> *dest, <b>const</b> <b>char</b> *src) {
+  <b>char</b> *c = dest;
+  dest += length(dest);
+
+  <b>while</b>(*src) {
+    *dest++ = *src++;
+  }
+
+  *dest = '&#92;0';
+  <b>return</b> c;
+}
+
+<b>char</b> *atFirst(<b>char</b> *dest, <b>const</b> <b>char</b> *src) {
+  <b>char</b> *c = dest, d[512] = {0}, *e = d;
+  copy(d, dest);
+
+  <b>while</b>(*src) {
+    *dest++ = *src++;
+  }
+
+  <b>while</b>(*e) {
+    *dest++ = *e++;
+  }
+
+  *dest = '&#92;0';
+  <b>return</b> c;
+}
+
+<b>char</b> *join(<b>char</b> *(*f)(<b>char</b> *, <b>const</b> <b>char</b> *), <b>char</b> *dest, ...) {
+  <b>char</b> *c;
+
+  va_list vl;
+  va_start(vl, dest);
+  <b>while</b>(c = va_arg(vl, <b>char</b> *)) {
+    (*f)(dest, c);
+  }
+  va_end(vl);
+
+  <b>return</b> dest;
+}
+
+<b>void</b> main() {
+  <b>char</b> c[512] = {0};
+  printf("joinFirst: %s&#92;n", join(atFirst, c, "1", "2", "3", NULL));
+  zero(c, <b>sizeof</b>(c));
+  printf("joinLast: %s&#92;n", join(atLast, c, "1", "2", "3", NULL));
+}
+</pre>
+</body>
+
+</html>

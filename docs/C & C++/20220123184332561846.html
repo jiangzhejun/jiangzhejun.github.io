@@ -1,0 +1,64 @@
+<html>
+
+<head>
+<link rel="stylesheet" href="../../webook.css">
+<meta charset="utf-8">
+<title>字符串路径截取目录或文件名.c - webook</title>
+</head>
+
+<body>
+<h1>字符串路径截取目录或文件名.c</h1>
+<pre class="code_block" title="c">
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+<b>int</b> length(<b>const</b> <b>char</b> *str) {
+  <b>const</b> <b>char</b> *c = str;
+  <b>while</b>(*str) {
+    str++;
+  }
+
+  <b>return</b> str - c;
+}
+
+<b>char</b> *cutwo(<b>char</b> *path) {
+  path += length(path) - 1;
+
+  <b>while</b>(*path) {
+    <b>if</b>(*path == '&#92;&#92;' || *path == '/') {
+      *path = '&#92;0';
+      <b>break</b>;
+    } <b>else</b> {
+      path--;
+    }
+  }
+
+  <b>return</b> ++path;
+}
+
+<b>char</b> *cuthree(<b>char</b> *path, <b>char</b> **ext) {
+  <b>char</b> *c = cutwo(path);
+  path += length(path) + length(c) - 1;
+
+  <b>while</b>(*path) {
+    <b>if</b>(*path == '.') {
+      *path = '&#92;0';
+      <b>break</b>;
+    } <b>else</b> {
+      path--;
+    }
+  }
+
+  *ext = (<b>char</b> *)malloc(<b>sizeof</b>(++path));
+  *ext = ++path;
+  <b>return</b> c;
+}
+
+<b>void</b> main() {
+  <b>char</b> c[512] = "12345/678.9&#92;0", *ext = NULL, *name = cuthree(c, &amp;ext);
+  printf("Path: %s&#92;nName: %s&#92;nExt: %s", c, name, ext);
+}
+</pre>
+</body>
+
+</html>

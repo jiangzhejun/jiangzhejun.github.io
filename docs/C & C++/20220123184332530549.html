@@ -1,0 +1,62 @@
+<html>
+
+<head>
+<link rel="stylesheet" href="../../webook.css">
+<meta charset="utf-8">
+<title>动态分配字符串空间.c - webook</title>
+</head>
+
+<body>
+<h1>动态分配字符串空间.c</h1>
+<pre class="code_block" title="c">
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+<b>int</b> length(<b>const</b> <b>char</b> *str) {
+  <b>const</b> <b>char</b> *c = str;
+  <b>while</b>(*str) {
+    str++;
+  }
+
+  <b>return</b> str - c;
+}
+
+<b>char</b> *copy(<b>char</b> *dest, <b>const</b> <b>char</b> *src) {
+  <b>char</b> *c = dest;
+  <b>while</b>(*dest++ = *src++);
+  *dest = '&#92;0';
+
+  <b>return</b> c;
+}
+
+<b>char</b> *join(<b>char</b> *dest, <b>const</b> <b>char</b> *src) {
+  <b>char</b> *c = dest;
+  dest += length(dest);
+
+  <b>while</b>(*src) {
+    *dest++ = *src++;
+  }
+
+  *dest = '&#92;0';
+  <b>return</b> c;
+}
+
+<b>char</b> *getString(<b>char</b> **dest, <b>const</b> <b>char</b> *src) {
+  <b>char</b> *c = *dest;
+  *dest = (<b>char</b> *)malloc(<b>sizeof</b>(<b>char</b>) * (length(*dest) + length(src) + 1));
+  copy(*dest, c);
+  join(*dest, src);
+  <b>return</b> c;
+}
+
+<b>void</b> main() {
+  <b>char</b> *c = "12345@678.", *d = "9&#92;0";
+  printf("%s&#92;n", c);
+  getString(&amp;c, d);
+  printf("%s&#92;n", c);
+  free(c);
+}
+</pre>
+</body>
+
+</html>
