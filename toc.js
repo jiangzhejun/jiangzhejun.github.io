@@ -3,5 +3,5 @@ function act(dest) {
 }
 
 window.onload = function() {
-  act(sub_0);
+  act($0);
 }
