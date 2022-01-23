@@ -1,0 +1,28 @@
+<html>
+
+<head>
+<link rel="stylesheet" href="../../webook.css">
+<meta charset="utf-8">
+<title>Github打不开的解决方法 - webook</title>
+</head>
+
+<body>
+<h1>Github打不开的解决方法</h1>
+<i>2021/4/9 北京</i>
+<br><br>
+<h2>一、DNS查询</h2>
+访问<a href="https://tool.chinaz.com/dns/" target="_blank">https://tool.chinaz.com/dns/</a>分别搜索github.com和github.global.ssl.fastly.net两个网址，获取TTL值最小的IP地址。
+<br><br>
+<h2>二、修改hosts文件</h2>
+<div class="code_line">C:\Windows\System32\drivers\etc\hosts</div>
+<br><br>
+用文本编辑器在文件末尾追加配置：
+<pre class="code_block" title="">
+#GitHub
+XXX.XXX.XXX.XXX github.com
+XXX.XXX.XXX.XXX github.global.ssl.fastly.net
+</pre>
+
+</body>
+
+</html>
