@@ -1,0 +1,36 @@
+<html>
+
+<head>
+<link rel="stylesheet" href="../../webook.css">
+<meta charset="utf-8">
+<title>Debian10安装配置TinyProxy - webook</title>
+</head>
+
+<body>
+<h1>Debian10安装配置TinyProxy</h1>
+<i>姜哲俊 2021年11月16日</i>
+<br><br>
+<h2>1. 安装</h2>
+apt-get update
+apt-get install tinyproxy
+<br><br>
+<h2>2. 配置</h2>
+vim /etc/tinyproxy/tinyproxy.conf
+Port 8888
+&#35;Allow 127.0.0.1
+<br><br>
+<h2>3. 启动</h2>
+service tinyproxy start
+<br><br>
+<h2>4. 设置防火墙规则</h2>
+iptables -I INPUT -p tcp --dport 8888 -j ACCEPT
+iptables -L
+<br><br>
+<h2>5. 保存防火墙规则</h2>
+apt-get install iptables-persistent
+netfilter-persistent save
+netfilter-persistent reload
+
+</body>
+
+</html>

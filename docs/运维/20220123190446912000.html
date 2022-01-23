@@ -1,0 +1,53 @@
+<html>
+
+<head>
+<link rel="stylesheet" href="../../webook.css">
+<meta charset="utf-8">
+<title>CentOS7安装配置Samba - webook</title>
+</head>
+
+<body>
+<h1>CentOS7安装配置Samba</h1>
+<i>姜哲俊 2021年11月8日</i>
+<br><br>
+<h2>1. 安装</h2>
+yum install samba -y
+<br><br>
+<h2>2. 启动</h2>
+service smb start
+service smb status
+<br><br>
+<h2>3. 配置</h2>
+sudo chmod 777 /bww/share
+vi /etc/samba/smb.conf
+<br><br>
+[global]
+  create mask = 0775
+  directory mask = 0775
+  force create mode = 0775
+  force directory mode = 0775
+<br><br>
+[bww_share]
+  path = /bww/share
+  read only = no
+<br><br>
+<h2>4. 添加用户</h2>
+useradd bww_share
+smbpasswd -a bww_share
+<br><br>
+<h2>5. 重启</h2>
+service smb restart
+<br><br>
+<h2>6. 防火墙例外</h2>
+firewall-cmd --permanent --add-service=samba
+firewall-cmd --reload
+<br><br>
+getsebool  -a | grep samba
+setsebool -P samba_export_all_rw on
+<br><br>
+<h2>7. 开机自启</h2>
+chkconfig smb on
+
+</body>
+
+</html>
