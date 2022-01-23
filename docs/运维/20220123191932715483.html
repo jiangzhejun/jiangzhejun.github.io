@@ -1,0 +1,66 @@
+<html>
+
+<head>
+<link rel="stylesheet" href="../../webook.css">
+<meta charset="utf-8">
+<title>CreateDesktopShortcut.vbs - webook</title>
+</head>
+
+<body>
+<h1>CreateDesktopShortcut.vbs</h1>
+<pre class="code_block" title="basic">
+<b>On</b> <b>Error</b> <b>Resume</b> <b>Next</b>
+<b>Rem</b> CreateDesktopShortcut - bi2020101316121021223029
+
+<b>Function</b> extract(rgx, src)
+  <b>Dim</b> Regex, Match, Matches, Value
+  <b>Set</b> Regex = <b>New</b> RegExp
+      Regex.Pattern = rgx
+      Regex.IgnoreCase = <b>True</b>
+      Regex.<b>Global</b> = <b>False</b>
+    <b>Set</b> Matches = Regex.Execute(src)
+      <b>For</b> <b>Each</b> Match <b>in</b> Matches
+        Value = Match.Value
+      <b>Next</b>
+      extract = Value
+    <b>Set</b> Matches = <b>Nothing</b>
+  <b>Set</b> Regex = <b>Nothing</b>
+<b>End</b> <b>Function</b>
+
+<b>Function</b> signature()
+  Randomize
+  <b>Dim</b> Words(8)
+  Words(0) = "bi"
+  Words(1) = <b>Year</b>(<b>Now</b>)
+  Words(2) = <b>Right</b>("0" &amp; <b>Month</b>(<b>Now</b>), 2)
+  Words(3) = <b>Right</b>("0" &amp; <b>Day</b>(<b>Now</b>), 2)
+  Words(4) = <b>Right</b>("0" &amp; <b>Hour</b>(<b>Now</b>), 2)
+  Words(5) = <b>Right</b>("0" &amp; <b>Minute</b>(<b>Now</b>), 2)
+  Words(6) = <b>Right</b>("0" &amp; <b>Second</b>(<b>Now</b>), 2)
+  Words(7) = <b>Int</b>(((999 - 100 + 1) * <b>Rnd</b>) + 100)
+  signature = <b>Join</b>(Words, "")
+<b>End</b> <b>Function</b>
+
+<b>Set</b> Args = WScript.Arguments
+  <b>For</b> <b>Each</b> Arg <b>In</b> Args
+    shortcut Arg
+  <b>Next</b>
+<b>Set</b> Args = <b>Nothing</b>
+
+<b>Sub</b> shortcut(path)
+  name = extract("^[^&#92;.]+", extract("[^&#92;&#92;]+$", path))
+  <b>Set</b> co = WScript.<b>CreateObject</b>("WScript.Shell")
+    <b>Set</b> cs = co.CreateShortcut(co.SpecialFolders("Desktop") &amp; "&#92;" &amp; name &amp; ".lnk")
+      cs.Description = signature
+      cs.IconLocation = path &amp; ", 0"
+      cs.TargetPath = path
+      cs.WindowStyle = 1
+      cs.WorkingDirectory = co.SpecialFolders("MyDocuments")
+      cs.Save
+    <b>Set</b> cs = <b>Nothing</b>
+  <b>Set</b> co = <b>Nothing</b>
+<b>End</b> <b>Sub</b>
+</pre>
+</body>
+
+</html>
