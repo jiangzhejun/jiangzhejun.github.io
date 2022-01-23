@@ -1,0 +1,90 @@
+<html>
+
+<head>
+<link rel="stylesheet" href="../../webook.css">
+<meta charset="utf-8">
+<title>zipack.java - webook</title>
+</head>
+
+<body>
+<h1>zipack.java</h1>
+<pre class="code_block" title="java">
+<b>package</b> bww.bill;
+
+<b>import</b> java.io.*;
+<b>import</b> java.util.zip.*;
+
+<b>public</b> <b>class</b> zipack {
+  <b>protected</b> <b>static</b> <b>final</b> String VERSION_INFO = "zipack 2.1.2.8 - bi202010071623";
+  <b>private</b> <b>static</b> CheckedOutputStream COS = <b>null</b>;
+  <b>private</b> <b>static</b> FileOutputStream FOS = <b>null</b>;
+  <b>protected</b> <b>static</b> ZipOutputStream ZOS = <b>null</b>;
+
+  <b>public</b> zipack(String[] archives) {
+    <b>if</b> (archives != <b>null</b> &amp;&amp; archives.length &gt; 0) {
+      <b>try</b> {
+        open(archives[0].replaceAll("&#92;&#92;.[^&#92;&#92;.]+$", "") + ".zip");
+
+        ZOS.setComment(VERSION_INFO);
+        ZOS.setLevel(Deflater.BEST_COMPRESSION);
+        ZOS.setMethod(ZipOutputStream.DEFLATED);
+
+        <b>for</b> (String s : archives) {
+          dig(<b>new</b> File(s), s.replaceAll("^.*[/&#92;&#92;&#92;&#92;]([^/&#92;&#92;&#92;&#92;]+)$", "$1"));
+        }
+
+        close();
+      } <b>catch</b> (Exception e) {
+        e.printStackTrace();
+      }
+    }
+  }
+
+  <b>protected</b> <b>static</b> <b>final</b> <b>void</b> close() <b>throws</b> Exception {
+    ZOS.close();
+    COS.close();
+    FOS.close();
+  }
+
+  <b>protected</b> <b>final</b> <b>void</b> dig(File archive, String path) <b>throws</b> Exception {
+    <b>if</b> (archive.isFile()) {
+      save(<b>new</b> FileInputStream(archive), path);
+    } <b>else</b> <b>if</b> (archive.isDirectory()) {
+      <b>for</b> (File f : archive.listFiles()) {
+        dig(f, path + "/" + f.getName());
+      }
+    }
+  }
+
+  <b>protected</b> <b>static</b> <b>final</b> <b>void</b> open(String name) <b>throws</b> Exception {
+    FOS = <b>new</b> FileOutputStream(name);
+    COS = <b>new</b> CheckedOutputStream(FOS, <b>new</b> CRC32());
+    ZOS = <b>new</b> ZipOutputStream(COS);
+  }
+
+  <b>protected</b> <b>final</b> <b>void</b> put(InputStream is, String name) <b>throws</b> Exception {
+    <b>byte</b>[] b = <b>new</b> <b>byte</b>[is.available()];
+    is.read(b);
+    is.close();
+
+    ZOS.putNextEntry(<b>new</b> ZipEntry(name));
+    ZOS.write(b);
+    ZOS.flush();
+    ZOS.closeEntry();
+    System.out.println("+ " + name);
+  }
+
+  <b>protected</b> <b>void</b> save(InputStream is, String name) <b>throws</b> Exception {
+    put(is, name);
+  }
+
+  <b>public</b> <b>static</b> <b>void</b> main(String[] args) {
+    <b>new</b> zipack(args);
+    System.out.println(VERSION_INFO);
+    System.exit(0);
+  }
+}
+</pre>
+</body>
+
+</html>

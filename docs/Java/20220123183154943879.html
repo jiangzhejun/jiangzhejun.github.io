@@ -1,0 +1,46 @@
+<html>
+
+<head>
+<link rel="stylesheet" href="../../webook.css">
+<meta charset="utf-8">
+<title>图片加载错误的处理方法 - webook</title>
+</head>
+
+<body>
+<h1>图片加载错误的处理方法</h1>
+<i>2021/5/14 北京</i>
+<br><br>
+原本用于uFace2项目，因Linux服务器缺少字体，绘制出错，只好忍痛割爱。现专文公布，使其不被埋没。
+<pre class="code_block" title="java">
+<b>private</b> <b>byte</b>[] onError() <b>throws</b> IOException {
+  BufferedImage bi = <b>new</b> BufferedImage(300, 300, BufferedImage.TYPE_INT_RGB);
+  Font f = <b>new</b> Font("Serif", Font.PLAIN, 210);
+  Graphics2D g = bi.createGraphics();
+  bi = g.getDeviceConfiguration().createCompatibleImage(300, 300, Transparency.TRANSLUCENT);
+  g.dispose();
+  g = bi.createGraphics();
+  g.setColor(Color.GRAY);
+  g.setFont(f);
+
+  g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+  g.setStroke(<b>new</b> BasicStroke(5f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND, 3.5f, <b>new</b> <b>float</b>[] { 15, 9 }, 0f));
+  g.draw(<b>new</b> RoundRectangle2D.Float(30, 30, 240, 240, 30, 30));
+
+  FontMetrics fm = g.getFontMetrics();
+  String s = "?";
+  <b>int</b> sAscent = fm.getAscent(), sHeight = fm.getHeight(), sWidth = fm.stringWidth(s);
+
+  g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+  g.drawString(s, (300 - sWidth) / 2, (300 - sHeight) / 2 + sAscent);
+  g.dispose();
+
+  ByteArrayOutputStream baos = <b>new</b> ByteArrayOutputStream();
+  ImageIO.write(bi, "png", baos);
+
+  <b>return</b> baos.toByteArray();
+}
+</pre>
+
+</body>
+
+</html>

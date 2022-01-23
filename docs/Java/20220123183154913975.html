@@ -1,0 +1,129 @@
+<html>
+
+<head>
+<link rel="stylesheet" href="../../webook.css">
+<meta charset="utf-8">
+<title>upack.java - webook</title>
+</head>
+
+<body>
+<h1>upack.java</h1>
+<pre class="code_block" title="java">
+<b>package</b> bww.bill;
+
+<b>public</b> <b>class</b> upack {
+  <b>private</b> <b>byte</b>[] content = <b>null</b>;
+  <b>private</b> <b>byte</b>[] data = <b>null</b>;
+  <b>private</b> String name = "";
+  <b>private</b> String type = "";
+
+  <b>public</b> upack(<b>byte</b>[] src, String fld) {
+    <b>byte</b>[] b = <b>null</b>;
+    <b>int</b> x, y, z;
+
+    <b>for</b> (x = 0; x &lt; src.length; x++) {
+      <b>if</b> (src[x] == '&#92;n') {
+        b = <b>new</b> <b>byte</b>[x - 1];
+        System.arraycopy(src, 0, b, 0, b.length);
+        <b>break</b>;
+      }
+    }
+
+    z = b.length + 2;
+
+    <b>for</b> (x = z; x &lt; src.length; x++) {
+      <b>for</b> (y = 0; y &lt; b.length; y++) {
+        <b>if</b> (b[y] != src[x + y]) {
+          <b>break</b>;
+        }
+      }
+      <b>if</b> (y == b.length) {
+        content = <b>new</b> <b>byte</b>[x - 2 - z];
+        System.arraycopy(src, z, content, 0, content.length);
+        <b>if</b> (isField(fld)) {
+          setData(content);
+          setName(content);
+          setType(content);
+          <b>break</b>;
+        } <b>else</b> {
+          z += x;
+        }
+      }
+    }
+  }
+
+  <b>private</b> <b>void</b> setType(<b>byte</b>[] src) {
+    <b>byte</b>[] b = <b>null</b>;
+    <b>int</b> i = indexOf("Content-Type: ".getBytes(), src, 0),
+        j = indexOf("&#92;r&#92;n&#92;r&#92;n".getBytes(), src, 0);
+
+    <b>if</b> (i &gt; 0) {
+      b = <b>new</b> <b>byte</b>[j - i - 14];
+      System.arraycopy(src, i + 14, b, 0, b.length);
+      type = <b>new</b> String(b);
+    }
+  }
+
+  <b>private</b> <b>void</b> setName(<b>byte</b>[] src) {
+    <b>try</b> {
+      <b>int</b> i = indexOf("; filename=&#92;"".getBytes(), src, 0),
+          j = indexOf("&#92;"&#92;r&#92;n".getBytes(), src, 0);
+
+      <b>if</b> (i &gt; 0) {
+        <b>byte</b>[] b = <b>new</b> <b>byte</b>[j - i - 12];
+        System.arraycopy(src, i + 12, b, 0, b.length);
+        name = <b>new</b> String(b, "UTF-8");
+      }
+    } <b>catch</b> (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  <b>private</b> <b>void</b> setData(<b>byte</b>[] src) {
+    <b>int</b> i = indexOf("&#92;r&#92;n&#92;r&#92;n".getBytes(), src, 0);
+    <b>byte</b>[] b = <b>new</b> <b>byte</b>[src.length - i - 4];
+    System.arraycopy(src, i + 4, b, 0, b.length);
+    data = b;
+  }
+
+  <b>private</b> <b>boolean</b> isField(String fld) {
+    <b>byte</b>[] b = <b>new</b> <b>byte</b>[indexOf("&#92;"".getBytes(), content, 38) - 38];
+    System.arraycopy(content, 38, b, 0, b.length);
+    <b>return</b> <b>new</b> String(b).equals(fld);
+  }
+
+  <b>private</b> <b>static</b> <b>int</b> indexOf(<b>byte</b>[] dest, <b>byte</b>[] src, <b>int</b> pos) {
+    <b>int</b> i, j;
+
+    <b>for</b> (i = pos; i &lt; src.length; i++) {
+      <b>for</b> (j = 0; j &lt; dest.length; j++) {
+        <b>if</b> (dest[j] != src[i + j]) {
+          <b>break</b>;
+        }
+      }
+      <b>if</b> (j &lt; dest.length) {
+        <b>continue</b>;
+      } <b>else</b> {
+        <b>return</b> i;
+      }
+    }
+
+    <b>return</b> -1;
+  }
+
+  <b>public</b> String getType() {
+    <b>return</b> type;
+  }
+
+  <b>public</b> String getName() {
+    <b>return</b> name;
+  }
+
+  <b>public</b> <b>byte</b>[] getData() {
+    <b>return</b> data;
+  }
+}
+</pre>
+</body>
+
+</html>
