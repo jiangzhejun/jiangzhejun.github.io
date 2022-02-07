@@ -1,0 +1,30 @@
+<html>
+
+<head>
+<link rel="stylesheet" href="../../../webook.css">
+<meta charset="utf-8">
+<title>自带Base64编码数据的批处理命令.bat - webook</title>
+</head>
+
+<body>
+<h1>自带Base64编码数据的批处理命令.bat</h1>
+<pre class="code_block" title="dos">
+@<b>echo</b> <b>off</b> &amp; title %~n0 - bi201903041404
+ 
+<b>if</b> <b>exist</b> "%1" (<b>cd</b> /d %~dp1) <b>else</b> exit
+certutil -encode "%~nx1" "%~n1.dat"
+ 
+<b>echo</b> <b>setlocal</b> <b>enabledelayedexpansion</b>^&amp;<b>cd</b> /d %%~dp0&gt;"%~n1.bat"
+<b>echo</b> <b>for</b> /l %%%%x <b>in</b> (1,1,9) <b>do</b> <b>set</b> bbid=!bbid!-!random!&gt;&gt;"%~n1.bat"
+<b>echo</b> <b>set</b> bbid=%%temp%%&#92;it$free%%bbid%%%~x1&gt;&gt;"%~n1.bat"
+<b>echo</b> certutil -decode "%%~n0.bat" %%bbid%%&gt;&gt;"%~n1.bat"
+<b>echo</b> <b>start</b> /wait %%bbid%%&gt;&gt;"%~n1.bat"
+<b>echo</b> <b>del</b> /f/q %%bbid%%&gt;&gt;"%~n1.bat"
+<b>echo</b> exit /b&gt;&gt;"%~n1.bat"
+ 
+<b>copy</b> "%~n1.bat"+"%~n1.dat"&amp;<b>del</b> "%~n1.dat"
+<b>call</b> "%~n1.bat"
+</pre>
+</body>
+
+</html>

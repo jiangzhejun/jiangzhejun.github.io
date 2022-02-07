@@ -1,0 +1,24 @@
+<html>
+
+<head>
+<link rel="stylesheet" href="../../../webook.css">
+<meta charset="utf-8">
+<title>显示或隐藏指定test文件夹.js - webook</title>
+</head>
+
+<body>
+<h1>显示或隐藏指定test文件夹.js</h1>
+<pre class="code_block" title="javascript">
+<b>var</b> CONST_HIDDEN = 2,
+fso = <b>new</b> ActiveXObject("Scripting.FileSystemObject"),
+folder = fso.GetFolder("test");
+ 
+<b>if</b>(folder.attributes &amp; CONST_HIDDEN) {
+  folder.attributes &amp;= ~CONST_HIDDEN;
+} <b>else</b> {
+  folder.attributes |= CONST_HIDDEN;
+}
+</pre>
+</body>
+
+</html>

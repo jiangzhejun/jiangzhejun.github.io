@@ -1,0 +1,30 @@
+<html>
+
+<head>
+<link rel="stylesheet" href="../../../webook.css">
+<meta charset="utf-8">
+<title>Windows家庭版开启组策略 - webook</title>
+</head>
+
+<body>
+<h1>Windows家庭版开启组策略</h1>
+<i>2021/3/5 北京</i>
+<br><br>
+新建文本文件，键入一下代码：
+<pre class="code_block" title="dos">
+@<b>echo</b> <b>off</b> &amp; title %~n0 - bi201907041144
+<b>set</b> dona=dism /online /norestart /add-package:
+<b>set</b> cwsp=%systemroot%&#92;servicing&#92;Packages
+pushd "%~dp0"
+
+<b>dir</b> /b %cwsp%&#92;Microsoft-Windows-GroupPolicy-ClientExtensions-Package~3*.mum&gt;$
+<b>dir</b> /b %cwsp%&#92;Microsoft-Windows-GroupPolicy-ClientTools-Package~3*.mum&gt;&gt;$
+<b>for</b> /f %%i <b>in</b> ('<b>findstr</b> /i . $ 2^&gt;<b>nul</b>') <b>do</b> %dona%"%cwsp%&#92;%%i"
+<b>del</b> /f/q $
+<b>pause</b>
+</pre>
+保存为批处理文件，以管理员身份运行。结束后Win+R输入 <div class="code_line">gpedit.msc</div> 启动“本地组策略编辑器”，如果报错重启系统即可。
+
+</body>
+
+</html>

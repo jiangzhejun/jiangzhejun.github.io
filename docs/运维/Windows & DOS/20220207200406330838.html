@@ -1,0 +1,54 @@
+<html>
+
+<head>
+<link rel="stylesheet" href="../../../webook.css">
+<meta charset="utf-8">
+<title>统计所有目录并生成网页报表.bat - webook</title>
+</head>
+
+<body>
+<h1>统计所有目录并生成网页报表.bat</h1>
+<pre class="code_block" title="dos">
+@<b>echo</b> <b>off</b> &amp; title %~n0 - bi20190412161435
+
+pushd %~dp0 &amp; <b>for</b> %%o <b>in</b> (.) <b>do</b> <b>set</b> title=%%~no
+<b>set</b> dest=index.html
+ 
+<b>echo</b> ^&lt;meta charset="gbk"^&gt;&gt;%dest%
+<b>echo</b> ^&lt;h1^&gt;%title%^&lt;/h1^&gt;&gt;&gt;%dest%
+<b>echo</b> ^&lt;table border="1" width="800"^&gt;&gt;&gt;%dest%
+<b>echo</b> ^&lt;tr bgcolor="silver"^&gt;&gt;&gt;%dest%
+<b>echo</b> ^&lt;td^&gt;目录名^&lt;/td^&gt;&gt;&gt;%dest%
+<b>echo</b> ^&lt;td^&gt;文件数^&lt;/td^&gt;&gt;&gt;%dest%
+<b>echo</b> ^&lt;td^&gt;字节数^&lt;/td^&gt;&gt;&gt;%dest%
+<b>echo</b> ^&lt;/tr^&gt;&gt;&gt;%dest%
+ 
+<b>for</b> /f "<b>delims</b>=" %%l <b>in</b> ('<b>dir</b> /ad /b') <b>do</b> (
+  <b>setlocal</b> <b>enabledelayedexpansion</b>
+  <b>call</b>:col "%%l"
+  <b>call</b>:row "%%l" !files! "!bytes!"
+  endlocal
+)
+ 
+<b>echo</b> ^&lt;/table^&gt;&gt;&gt;%dest%
+<b>echo</b> ^&lt;br^&gt;&gt;&gt;%dest%
+<b>echo</b> ^&lt;i^&gt;%<b>date</b>% %<b>time</b>%^&lt;/i^&gt;&gt;&gt;%dest%
+exit /b 0
+
+:row
+<b>echo</b> ^&lt;tr^&gt;&gt;&gt;%dest%
+<b>echo</b> ^&lt;td^&gt;%~1^&lt;/td^&gt;&gt;&gt;%dest%
+<b>echo</b> ^&lt;td^&gt;%~2^&lt;/td^&gt;&gt;&gt;%dest%
+<b>echo</b> ^&lt;td^&gt;%~3^&lt;/td^&gt;&gt;&gt;%dest%
+<b>echo</b> ^&lt;/tr^&gt;&gt;&gt;%dest%
+<b>goto</b>:eof
+
+:col
+<b>for</b> /f "<b>delims</b>=个文件字节 <b>tokens</b>=1,2" %%m <b>in</b> ('<b>dir</b> "%~1" /s ^|<b>findstr</b> 个文件') <b>do</b> (
+  <b>set</b> files=%%m
+  <b>set</b> bytes=%%n
+)
+</pre>
+</body>
+
+</html>
