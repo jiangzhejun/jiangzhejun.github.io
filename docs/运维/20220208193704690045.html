@@ -1,0 +1,31 @@
+<html>
+
+<head>
+<link rel="stylesheet" href="../../webook.css">
+<meta charset="utf-8">
+<title>bakit.bat - webook</title>
+</head>
+
+<body>
+<h1>bakit.bat</h1>
+<pre class="code_block" title="dos">
+@<b>echo</b> <b>off</b> &amp; title %~n0 - bi202102241045
+
+pushd %~1 &amp; <b>for</b> %%o <b>in</b> (.) <b>do</b> <b>set</b> src=%%~no
+<b>set</b> ymd=%<b>date</b>:~,4%%<b>date</b>:~5,2%%<b>date</b>:~8,2%
+<b>set</b> home=E:&#92;bibi&#92;bak
+
+<b>set</b> dest=%home%&#92;%src%_%ymd%.7z
+<b>set</b> params=-mx9
+
+<b>if</b> <b>exist</b> %src%.nobak (
+  <b>set</b> params=%params% -xr@%src%.nobak
+)
+
+forfiles /p %home% /m %src%_*.7z -d -30 /c "cmd /c <b>del</b> /f @<b>path</b>"
+7z a "%dest%" %params% %<b>cd</b>%&#92;*
+exit /b 0
+</pre>
+</body>
+
+</html>
