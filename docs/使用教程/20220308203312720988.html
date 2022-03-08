@@ -1,0 +1,42 @@
+<html>
+
+<head>
+<link rel="stylesheet" href="../../webook.css">
+<meta charset="utf-8">
+<title>Excel宏：表1重复行剪切至表2保存后另起一行.bas - webook</title>
+</head>
+
+<body>
+<h1>Excel宏：表1重复行剪切至表2保存后另起一行.bas</h1>
+<pre class="code_block" title="basic">
+Application.ScreenUpdating = <b>False</b>
+Sheet1.Activate
+<b>Dim</b> i, j <b>As</b> <b>Integer</b>
+<b>For</b> i = ActiveSheet.UsedRange.Rows.Count + 1 <b>To</b> 1 <b>Step</b> -1
+  <b>For</b> j = i - 1 <b>To</b> 1 <b>Step</b> -1
+    <b>Select</b> <b>Case</b> Cells(j, "B")
+    <b>Case</b> ""
+      Rows(j).Delete
+    <b>Case</b> Cells(2, "L")
+      Rows(j).Delete
+    <b>Case</b> Cells(i, "B")
+      Range("B" &amp; i, "H" &amp; i).Copy
+      Sheet2.Cells(Rows.Count, "B").<b>End</b>(xlUp).Offset(1, 0).PasteSpecial xlValues
+      Sheet2.UsedRange.ClearFormats
+      Rows(i).Delete
+      <b>Exit</b> <b>For</b>
+    <b>End</b> <b>Select</b>
+  <b>Next</b>
+<b>Next</b>
+Cells(Range("A1").CurrentRegion.<b>End</b>(xlDown) + 2, "B").<b>Select</b>
+Cells(ActiveCell.Row, "B") = Cells(2, "L")
+Cells(ActiveCell.Row, "D") = 1
+Cells(ActiveCell.Row, "G") = 1
+Cells(ActiveCell.Row, "H") = 1
+Cells(ActiveCell.Row, "I") = Cells(3, "L")
+ThisWorkbook.Save
+Application.ScreenUpdating = <b>True</b>
+</pre>
+</body>
+
+</html>

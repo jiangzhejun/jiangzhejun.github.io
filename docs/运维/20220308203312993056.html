@@ -1,0 +1,525 @@
+<html>
+
+<head>
+<link rel="stylesheet" href="../../webook.css">
+<meta charset="utf-8">
+<title>Rclone+WinFSP挂载网盘为本地路径 - webook</title>
+</head>
+
+<body>
+<h1>Rclone+WinFSP挂载网盘为本地路径</h1>
+<i>2021/3/5 - 10 北京</i>
+<br><br>
+<h2>（一）下载及安装</h2>
+<h3>WinFSP</h3>
+这是一款Windows平台下的文件系统代理软件（Windows File System Proxy），<a href="https://github.com/billziss-gh/winfsp" target="_self">官网</a>下载后是一个名为winfsp-1.8.20304.msi的安装包，没什么好说的，双击运行一路回车便是。
+<br><br>
+<h3>Rclone</h3>
+这是一个命令行工具，支持在不同对象存储、网盘间同步、上传、下载数据。<a href="https://rclone.org" target="_self">官网</a>下载对应的32位或64位压缩包，解压到任意目录均可。主程序为rclone.exe，可以直接放到C:\Windows\System32系统文件夹，否则需要将所在目录加入到环境变量PATH。
+<br><br>
+接下来打开CMD或PowerShell，确认rclone是否安装成功。
+<pre class="code_block" title="dos">
+Windows PowerShell
+版权所有 (C) Microsoft Corporation。保留所有权利。
+
+PS C:&#92;Users&#92;bi4076&gt; rclone --version
+rclone v1.54.0
+- os/arch: windows/amd64
+- go version: go1.15.7
+</pre>
+<br><br>
+<h2>（二）FTP协议</h2>
+<h3>1. 进入配置</h3>
+<pre class="code_block" title="dos">
+PS C:&#92;Users&#92;bi4076&gt; rclone config
+No remotes found - make a new one
+n) New remote
+s) <b>Set</b> configuration password
+q) Quit config
+</pre>
+<br><br>
+<h3>2. 选择n新建项目并命名</h3>
+<pre class="code_block" title="dos">
+n/s/q&gt; n
+name&gt; bkftp
+</pre>
+<br><br>
+<h3>3. 选择13</h3>
+<pre class="code_block" title="dos">
+<b>Type</b> of storage to configure.
+Enter a string value. Press Enter <b>for</b> the default ("").
+Choose a number from below, or <b>type</b> <b>in</b> your own value
+ 1 / 1Fichier
+   &#92; "fichier"
+ 2 / Alias <b>for</b> an existing remote
+   &#92; "alias"
+ 3 / Amazon Drive
+   &#92; "amazon cloud drive"
+ 4 / Amazon S3 Compliant Storage Providers including AWS, Alibaba, Ceph, Digital Ocean, Dreamhost, IBM COS, Minio, and Tencent COS
+   &#92; "s3"
+ 5 / Backblaze B2
+   &#92; "b2"
+ 6 / Box
+   &#92; "box"
+ 7 / Cache a remote
+   &#92; "cache"
+ 8 / Citrix Sharefile
+   &#92; "sharefile"
+ 9 / Compress a remote
+   &#92; "compress"
+10 / Dropbox
+   &#92; "dropbox"
+11 / Encrypt/Decrypt a remote
+   &#92; "crypt"
+12 / Enterprise File Fabric
+   &#92; "filefabric"
+13 / <b>FTP</b> Connection
+   &#92; "<b>ftp</b>"
+14 / Google Cloud Storage (this is not Google Drive)
+   &#92; "google cloud storage"
+15 / Google Drive
+   &#92; "drive"
+16 / Google Photos
+   &#92; "google photos"
+17 / Hadoop distributed file system
+   &#92; "hdfs"
+18 / Hubic
+   &#92; "hubic"
+19 / <b>In</b> memory object storage system.
+   &#92; "memory"
+20 / Jottacloud
+   &#92; "jottacloud"
+21 / Koofr
+   &#92; "koofr"
+22 / Local Disk
+   &#92; "local"
+23 / Mail.ru Cloud
+   &#92; "mailru"
+24 / Mega
+   &#92; "mega"
+25 / Microsoft Azure Blob Storage
+   &#92; "azureblob"
+26 / Microsoft OneDrive
+   &#92; "onedrive"
+27 / OpenDrive
+   &#92; "opendrive"
+28 / OpenStack Swift (Rackspace Cloud Files, Memset Memstore, OVH)
+   &#92; "swift"
+29 / Pcloud
+   &#92; "pcloud"
+30 / Put.io
+   &#92; "putio"
+31 / QingCloud Object Storage
+   &#92; "qingstor"
+32 / SSH/SFTP Connection
+   &#92; "sftp"
+33 / Sugarsync
+   &#92; "sugarsync"
+34 / Tardigrade Decentralized Cloud Storage
+   &#92; "tardigrade"
+35 / Transparently chunk/split large files
+   &#92; "chunker"
+36 / Union merges the contents of several upstream fs
+   &#92; "union"
+37 / Webdav
+   &#92; "webdav"
+38 / Yandex Disk
+   &#92; "yandex"
+39 / Zoho
+   &#92; "zoho"
+40 / http Connection
+   &#92; "http"
+41 / premiumize.me
+   &#92; "premiumizeme"
+42 / seafile
+   &#92; "seafile"
+Storage&gt; 13
+</pre>
+<br><br>
+<h3>4. 填写远程主机名或IP地址</h3>
+<pre class="code_block" title="dos">
+** See help <b>for</b> <b>ftp</b> backend <b>at</b>: https://rclone.org/<b>ftp</b>/ **
+
+<b>FTP</b> host to connect to
+Enter a string value. Press Enter <b>for</b> the default ("").
+Choose a number from below, or <b>type</b> <b>in</b> your own value
+ 1 / Connect to <b>ftp</b>.example.com
+   &#92; "<b>ftp</b>.example.com"
+host&gt; XXX.XXX.XXX.XXX
+</pre>
+<br><br>
+<h3>5. 填写FTP用户名</h3>
+<pre class="code_block" title="dos">
+<b>FTP</b> username, leave blank <b>for</b> current username, DESKTOP-FD6PU90&#92;bi4076
+Enter a string value. Press Enter <b>for</b> the default ("").
+user&gt; XXXXX
+</pre>
+<br><br>
+<h3>6. 填写端口（默认回车即可）</h3>
+<pre class="code_block" title="dos">
+<b>FTP</b> port, leave blank to use default (21)
+Enter a string value. Press Enter <b>for</b> the default ("").
+port&gt;
+</pre>
+<br><br>
+<h3>7. 填写密码并确认</h3>
+<pre class="code_block" title="dos">
+<b>FTP</b> password
+y) Yes <b>type</b> <b>in</b> my own password
+g) Generate random password
+y/g&gt; y
+Enter the password:
+password:
+Confirm the password:
+password:
+</pre>
+<br><br>
+<h3>8. 使用隐式FTPS（默认回车即可）</h3>
+<pre class="code_block" title="dos">
+Use Implicit FTPS (<b>FTP</b> over TLS)
+When using implicit <b>FTP</b> over TLS the client connects using TLS
+right from the <b>start</b> which breaks compatibility with
+non-TLS-aware servers. This is usually served over port 990 rather
+than port 21. Cannot be used <b>in</b> combination with explicit <b>FTP</b>.
+Enter a boolean value (true or false). Press Enter <b>for</b> the default ("false").
+tls&gt;
+</pre>
+<br><br>
+<h3>9. 使用显式FTPS（默认回车即可）</h3>
+<pre class="code_block" title="dos">
+Use Explicit FTPS (<b>FTP</b> over TLS)
+When using explicit <b>FTP</b> over TLS the client explicitly requests
+security from the server <b>in</b> order to upgrade a plain text connection
+to an encrypted one. Cannot be used <b>in</b> combination with implicit <b>FTP</b>.
+Enter a boolean value (true or false). Press Enter <b>for</b> the default ("false").
+explicit_tls&gt;
+</pre>
+<br><br>
+<h3>10. 高级配置（默认回车即可）</h3>
+<pre class="code_block" title="dos">
+Edit advanced config? (y/n)
+y) Yes
+n) No (default)
+y/n&gt;
+</pre>
+<br><br>
+<h3>11. 查看远程配置（默认回车即可）</h3>
+<pre class="code_block" title="dos">
+Remote config
+--------------------
+[bkftp]
+<b>type</b> = <b>ftp</b>
+host = XXX.XXX.XXX.XXX
+user = XXXXX
+pass = *** ENCRYPTED ***
+--------------------
+y) Yes this is OK (default)
+e) Edit this remote
+d) Delete this remote
+y/e/d&gt;
+</pre>
+<br><br>
+<h3>12. 选择q退出当前项目</h3>
+<pre class="code_block" title="dos">
+Current remotes:
+
+Name                 <b>Type</b>
+====                 ====
+bkftp                <b>ftp</b>
+
+e) Edit existing remote
+n) New remote
+d) Delete remote
+r) Rename remote
+c) <b>Copy</b> remote
+s) <b>Set</b> configuration password
+q) Quit config
+e/n/d/r/c/s/q&gt; q
+</pre>
+<br><br>
+<h2> (三）OneDrive协议</h2>
+<h3>1. 选择n新建项目并命名</h3>
+<pre class="code_block" title="dos">
+PS C:&#92;Users&#92;bi4076&gt; rclone config
+Current remotes:
+
+Name                 <b>Type</b>
+====                 ====
+bkftp                <b>ftp</b>
+
+e) Edit existing remote
+n) New remote
+d) Delete remote
+r) Rename remote
+c) <b>Copy</b> remote
+s) <b>Set</b> configuration password
+q) Quit config
+e/n/d/r/c/s/q&gt; n
+name&gt; onedrive
+</pre>
+<br><br>
+<h3>2. 选择26</h3>
+<pre class="code_block" title="dos">
+<b>Type</b> of storage to configure.
+Enter a string value. Press Enter <b>for</b> the default ("").
+Choose a number from below, or <b>type</b> <b>in</b> your own value
+ 1 / 1Fichier
+   &#92; "fichier"
+ 2 / Alias <b>for</b> an existing remote
+   &#92; "alias"
+ 3 / Amazon Drive
+   &#92; "amazon cloud drive"
+ 4 / Amazon S3 Compliant Storage Providers including AWS, Alibaba, Ceph, Digital Ocean, Dreamhost, IBM COS, Minio, and Tencent COS
+   &#92; "s3"
+ 5 / Backblaze B2
+   &#92; "b2"
+ 6 / Box
+   &#92; "box"
+ 7 / Cache a remote
+   &#92; "cache"
+ 8 / Citrix Sharefile
+   &#92; "sharefile"
+ 9 / Compress a remote
+   &#92; "compress"
+10 / Dropbox
+   &#92; "dropbox"
+11 / Encrypt/Decrypt a remote
+   &#92; "crypt"
+12 / Enterprise File Fabric
+   &#92; "filefabric"
+13 / <b>FTP</b> Connection
+   &#92; "<b>ftp</b>"
+14 / Google Cloud Storage (this is not Google Drive)
+   &#92; "google cloud storage"
+15 / Google Drive
+   &#92; "drive"
+16 / Google Photos
+   &#92; "google photos"
+17 / Hadoop distributed file system
+   &#92; "hdfs"
+18 / Hubic
+   &#92; "hubic"
+19 / <b>In</b> memory object storage system.
+   &#92; "memory"
+20 / Jottacloud
+   &#92; "jottacloud"
+21 / Koofr
+   &#92; "koofr"
+22 / Local Disk
+   &#92; "local"
+23 / Mail.ru Cloud
+   &#92; "mailru"
+24 / Mega
+   &#92; "mega"
+25 / Microsoft Azure Blob Storage
+   &#92; "azureblob"
+26 / Microsoft OneDrive
+   &#92; "onedrive"
+27 / OpenDrive
+   &#92; "opendrive"
+28 / OpenStack Swift (Rackspace Cloud Files, Memset Memstore, OVH)
+   &#92; "swift"
+29 / Pcloud
+   &#92; "pcloud"
+30 / Put.io
+   &#92; "putio"
+31 / QingCloud Object Storage
+   &#92; "qingstor"
+32 / SSH/SFTP Connection
+   &#92; "sftp"
+33 / Sugarsync
+   &#92; "sugarsync"
+34 / Tardigrade Decentralized Cloud Storage
+   &#92; "tardigrade"
+35 / Transparently chunk/split large files
+   &#92; "chunker"
+36 / Union merges the contents of several upstream fs
+   &#92; "union"
+37 / Webdav
+   &#92; "webdav"
+38 / Yandex Disk
+   &#92; "yandex"
+39 / Zoho
+   &#92; "zoho"
+40 / http Connection
+   &#92; "http"
+41 / premiumize.me
+   &#92; "premiumizeme"
+42 / seafile
+   &#92; "seafile"
+Storage&gt; 26
+</pre>
+<br><br>
+<h3>3. 客户端ID（默认回车即可）</h3>
+<pre class="code_block" title="dos">
+** See help <b>for</b> onedrive backend <b>at</b>: https://rclone.org/onedrive/ **
+
+OAuth Client Id
+Leave blank normally.
+Enter a string value. Press Enter <b>for</b> the default ("").
+client_id&gt;
+OAuth Client Secret
+Leave blank normally.
+Enter a string value. Press Enter <b>for</b> the default ("").
+client_secret&gt;
+</pre>
+<br><br>
+<h3>4. 客户端加密（默认回车即可）</h3>
+<pre class="code_block" title="dos">
+OAuth Client Secret
+Leave blank normally.
+Enter a string value. Press Enter <b>for</b> the default ("").
+client_secret&gt;
+</pre>
+<br><br>
+<h3>5. 选择国际版</h3>
+<pre class="code_block" title="dos">
+Choose national cloud region <b>for</b> OneDrive.
+Enter a string value. Press Enter <b>for</b> the default ("global").
+Choose a number from below, or <b>type</b> <b>in</b> your own value
+ 1 / Microsoft Cloud Global
+   &#92; "global"
+ 2 / Microsoft Cloud <b>for</b> US Government
+   &#92; "us"
+ 3 / Microsoft Cloud Germany
+   &#92; "de"
+ 4 / Azure and Office 365 operated by 21Vianet <b>in</b> China
+   &#92; "cn"
+region&gt; 1
+</pre>
+<br><br>
+<h3>6. 高级配置（默认回车即可）</h3>
+<pre class="code_block" title="dos">
+Edit advanced config? (y/n)
+y) Yes
+n) No (default)
+y/n&gt;
+</pre>
+<br><br>
+<h3>7. 远程配置</h3>
+<pre class="code_block" title="dos">
+Remote config
+Use auto config?
+ * Say Y <b>if</b> not sure
+ * Say N <b>if</b> you are working <b>on</b> a remote or headless machine
+y) Yes (default)
+n) No
+y/n&gt;
+<b>If</b> your browser doesn't open automatically go to the following link: http://127.0.0.1:53682/auth?state=gFtdebuGpevG_JKLamRaQQ
+Log <b>in</b> and authorize rclone <b>for</b> access
+Waiting <b>for</b> code...
+</pre>
+此时会跳转至网页端验证，输入正确的Microsoft帐户和密码并取得授权后返回。
+<br><br>
+<h3>8. 选择1（个人或商业版）</h3>
+<pre class="code_block" title="dos">
+Got code
+Choose a number from below, or <b>type</b> <b>in</b> an existing value
+ 1 / OneDrive Personal or Business
+   &#92; "onedrive"
+ 2 / Root Sharepoint site
+   &#92; "sharepoint"
+ 3 / Sharepoint site name or URL (e.g. mysite or https://contoso.sharepoint.com/sites/mysite)
+   &#92; "url"
+ 4 / Search <b>for</b> a Sharepoint site
+   &#92; "search"
+ 5 / <b>Type</b> <b>in</b> driveID (advanced)
+   &#92; "driveid"
+ 6 / <b>Type</b> <b>in</b> SiteID (advanced)
+   &#92; "siteid"
+ 7 / Sharepoint server-relative <b>path</b> (advanced, e.g. /teams/hr)
+   &#92; "<b>path</b>"
+Your <b>choice</b>&gt; 1
+</pre>
+<br><br>
+<h3>9. 选择0（个人版）</h3>
+<pre class="code_block" title="dos">
+Found 1 drives, please select the one you want to use:
+0:  (personal) id=c8fd9acfe8cfd190
+Chose drive to use:&gt; 0
+</pre>
+<br><br>
+<h3>10. 确认配置（默认回车即可）</h3>
+<pre class="code_block" title="dos">
+Found drive 'root' of <b>type</b> 'personal', URL: https://onedrive.live.com/?cid=c8fd9acfe8cfd190
+Is that okay?
+y) Yes (default)
+n) No
+y/n&gt;
+</pre>
+<br><br>
+<h3>11. 查看远程配置</h3>
+<pre class="code_block" title="dos">
+[onedrive]
+<b>type</b> = onedrive
+region = global
+token = {"access_token":"*密钥省略*","expiry":"2021-03-09T18:33:36.3416896+08:00"}
+drive_id = c8fd9acfe8cfd190
+drive_type = personal
+--------------------
+y) Yes this is OK (default)
+e) Edit this remote
+d) Delete this remote
+y/e/d&gt;
+</pre>
+<br><br>
+<h3>12. 选择q退出当前项目</h3>
+<pre class="code_block" title="dos">
+Current remotes:
+
+Name                 <b>Type</b>
+====                 ====
+bkftp                <b>ftp</b>
+onedrive             onedrive
+
+e) Edit existing remote
+n) New remote
+d) Delete remote
+r) Rename remote
+c) <b>Copy</b> remote
+s) <b>Set</b> configuration password
+q) Quit config
+e/n/d/r/c/s/q&gt; q
+</pre>
+<br><br>
+<h2>（四）挂载及卸载</h2>
+<h3>挂载为磁盘</h3>
+<pre class="code_block" title="dos">
+rclone mount 配置项目名称:/ 盘符: --cache-<b>dir</b> 缓存路径 --vfs-cache-mode writes
+</pre>
+<br><br>
+<h3>挂载为目录</h3>
+<pre class="code_block" title="dos">
+rclone mount 配置项目名称:/ 挂载路径&#92;目标文件夹 --cache-<b>dir</b> 缓存路径 --vfs-cache-mode writes
+</pre>
+<br><br>
+注：
+<ol>
+	<li>目标路径不能为磁盘根目录</li>
+	<li>如果目标文件夹存在会导致挂载失败</li>
+</ol>
+<br><br>
+<h3>自动挂载</h3>
+上述方式必须保持命令行窗口在前台运行，无法自动挂载并在后台驻留。因此可编写如下VBS脚本，放置于启动文件夹，使其开机自动挂载。
+<br><br>
+<pre class="code_block" title="basic">
+<b>Option</b> Explicit
+<b>Rem</b> RClone Mount - bi202103041208
+<b>Dim</b> cdir, cmode, order, WS
+
+<b>On</b> <b>Error</b> <b>Resume</b> <b>Next</b>
+cdir = " --cache-dir 缓存路径"
+cmode = " --vfs-cache-mode writes"
+order = "rclone mount "
+
+<b>Set</b> WS = Wscript.<b>CreateObject</b>("Wscript.Shell")
+WS.Run order &amp; "配置项目名称:/ 盘符:" &amp; cdir &amp; cmode, 0
+<b>Set</b> WS = <b>Nothing</b>
+</pre>
+<br><br>
+<h3>卸载</h3>
+可运行 <div class="code_line">taskkill /im rclone.exe /f</div> 命令，或在任务管理器手动关闭对应的进程。
+
+</body>
+
+</html>
