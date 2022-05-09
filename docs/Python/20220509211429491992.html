@@ -1,0 +1,29 @@
+<html>
+
+<head>
+<link rel="stylesheet" href="../../webook.css">
+<meta charset="utf-8">
+<title>iso7064-1983mod11-2.py - webook</title>
+</head>
+
+<body>
+<h1>iso7064-1983mod11-2.py</h1>
+<pre class="code_block" title="python">
+# coding: utf-8 / 身份证效验 - bi202204241025511
+
+<b>import</b> datetime, sys
+
+<b>def</b> check(id):
+    a = <b>lambda</b> b, c : b * c # 求积
+    digit = len(id) + 1 # 位数
+    mf = tuple(2 ** (digit - i) % 11 <b>for</b> i <b>in</b> range(1, digit)) # 列出乘数因子
+    n = (12 - sum(list(map(a, map(int, id), mf))) % 11) % 11 # 效验码
+    <b>return</b> id + ('X' <b>if</b> n == 10 <b>else</b> str(n))
+
+<b>if</b> len(sys.argv) &gt; 1:
+    <b>for</b> a <b>in</b> sys.argv[1:]:
+        print(check(a))
+</pre>
+</body>
+
+</html>
