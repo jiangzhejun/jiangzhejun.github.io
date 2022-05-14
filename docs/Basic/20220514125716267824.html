@@ -1,0 +1,28 @@
+<html>
+
+<head>
+<link rel="stylesheet" href="../../webook.css">
+<meta charset="utf-8">
+<title>Post-it.vbs - webook</title>
+</head>
+
+<body>
+<h1>Post-it.vbs</h1>
+<pre class="code_block" title="basic">
+<b>Dim</b> Form, TextBox '命令行第一个参数拷贝至剪贴板 - bi202203241359
+
+<b>If</b> WScript.Arguments.Count &gt; 0 <b>Then</b>
+    <b>Set</b> Form = <b>CreateObject</b>("Forms.Form.1")
+        <b>Set</b> TextBox = Form.Controls.Add("Forms.TextBox.1").<b>Object</b>
+            TextBox.MultiLine = <b>True</b>
+            TextBox.Text = WScript.Arguments(0)
+            TextBox.SelStart = 0
+            TextBox.SelLength = TextBox.TextLength
+            TextBox.Copy
+        <b>Set</b> TextBox = <b>Nothing</b>
+    <b>Set</b> Form = <b>Nothing</b>
+<b>End</b> <b>If</b>
+</pre>
+</body>
+
+</html>
