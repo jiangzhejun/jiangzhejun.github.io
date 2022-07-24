@@ -1,0 +1,48 @@
+<html>
+
+<head>
+<link rel="stylesheet" href="../../webook.css">
+<meta charset="utf-8">
+<title>中文地址拆分演示.py - webook</title>
+</head>
+
+<body>
+<h1>中文地址拆分演示.py</h1>
+<pre class="code_block" title="python">
+# coding: utf-8 / 中文地址拆分演示 - bi202207201359
+
+<b>import</b> cpca, sys
+
+<b>if</b> len(sys.argv) &gt; 1:
+    df = cpca.transform(sys.argv[1:])
+    <b>for</b> row <b>in</b> df.itertuples():
+        print(getattr(row, '省'), getattr(row, '市'), getattr(row, '区'), getattr(row, '地址'))
+
+''' 错误1
+ModuleNotFoundError: No module named 'ahocorasick'
+下载安装 pyahocorasick-1.4.4-cp310-cp310-win_amd64.whl
+'''
+
+''' 错误2
+ModuleNotFoundError: No module named 'pandas'
+下载安装 pandas-1.4.3-cp310-cp310-win_amd64.whl
+'''
+
+''' 错误3
+ImportError: Unable to <b>import</b> required dependencies:
+numpy: No module named 'numpy'
+下载安装 numpy-1.23.1-cp310-cp310-win_amd64.whl
+pytz: No module named 'pytz'
+下载安装 pytz-2022.1-py2.py3-none-any.whl
+dateutil: No module named 'dateutil'
+下载安装 python_dateutil-2.8.2-py2.py3-none-any.whl
+'''
+
+''' 错误4
+ModuleNotFoundError: No module named 'six'
+下载安装 six-1.16.0-py2.py3-none-any.whl
+'''
+</pre>
+</body>
+
+</html>
