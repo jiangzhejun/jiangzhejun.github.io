@@ -1,0 +1,30 @@
+<html>
+
+<head>
+<link rel="stylesheet" href="../../../webook.css">
+<meta charset="utf-8">
+<title>Windows手动安装Embed版Python - webook</title>
+</head>
+
+<body>
+<h1>Windows手动安装Embed版Python</h1>
+<i>2022.7.27 北京</i>
+<br><br>
+<ol>
+	<li>官网下载python-3.10.5-embed-amd64.zip并解压缩到任意路径</li>
+	<li>安装目录创建packages子目录 把第三方包统统放进去</li>
+	<li>修改python310._pth 将packages写入第二行</li>
+</ol>
+<br><br>
+<pre class="code_block" title="">
+python310.zip
+packages
+.
+
+# Uncomment to run site.main() automatically
+# import site
+</pre>
+
+</body>
+
+</html>
