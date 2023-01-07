@@ -1,0 +1,86 @@
+<html>
+
+<head>
+<link rel="stylesheet" href="../../webook.css">
+<meta charset="utf-8">
+<title>C语言参考sprintf实现的字符串拼接工具 - webook</title>
+</head>
+
+<body>
+<h1>C语言参考sprintf实现的字符串拼接工具</h1>
+<i>2023.1.7 北京</i>
+<br><br>
+因为实际开发中对字符串拼接的需求，参考库函数sprintf源码，结合strcpy、strcat，开发了joinf小工具。除了单字符、字符串以外，还支持数字（整数、实数）的拼接。另外，通过自己的代码实现了对不定参数的处理。
+<br><br>
+<pre class="code_block" title="c">
+<b>void</b> _append_d(<b>char</b> *buff, <b>double</b> num) {
+	<b>char</b> c[255] = {0}, *p = c;
+	<b>if</b> (num &lt; 0) {
+		*buff++ = '-';
+		num = -num;
+	}
+	*p++;
+	<b>int</b> i = (<b>int</b>)num, j, k = 4;
+	<b>if</b> (j = (<b>int</b>)((num - i) * 10000 + 0.5)) {
+		<b>while</b> (!(j % 10)) {
+			j /= 10;
+			k--;
+		}
+		<b>while</b> (k--) {
+			*p++ = j % 10 + '0';
+			j /= 10;
+		}
+		*p++ = '.';
+	}
+	<b>while</b> (i &gt;= 10) {
+		*p++ = i % 10 + '0';
+		i /= 10;
+	}
+	*p++ = i + '0';
+	<b>while</b> (*buff++ = *--p);
+}
+
+<b>void</b> _append_s(<b>char</b> *buff, <b>const</b> <b>char</b> *str) {
+	<b>while</b> (*buff++ = *str++);
+}
+
+<b>char</b> *joinf(<b>const</b> <b>char</b> *fmt, ...) {
+	<b>static</b> <b>char</b> buff[999] = {0};
+	<b>char</b> *b = buff, c, *p;
+	p = (<b>char</b> *)&amp;fmt + <b>sizeof</b>(fmt);
+	<b>while</b> (*fmt) {
+		c = *fmt++;
+		<b>if</b> (c == '%') {
+			<b>switch</b> (c = *fmt++) {
+			<b>case</b> 'c':
+				*b++ = *(<b>char</b>*)p;
+				p += <b>sizeof</b>(fmt);
+				<b>break</b>;
+			<b>case</b> 'd':
+				_append_d(b, *(<b>double</b>*)p);
+				p += <b>sizeof</b>(fmt);
+				<b>break</b>;
+			<b>case</b> 'i':
+				_append_d(b, *(<b>int</b>*)p + 0.0);
+				p += <b>sizeof</b>(fmt);
+				<b>break</b>;
+			<b>case</b> 's':
+				_append_s(b, *(<b>char</b>**)p);
+				p += <b>sizeof</b>(fmt);
+				<b>break</b>;
+			<b>default</b>:
+				*b++ = c;
+			}
+		} <b>else</b> {
+			<b>while</b> (*b) b++;
+			*b++ = c;
+		}
+	}
+	p = 0;
+	<b>return</b> buff;
+}
+</pre>
+
+</body>
+
+</html>
