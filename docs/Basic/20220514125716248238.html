@@ -17,7 +17,7 @@
   <b>Set</b> Regex = <b>New</b> RegExp
       Regex.Pattern = rgx
       Regex.IgnoreCase = <b>True</b>
-      Regex.<b>Global</b> = <b>False</b>
+      Regex.Global = <b>False</b>
     <b>Set</b> Matches = Regex.Execute(src)
       <b>For</b> <b>Each</b> Match <b>in</b> Matches
         Value = Match.Value
@@ -31,14 +31,14 @@
   Randomize
   <b>Dim</b> Words(8)
   Words(0) = "bi"
-  Words(1) = <b>Year</b>(<b>Now</b>)
-  Words(2) = <b>Right</b>("0" &amp; <b>Month</b>(<b>Now</b>), 2)
-  Words(3) = <b>Right</b>("0" &amp; <b>Day</b>(<b>Now</b>), 2)
-  Words(4) = <b>Right</b>("0" &amp; <b>Hour</b>(<b>Now</b>), 2)
-  Words(5) = <b>Right</b>("0" &amp; <b>Minute</b>(<b>Now</b>), 2)
-  Words(6) = <b>Right</b>("0" &amp; <b>Second</b>(<b>Now</b>), 2)
-  Words(7) = <b>Int</b>(((999 - 100 + 1) * <b>Rnd</b>) + 100)
-  signature = <b>Join</b>(Words, "")
+  Words(1) = Year(Now)
+  Words(2) = Right("0" &amp; Month(Now), 2)
+  Words(3) = Right("0" &amp; Day(Now), 2)
+  Words(4) = Right("0" &amp; Hour(Now), 2)
+  Words(5) = Right("0" &amp; Minute(Now), 2)
+  Words(6) = Right("0" &amp; Second(Now), 2)
+  Words(7) = Int(((999 - 100 + 1) * Rnd) + 100)
+  signature = Join(Words, "")
 <b>End</b> <b>Function</b>
 
 <b>Set</b> Args = WScript.Arguments
@@ -49,7 +49,7 @@
 
 <b>Sub</b> shortcut(path)
   name = extract("^[^&#92;.]+", extract("[^&#92;&#92;]+$", path))
-  <b>Set</b> co = WScript.<b>CreateObject</b>("WScript.Shell")
+  <b>Set</b> co = WScript.CreateObject("WScript.Shell")
     <b>Set</b> cs = co.CreateShortcut(co.SpecialFolders("Desktop") &amp; "&#92;" &amp; name &amp; ".lnk")
       cs.Description = signature
       cs.IconLocation = path &amp; ", 0"

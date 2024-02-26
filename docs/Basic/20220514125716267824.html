@@ -12,7 +12,7 @@
 <b>Dim</b> Form, TextBox '命令行第一个参数拷贝至剪贴板 - bi202203241359
 
 <b>If</b> WScript.Arguments.Count &gt; 0 <b>Then</b>
-    <b>Set</b> Form = <b>CreateObject</b>("Forms.Form.1")
+    <b>Set</b> Form = CreateObject("Forms.Form.1")
         <b>Set</b> TextBox = Form.Controls.Add("Forms.TextBox.1").<b>Object</b>
             TextBox.MultiLine = <b>True</b>
             TextBox.Text = WScript.Arguments(0)

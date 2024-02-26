@@ -11,7 +11,7 @@
 <pre class="code_block" title="basic">
 Application.ScreenUpdating = <b>False</b>
 Sheet1.Activate
-<b>Dim</b> i, j <b>As</b> <b>Integer</b>
+<b>Dim</b> i, j As <b>Integer</b>
 <b>For</b> i = ActiveSheet.UsedRange.Rows.Count + 1 <b>To</b> 1 <b>Step</b> -1
   <b>For</b> j = i - 1 <b>To</b> 1 <b>Step</b> -1
     <b>Select</b> <b>Case</b> Cells(j, "B")

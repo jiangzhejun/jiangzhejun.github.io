@@ -512,7 +512,7 @@ cdir = " --cache-dir 缓存路径"
 cmode = " --vfs-cache-mode writes"
 order = "rclone mount "
 
-<b>Set</b> WS = Wscript.<b>CreateObject</b>("Wscript.Shell")
+<b>Set</b> WS = Wscript.CreateObject("Wscript.Shell")
 WS.Run order &amp; "配置项目名称:/ 盘符:" &amp; cdir &amp; cmode, 0
 <b>Set</b> WS = <b>Nothing</b>
 </pre>

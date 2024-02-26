@@ -27,7 +27,7 @@ pushd %~dp0 &amp; <b>for</b> %%o <b>in</b> (.) <b>do</b> <b>set</b> title=%%~no
   <b>setlocal</b> <b>enabledelayedexpansion</b>
   <b>call</b>:col "%%l"
   <b>call</b>:row "%%l" !files! "!bytes!"
-  endlocal
+  <b>endlocal</b>
 )
  
 <b>echo</b> ^&lt;/table^&gt;&gt;&gt;%dest%
