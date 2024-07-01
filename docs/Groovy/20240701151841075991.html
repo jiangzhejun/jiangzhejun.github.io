@@ -1,0 +1,38 @@
+<html>
+
+<head>
+<link rel="stylesheet" href="../../webook.css">
+<meta charset="utf-8">
+<title>判断加班类型.groovy - webook</title>
+</head>
+
+<body>
+<h1>判断加班类型.groovy</h1>
+<pre class="code_block" title="groovy">
+java.text.SimpleDateFormat sdf1 = <b>new</b> java.text.SimpleDateFormat("yyyy-MM-dd");
+java.text.SimpleDateFormat sdf2 = <b>new</b> java.text.SimpleDateFormat("yyyy-MM-dd HH:mm");
+java.util.Date d1 = sdf2.parse(param[0]);
+java.util.Date d2 = sdf2.parse(param[1]);
+java.util.Date d3 = sdf2.parse(sdf1.parse(param[0]) + " 00:00");
+java.util.Date d4 = sdf2.parse(sdf1.parse(param[0]) + " 05:59");
+java.util.Date d5 = sdf2.parse(sdf1.parse(param[0]) + " 06:01");
+java.util.Date d6 = sdf2.parse(sdf1.parse(param[0]) + " 19:59");
+java.util.Date d7 = sdf2.parse(sdf1.parse(param[0]) + " 20:01");
+java.util.Date d8 = sdf2.parse(sdf1.parse(param[0]) + " 23:59");
+java.util.Calendar c = <b>new</b> GregorianCalendar();
+
+c.setTime(d5);
+c.add(c.DATE, 1);
+java.util.Date d9 = c.getTime();
+
+<b>if</b> (d1.after(d4) &amp;&amp; d2.before(d7)) {
+  <b>return</b> "平时加班";
+} <b>else</b> <b>if</b> (d1.after(d6) &amp;&amp; d2.before(d9) || d1.after(d3) &amp;&amp; d2.before(d5)) {
+  <b>return</b> "夜间加班";
+} <b>else</b> {
+  <b>return</b> "跨越加班";
+}
+</pre>
+</body>
+
+</html>
