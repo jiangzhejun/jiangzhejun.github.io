@@ -1,0 +1,51 @@
+<html>
+
+<head>
+<link rel="stylesheet" href="../../webook.css">
+<meta charset="utf-8">
+<title>SCP命令详解 - webook</title>
+</head>
+
+<body>
+<h1>SCP命令详解</h1>
+<i>2024.8.1 北京</i>
+<br><br>
+SCP全称是Secure Copy Protocol，它是一个命令行工具，允许用户在两个主机之间安全的复制文件和目录。SCP通过SSH连接加密传输，确保数据传输过程中不会被攻击。简单、安全，在大多数Unix系统下都是预安装的，Windows 10以上系统也已内置。
+<br><br>
+SCP默认加密算法是AES-128。复制相同文件时，会默认进行覆盖，没有任何的警告提示。复制大文件时，终端可能会睡眠终止传输过程，建议使用tmux来维持会话。
+<br><br>
+<div class="code_line">scp 参数表 源文件列表 用户名@目标主机地址:文件路径</div>
+<br><br>
+<h2>不传值</h2>
+<ul>
+	<li>-1 强制使用SSH1协议</li>
+	<li>-2 强制使用SSH2协议</li>
+	<li>-3 两台远程主机之间的副本通过本地主机传输</li>
+	<li>-4 使用IPv4</li>
+	<li>-6 使用IPv6</li>
+	<li>-A 允许将ssh代理转发到远程系统</li>
+	<li>-B 批处理模式（阻止终端询问ssh密码）</li>
+	<li>-C 开启压缩传输</li>
+	<li>-p 保留文件的修改、访问时间和权限模式</li>
+	<li>-q 不显示输出、调试信息</li>
+	<li>-r 以递归的方式进行复制</li>
+	<li>-T 禁用严格的文件名检查</li>
+	<li>-v 显示输出、调试信息</li>
+</ul>
+<br><br>
+<h2>传值</h2>
+<ul>
+	<li>-c 指定传输数据的加密算法</li>
+	<li>-F 指定SSH配置文件</li>
+	<li>-i 指定读取用于公钥身份验证的标识（私钥）的文件</li>
+	<li>-J 指定1个以上的跳转主机（逗号分隔）</li>
+	<li>-l 限制使用的带宽</li>
+	<li>-o 指定使用的ssh选项</li>
+	<li>-P 指定目标主机的端口</li>
+	<li>-S 用于加密连接的程序名称</li>
+</ul>
+<br><br>
+
+</body>
+
+</html>
