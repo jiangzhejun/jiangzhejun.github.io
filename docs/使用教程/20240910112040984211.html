@@ -1,0 +1,139 @@
+<html>
+
+<head>
+<link rel="stylesheet" href="../../webook.css">
+<meta charset="utf-8">
+<title>wget命令详解 - webook</title>
+</head>
+
+<body>
+<h1>wget命令详解</h1>
+<i>2024.8.15 北京</i>
+<br><br>
+一个从网络上自动下载文件的自由工具，支持通过 HTTP、HTTPS、FTP 三个最常见的 TCP/IP协议 下载，并可以使用 HTTP 代理。"wget" 这个名称来源于 “World Wide Web” 与 “get” 的结合。
+<br><br>
+<h2>启动：</h2>
+<ul>
+	<li><b>-V, --version</b> 显示 Wget 的版本并且退出。</li>
+	<li><b>-h, --help</b> 打印此帮助。</li>
+	<li><b>-b, -background</b> 启动后进入后台操作。</li>
+	<li><b>-e, -execute=COMMAND</b> 运行‘.wgetrc’形式的命令。</li>
+</ul>
+<br><br>
+<h2>日志记录及输入文件：</h2>
+<ul>
+	<li><b>-o, --output-file=文件</b> 将日志消息写入到指定文件中。</li>
+	<li><b>-a, --append-output=文件</b> 将日志消息追加到指定文件的末端。</li>
+	<li><b>-d, --debug</b> 打印调试输出。</li>
+	<li><b>-q, --quiet</b> 安静模式(不输出信息)。</li>
+	<li><b>-v, --verbose</b> 详细输出模式(默认)。</li>
+	<li><b>-nv, --non-verbose</b> 关闭详细输出模式，但不进入安静模式。</li>
+	<li><b>-i, --input-file=文件</b> 下载从指定文件中找到的 URL。</li>
+	<li><b>-F, --force-html</b> 以HTML方式处理输入文件。</li>
+	<li><b>-B, --base=URL</b> 使用 -F -i 文件选项时，在相对链接前添加指定的 URL。</li>
+</ul>
+<br><br>
+<h2>下载：</h2>
+<ul>
+	<li><b>-t, --tries=次数</b> 配置重试次数（0 表示无限）。</li>
+	<li><b>--retry-connrefused</b> 即使拒绝连接也重试。</li>
+	<li><b>-O --output-document=文件</b> 将数据写入此文件中。</li>
+	<li><b>-nc, --no-clobber</b> 不更改已经存在的文件，也不使用在文件名后添加 .#（# 为数字）的方法写入新的文件。</li>
+	<li><b>-c, --continue</b> 继续接收已下载了一部分的文件。</li>
+	<li><b>--progress=方式</b> 选择下载进度的表示方式。</li>
+	<li><b>-N, --timestamping</b> 除非远程文件较新，否则不再取回。</li>
+	<li><b>-S, --server-response</b> 显示服务器回应消息。</li>
+	<li><b>--spider</b> 不下载任何数据。</li>
+	<li><b>-T, --timeout=秒数</b> 配置读取数据的超时时间 (秒数)。</li>
+	<li><b>-w, --wait=秒数</b> 接收不同文件之间等待的秒数。</li>
+	<li><b>--waitretry=秒数</b> 在每次重试之间稍等一段时间 (由 1 秒至指定的 秒数不等)。</li>
+	<li><b>--random-wait</b> 接收不同文件之间稍等一段时间(由 0 秒至 2*WAIT 秒不等)。</li>
+	<li><b>-Y, --proxy=on/off</b> 打开或关闭代理服务器。</li>
+	<li><b>-Q, --quota=大小</b> 配置接收数据的限额大小。</li>
+	<li><b>--bind-address=地址</b> 使用本机的指定地址 (主机名称或 IP) 进行连接。</li>
+	<li><b>--limit-rate=速率</b> 限制下载的速率。</li>
+	<li><b>--dns-cache=off</b> 禁止查找存于高速缓存中的 DNS。</li>
+	<li><b>--restrict-file-names=OS</b> 限制文件名中的字符为指定的 OS (操作系统) 所允许的字符。</li>
+</ul>
+<br><br>
+<h2>目录：</h2>
+<ul>
+	<li><b>-nd --no-directories</b> 不创建目录。</li>
+	<li><b>-x, --force-directories</b> 强制创建目录。</li>
+	<li><b>-nH, --no-host-directories</b> 不创建含有远程主机名称的目录。</li>
+	<li><b>-P, --directory-prefix=名称</b> 保存文件前先创建指定名称的目录。</li>
+	<li><b>--cut-dirs=数目</b> 忽略远程目录中指定数目的目录层。</li>
+</ul>
+<br><br>
+<h2>HTTP 选项：</h2>
+<ul>
+	<li><b>--http-user=用户</b> 配置 http 用户名。</li>
+	<li><b>--http-passwd=密码</b> 配置 http 用户密码。</li>
+	<li><b>-C, --cache=on/off</b> (不)使用服务器中的高速缓存中的数据 (默认是使用的)。</li>
+	<li><b>-E, --html-extension</b> 将所有 MIME 类型为 text/html 的文件都加上 .html 扩展文件名。</li>
+	<li><b>--ignore-length</b> 忽略“Content-Length”文件头字段。</li>
+	<li><b>--header=字符串</b> 在文件头中添加指定字符串。</li>
+	<li><b>--proxy-user=用户</b> 配置代理服务器用户名。</li>
+	<li><b>--proxy-passwd=密码</b> 配置代理服务器用户密码。</li>
+	<li><b>--referer=URL</b> 在 HTTP 请求中包含“Referer：URL”头。</li>
+	<li><b>-s, --save-headers</b> 将 HTTP 头存入文件。</li>
+	<li><b>-U, --user-agent=AGENT</b> 标志为 AGENT 而不是 Wget/VERSION。</li>
+	<li><b>--no-http-keep-alive</b> 禁用 HTTP keep-alive（持久性连接）。</li>
+	<li><b>--cookies=off</b> 禁用 cookie。</li>
+	<li><b>--load-cookies=文件</b> 会话开始前由指定文件载入 cookie。</li>
+	<li><b>--save-cookies=文件</b> 会话结束后将 cookie 保存至指定文件。</li>
+	<li><b>--post-data=字符串</b> 使用 POST 方法，发送指定字符串。</li>
+	<li><b>--post-file=文件</b> 使用 POST 方法，发送指定文件中的内容。</li>
+</ul>
+<br><br>
+<h2>HTTPS (SSL) 选项：</h2>
+<ul>
+	<li><b>--sslcertfile=文件</b> 可选的客户段端证书。</li>
+	<li><b>--sslcertkey=密钥文件</b> 对此证书可选的“密钥文件”。</li>
+	<li><b>--egd-file=文件</b> EGD socket 文件名。</li>
+	<li><b>--sslcadir=目录</b> CA 散列表所在的目录。</li>
+	<li><b>--sslcafile=文件</b> 包含 CA 的文件。</li>
+	<li><b>--sslcerttype=0/1</b> Client-Cert 类型 0=PEM (默认) / 1=ASN1 (DER)</li>
+	<li><b>--sslcheckcert=0/1</b> 根据提供的 CA 检查服务器的证书</li>
+	<li><b>--sslprotocol=0-3</b> 选择 SSL 协议；0=自动选择/1=SSLv2/2=SSLv3/3=TLSv1</li>
+</ul>
+<br><br>
+<h2>FTP 选项：</h2>
+<ul>
+	<li><b>-nr, --dont-remove-listing</b> 不删除“.listing”文件。</li>
+	<li><b>-g, --glob=on/off</b> 设置是否展开有通配符的文件名。</li>
+	<li><b>--passive-ftp</b> 使用“被动”传输模式。</li>
+	<li><b>--retr-symlinks</b> 在递归模式中，下载链接所指示的文件(连至目录则例外）。</li>
+</ul>
+<br><br>
+<h2>递归下载：</h2>
+<ul>
+	<li><b>-r, --recursive</b> 递归下载。</li>
+	<li><b>-l, --level=数字</b> 最大递归深度(inf 或 0 表示无限)。</li>
+	<li><b>--delete-after</b> 删除下载后的文件。</li>
+	<li><b>-k, --convert-links</b> 将绝对链接转换为相对链接。</li>
+	<li><b>-K, --backup-converted</b>转换文件 X 前先将其备份为 X.orig。</li>
+	<li><b>-m, --mirror</b> 等效于 -r -N -l inf -nr 的选项。</li>
+	<li><b>-p, --page-requisites</b> 下载所有显示完整网页所需的文件，例如图像。</li>
+	<li><b>--strict-comments</b> 打开对 HTML 备注的严格(SGML)处理选项。</li>
+</ul>
+<br><br>
+<h2>递归下载时有关接受/拒绝的选项：</h2>
+<ul>
+	<li><b>-A, --accept=列表</b> 接受的文件样式列表，以逗号分隔。</li>
+	<li><b>-R, --reject=列表</b> 排除的文件样式列表，以逗号分隔。</li>
+	<li><b>-D, --domains=列表</b> 接受的域列表，以逗号分隔。</li>
+	<li><b>--exclude-domains=列表</b> 排除的域列表，以逗号分隔。</li>
+	<li><b>--follow-ftp</b> 跟随 HTML 文件中的 FTP 链接。</li>
+	<li><b>--follow-tags=列表</b> 要跟随的 HTML 标记，以逗号分隔。</li>
+	<li><b>-G, --ignore-tags=列表</b> 要忽略的 HTML 标记，以逗号分隔。</li>
+	<li><b>-H, --span-hosts</b> 递归时可进入其它主机。</li>
+	<li><b>-L, --relative</b> 只跟随相对链接。</li>
+	<li><b>-I, --include-directories=列表</b> 要下载的目录列表。</li>
+	<li><b>-X, --exclude-directories=列表</b> 要排除的目录列表。</li>
+	<li><b>-np, --no-parent</b> 不搜索上层目录。</li>
+</ul>
+
+</body>
+
+</html>
