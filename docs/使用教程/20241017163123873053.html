@@ -1,0 +1,194 @@
+<html>
+
+<head>
+<link rel="stylesheet" href="../../webook.css">
+<meta charset="utf-8">
+<title>Robocopy命令详解 - webook</title>
+</head>
+
+<body>
+<h1>Robocopy命令详解</h1>
+<i>2024.10.17 文心一言</i>
+<br><br>
+Robocopy（Robust File Copy）是Windows中一个功能强大且灵活的文件复制工具，专为高效的文件和文件夹复制设计。以下是Robocopy命令的详细解析：
+<br><br>
+<h2>一、基本语法</h2>
+<pre class="code_block" title="shell">
+robocopy [source] [destination] [<b>file</b>(s)] [options]
+</pre>
+<br><br>
+<ul>
+	<li><b>[source]</b>：源文件夹路径。</li>
+	<li><b>[destination]</b>：目标文件夹路径。</li>
+<i> <b>[file(s)]</b>：复制的文件类型（默认为</i>.*，即复制所有文件）。
+	<li><b>[options]</b>：可选参数，用于控制复制行为。</li>
+</ul>
+<br><br>
+<h2>二、常用选项</h2>
+<h3>复制选项</h3>
+<ul>
+	<li><b>/S</b>：复制非空子目录。</li>
+	<li><b>/E</b>：复制所有子目录，包括空子目录。</li>
+	<li><b>/LEV:n</b>：仅复制源目录树的前n层。</li>
+	<li><b>/Z</b>：在可重新启动模式下复制文件。</li>
+	<li><b>/B</b>：在备份模式下复制文件，适用于复制系统文件和权限受限的文件。</li>
+	<li><b>/ZB</b>：使用可重新启动模式；如果拒绝访问，则使用备份模式。</li>
+	<li><b>/EFSRAW</b>：在EFS RAW模式下复制所有加密的文件。</li>
+	<li><b>/COPY:DAT</b>：默认复制文件的“数据、属性、时间戳”。</li>
+	<li><b>/COPYALL</b>：复制所有属性，包括数据、时间戳、安全属性（ACL）、所有者信息、审计信息。</li>
+	<li><b>/SEC</b>：复制文件的NTFS权限（安全描述符）。</li>
+	<li><b>/DCOPY:T</b>：复制目录时间戳。</li>
+	<li><b>/NOCOPY</b>：不复制任何文件信息（与/PURGE一起使用生效）。</li>
+	<li><b>/SECFIX</b>：修复所有文件的文件安全性，即使是跳过的文件。</li>
+	<li><b>/TIMFIX</b>：修复所有文件的文件时间，即使是跳过的文件。</li>
+</ul>
+<br><br>
+<h3>文件选择选项</h3>
+<ul>
+	<li><b>/A+:[RASHCNET]</b>：将给定的属性添加到复制文件。</li>
+	<li><b>/A-:[RASHCNET]</b>：从复制文件中删除给定的属性。</li>
+	<li><b>/CREATE</b>：仅创建目录树和长度为零的文件。</li>
+	<li><b>/FAT</b>：仅使用8.3 FAT文件名创建目标文件。</li>
+	<li><b>/256</b>：关闭超长路径（>256字符）支持。</li>
+	<li><b>/IA:[RASHCNETO]</b>：仅包含具有任意给定属性集的文件。</li>
+	<li><b>/XA:[RASHCNETO]</b>：排除具有任意给定属性集的文件。</li>
+	<li><b>/XF 文件[文件]…</b>：排除与给定名称/路径/通配符匹配的文件。</li>
+	<li><b>/XD 目录[目录]…</b>：排除与给定名称/路径匹配的目录。</li>
+	<li><b>/XC</b>：排除已更改的文件。</li>
+	<li><b>/XN</b>：排除较新的文件。</li>
+	<li><b>/XO</b>：排除较旧的文件。</li>
+	<li><b>/XX</b>：排除多余的文件和目录。</li>
+	<li><b>/XL</b>：排除孤立的文件和目录。</li>
+	<li><b>/IS</b>：包含相同文件。</li>
+	<li><b>/IT</b>：包含已调整的文件。</li>
+	<li><b>/MAX:n</b>：最大的文件大小，排除大于n字节的文件。</li>
+	<li><b>/MIN:n</b>：最小的文件大小，排除小于n字节的文件。</li>
+	<li><b>/MAXAGE:n</b>：最长的文件存在时间，排除早于n天/日期的文件。</li>
+	<li><b>/MINAGE:n</b>：最短的文件存在时间，排除晚于n天/日期的文件。</li>
+	<li><b>/MAXLAD:n</b>：最大的最后访问日期，排除自n以来未使用的文件。</li>
+	<li><b>/MINLAD:n</b>：最小的最后访问日期，排除自n以来使用的文件。</li>
+	<li><b>/XJ</b>：排除接合点（默认情况下通常包括）。</li>
+	<li><b>/XJD</b>：排除目录的接合点。</li>
+	<li><b>/XJF</b>：排除文件的接合点。</li>
+</ul>
+<br><br>
+<h3>重试选项</h3>
+<ul>
+	<li><b>/R:n</b>：在失败时重试n次（默认是1,000,000次）。</li>
+	<li><b>/W:n</b>：重试之间等待n秒（默认30秒）。</li>
+	<li><b>/REG</b>：将注册表中的/R:n和/W:n保存为默认设置。</li>
+	<li><b>/TBD</b>：在网络路径不可用时等待路径变为可用。</li>
+</ul>
+<br><br>
+<h3>日志记录选项</h3>
+<ul>
+	<li><b>/L</b>：仅列出，不复制、添加时间戳或删除任何文件。</li>
+	<li><b>/LOG:file</b>：将输出结果保存到指定日志文件中。</li>
+	<li><b>/LOG+:file</b>：将输出结果附加到指定日志文件中。</li>
+	<li><b>/TEE</b>：将输出写入日志文件的同时，也在控制台显示。</li>
+	<li><b>/UNILOG:file</b>：以UNICODE方式将状态输出到日志文件（覆盖现有日志）。</li>
+	<li><b>/UNILOG+:file</b>：以UNICODE方式将状态输出到日志文件（附加到现有日志中）。</li>
+	<li><b>/NJH</b>：没有作业标头。</li>
+	<li><b>/NJS</b>：没有作业摘要。</li>
+	<li><b>/UNICODE</b>：以UNICODE方式输出状态。</li>
+</ul>
+<br><br>
+<h3>其他选项</h3>
+<ul>
+	<li><b>/MOVE</b>：移动文件和目录（复制后删除源）。</li>
+	<li><b>/PURGE</b>：删除目标文件夹中源文件夹不存在的文件（同步目标和源）。</li>
+	<li><b>/MIR</b>：镜像目录树（等同于/E和/PURGE）。</li>
+	<li><b>/MON:n</b>：监视源；发现多于n个更改时再次运行。</li>
+	<li><b>/MOT:m</b>：监视源；如果更改，在m分钟时间内再次运行。</li>
+	<li><b>/RH:hhmm-hhmm</b>：运行小时数，可以启动新副本的时间。</li>
+	<li><b>/PF</b>：以每个文件（而不是每个步骤）为基础检查运行小时数。</li>
+	<li><b>/IPG:n</b>：程序包间的间距（ms），以释放低速线路上的带宽。</li>
+	<li><b>/SL</b>：对照目标复制符号链接。</li>
+	<li><b>/MT[:n]</b>：使用n个线程进行复制（默认8，最大128），能显著提高大文件夹的复制速度。</li>
+	<li><b>/NP</b>：不显示进度百分比。</li>
+	<li><b>/V</b>：生成详细输出，同时显示跳过的文件。</li>
+	<li><b>/TS</b>：在输出中包含源文件的时间戳。</li>
+	<li><b>/FP</b>：在输出中包含文件的完整路径名称。</li>
+	<li><b>/BYTES</b>：以字节打印大小。</li>
+	<li><b>/NS</b>：无大小，不记录文件大小。</li>
+	<li><b>/NC</b>：无类别，不记录文件类别。</li>
+	<li><b>/NFL</b>：无文件列表，不记录文件名。</li>
+	<li><b>/NDL</b>：无目录列表，不记录目录名称。</li>
+	<li><b>/ETA</b>：显示复制文件的预期到达时间。</li>
+	<li><b>/QUIT</b>：处理命令行后退出（以查看参数）。</li>
+	<li><b>/NOSD</b>：未指定源目录。</li>
+	<li><b>/NODD</b>：未指定目标目录。</li>
+</ul>
+<br><br>
+<h2>三、示例</h2>
+<h3><b>简单文件夹复制</b></h3>
+将C:\source文件夹及其所有子文件夹（包括空文件夹）复制到D:\backup：
+<br><br>
+<pre class="code_block" title="shell">
+robocopy C:&#92;source D:&#92;backup /E
+</pre>
+<br><br>
+<h3><b>使用多线程复制</b></h3>
+将文件夹复制到目标位置，并使用16个线程加速：
+<br><br>
+<pre class="code_block" title="shell">
+robocopy C:&#92;source D:&#92;backup /E /MT:16
+</pre>
+<br><br>
+<h3><b>增量复制</b></h3>
+只复制源文件夹中比目标文件夹更新的文件：
+<br><br>
+<pre class="code_block" title="shell">
+robocopy C:&#92;source D:&#92;backup /E /XO
+</pre>
+<br><br>
+<h3><b>复制并记录日志</b></h3>
+将文件夹复制到目标位置，并将日志保存到logfile.txt：
+<br><br>
+<pre class="code_block" title="shell">
+robocopy C:&#92;source D:&#92;backup /E /LOG:C:&#92;logfile.txt
+</pre>
+<br><br>
+<h3><b>同步文件夹</b></h3>
+将C:\source同步到D:\backup，删除目标文件夹中源文件夹不存在的文件：
+<br><br>
+<pre class="code_block" title="shell">
+robocopy C:&#92;source D:&#92;backup /E /PURGE
+</pre>
+<br><br>
+<h3><b>移动文件夹</b></h3>
+移动文件夹内容（复制后删除源文件和文件夹）：
+<br><br>
+<pre class="code_block" title="shell">
+robocopy C:&#92;source D:&#92;backup /MOVE
+</pre>
+<br><br>
+<h2>四、日志信息</h2>
+Robocopy执行时会输出详细的日志信息，包括：
+<br><br>
+<ul>
+	<li><b>文件复制状态</b>：显示哪些文件被复制、跳过或删除。</li>
+	<li><b>错误和重试次数</b>：列出因何种原因复制失败，及其重试次数。</li>
+	<li><b>摘要</b>：执行结束后会显示复制的文件数量、总文件大小、复制时间等统计数据。</li>
+</ul>
+<br><br>
+<h2>五、特点</h2>
+<ul>
+	<li><b>多线程</b>：可以通过MT参数开启多线程复制，大幅提高速度。</li>
+	<li><b>增量复制</b>：只复制改变的文件，节省时间和带宽。</li>
+	<li><b>断点续传</b>：复制过程被中断后，Robocopy可以从中断的位置继续复制，不必重头再来。</li>
+	<li><b>容错能力</b>：具有自动重试功能，适合在网络环境下进行大批量的文件复制。</li>
+	<li><b>日志记录</b>：支持日志输出，方便追踪和排查问题。</li>
+</ul>
+<br><br>
+<h2>六、注意事项</h2>
+<ul>
+	<li>由于Robocopy功能强大，命令和选项较为复杂，初学者可能需要时间熟悉。</li>
+	<li>与图形化工具相比，Robocopy没有直观的界面，更适合命令行使用。</li>
+</ul>
+<br><br>
+综上所述，Robocopy是一个功能强大的文件复制工具，特别适合处理大量文件、复杂目录结构和跨网络的复制任务。通过合理使用其多线程、增量复制和错误恢复功能，可以大大提高文件复制的效率和可靠性。
+
+</body>
+
+</html>
