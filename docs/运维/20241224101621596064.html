@@ -1,0 +1,31 @@
+<html>
+
+<head>
+<link rel="stylesheet" href="../../webook.css">
+<meta charset="utf-8">
+<title>isbn.bat - webook</title>
+</head>
+
+<body>
+<h1>isbn.bat</h1>
+<pre class="code_block" title="dos">
+@<b>echo</b> <b>off</b> &amp; <b>cls</b> &amp; title ISBN checkout v2024.12.13 %bww%
+
+<b>setlocal</b> <b>enabledelayedexpansion</b>
+<b>set</b> /a pc=10000+%1, tc=10000+%2
+<b>set</b> <b>sc</b>=978-7-%pc:~1, 4%-%tc:~1, 4%
+<b>set</b> nc=%<b>sc</b>:-=%
+<b>set</b> cc=0
+
+<b>for</b> /l %%p <b>in</b> (0, 1, 11) <b>do</b> (
+	<b>set</b> /a num=!nc:~%%p, 1!, mod=%%p%%2
+	<b>if</b> !mod!==0 (<b>set</b> /a cc+=num) <b>else</b> (<b>set</b> /a cc+=num*3)
+)
+
+<b>set</b> /a cc=(10-cc%%10)%%10
+<b>echo</b> %<b>sc</b>%-%cc%
+<b>endlocal</b>
+</pre>
+</body>
+
+</html>

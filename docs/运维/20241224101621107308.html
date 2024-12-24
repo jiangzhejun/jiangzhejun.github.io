@@ -1,0 +1,44 @@
+<html>
+
+<head>
+<link rel="stylesheet" href="../../webook.css">
+<meta charset="utf-8">
+<title>7r.bat - webook</title>
+</head>
+
+<body>
+<h1>7r.bat</h1>
+<pre class="code_block" title="dos">
+@<b>echo</b> <b>off</b> &amp; <b>cls</b> &amp; <b>set</b> name=
+<b>for</b> %%b <b>in</b> (.) <b>do</b> <b>set</b> bwwork=%%~nb
+<b>call</b>:z "%~1" "%~2"
+
+:m
+<b>call</b>:z "%~3"
+<b>for</b> %%m <b>in</b> (mir mov) <b>do</b> (
+	<b>if</b> <b>exist</b> "%~1&#92;" <b>if</b> <b>exist</b> "%~2&#92;" <b>if</b> "/%%m"=="%~3" (
+		title 7%%m: "%~1" to "%~2" %bww%
+		robocopy %* /xd "`$Recycle.Bin" "System Volume Information"
+		<b>goto</b> :eof
+	)
+)
+
+shift /3
+<b>if</b> not [%3]==[] <b>goto</b> m
+<b>if</b> [%name%]==[] <b>goto</b> :eof
+title 7zip: %name% %bww%
+7z a "%name:~1,-1%.7z" %* -xr!.DS_Store -xr!__MACOSX -xr!Thumbs.db
+exit /b
+
+:z
+<b>for</b> %%z <b>in</b> (%*) <b>do</b> (
+	<b>if</b> <b>exist</b> %%z <b>if</b> [%name%]==[] (
+		<b>set</b> name="%%~nz"
+	) <b>else</b> (
+		<b>set</b> name="%bwwork%"
+	)
+)
+</pre>
+</body>
+
+</html>
