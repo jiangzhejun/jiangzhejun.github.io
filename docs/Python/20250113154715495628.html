@@ -1,0 +1,33 @@
+<html>
+
+<head>
+<link rel="stylesheet" href="../../webook.css">
+<meta charset="utf-8">
+<title>sizeof.py - webook</title>
+</head>
+
+<body>
+<h1>sizeof.py</h1>
+<pre class="code_block" title="python">
+<b>import</b> os # SizeOf v2024.11.26 - Bitwo Workshop, Wol.
+<b>import</b> sys
+
+<b>def</b> getSize(path):
+	<b>if</b> os.path.isfile(path):
+		<b>return</b> os.path.getsize(path)
+	<b>elif</b> os.path.isdir(path):
+		total_size = 0
+		<b>for</b> dirpath, _, filenames <b>in</b> os.walk(path):
+			<b>for</b> filename <b>in</b> filenames:
+				filepath = os.path.join(dirpath, filename)
+				total_size += os.path.getsize(filepath)
+		<b>return</b> total_size
+	<b>else</b>:
+		<b>return</b> -1
+
+<b>if</b> __name__ == "__main__":
+	print(getSize(sys.argv[1]))
+</pre>
+</body>
+
+</html>
